@@ -6,10 +6,9 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] public PlayerConfig playerConfig;
     [SerializeField] public float oxygen = 100f;
-    [SerializeField] private float oxygenRate = 10f;
     [SerializeField] public float carbonDioxide;
-    [SerializeField] private float carbonDioxideRate = 10f;
 
     #region Components
     public Animator anim { get; private set; }
@@ -47,23 +46,23 @@ public class Player : MonoBehaviour
 
     public void DecreaseOxygen()
     {
-        oxygen -= oxygenRate * Time.deltaTime;
+        oxygen -= playerConfig.oxygenRate * Time.deltaTime;
     }
 
     public void DecreaseCarbonDioxide()
     {
-        carbonDioxide -= carbonDioxideRate * Time.deltaTime;
+        carbonDioxide -= playerConfig.carbonDioxideRate * Time.deltaTime;
     }
 
     public void IncreaseOxygen()
     {
-        oxygen += oxygenRate * Time.deltaTime;
+        oxygen += playerConfig.oxygenRate * Time.deltaTime;
     }
 
     public void IncreaseCarbonDioxide()
     {
 
-        carbonDioxide += carbonDioxideRate * Time.deltaTime;
+        carbonDioxide += playerConfig.carbonDioxideRate * Time.deltaTime;
 
     }
 }
