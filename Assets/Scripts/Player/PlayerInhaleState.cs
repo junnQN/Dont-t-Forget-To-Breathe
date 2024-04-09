@@ -28,9 +28,5 @@ public class PlayerInhaleState : PlayerState
         {
             player.stateMachine.ChangeState(player.holdBreatheState);
         }
-        else if (Input.GetKey(KeyCode.O))
-        {
-            player.stateMachine.ChangeState(player.exhaleState);
-        }
     }
 }

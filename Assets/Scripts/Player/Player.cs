@@ -45,34 +45,24 @@ public class Player : MonoBehaviour
     
     public void DecreaseOxygen()
     {
-        if (oxygen > 0)
-        {
-            oxygen -= oxygenRate * Time.deltaTime;
-        }
+        oxygen -= oxygenRate * Time.deltaTime;
     }
-    
+
     public void DecreaseCarbonDioxide()
     {
-        if (carbonDioxide > 0)
-        {
-            carbonDioxide -= carbonDioxideRate * Time.deltaTime;
-        }
+        carbonDioxide -= carbonDioxideRate * Time.deltaTime;
     }
 
     public void IncreaseOxygen()
     {
-        if (oxygen<100f)
-        {
-            oxygen+= oxygenRate * Time.deltaTime;
-        }
+        oxygen+= oxygenRate * Time.deltaTime;
     }
     
     public void IncreaseCarbonDioxide()
     {
-        if (carbonDioxide<100f)
-        {
-            carbonDioxide+= carbonDioxideRate * Time.deltaTime;
-        }
+        
+        carbonDioxide+= carbonDioxideRate * Time.deltaTime;
+        
     }
 }
 
