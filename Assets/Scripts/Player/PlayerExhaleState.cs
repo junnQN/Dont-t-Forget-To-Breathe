@@ -26,7 +26,6 @@ public class PlayerExhaleState : PlayerState
         player.DecreaseOxygen();
         if(Input.GetKeyUp(KeyCode.O))
             player.stateMachine.ChangeState(player.holdBreatheState);
-        else if(Input.GetKey(KeyCode.I))
-            player.stateMachine.ChangeState(player.inhaleState);
+       
     }
 }
