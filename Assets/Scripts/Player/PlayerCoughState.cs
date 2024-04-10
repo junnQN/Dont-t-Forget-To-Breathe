@@ -17,7 +17,8 @@ public class PlayerCoughState : PlayerState
 
     private IEnumerator ChangeHoldBreatheStateStateAfterDelay()
     {
-        yield return new WaitForSeconds(player.playerConfig.timeToBreakCoughState);
+        var time = GameManager.instance.gameConfig.timeToBreakCoughState;
+        yield return new WaitForSeconds(time);
         stateMachine.ChangeState(player.holdBreatheState);
     }
 
@@ -30,10 +31,8 @@ public class PlayerCoughState : PlayerState
     public override void Update()
     {
         base.Update();
-        var oxygenAmount = -player.playerConfig.autoRate * Time.deltaTime;
-        var carbonDioxideAmount = player.playerConfig.autoRate * Time.deltaTime;
 
-        player.ChangeOxygen(oxygenAmount);
-        player.ChangeCarbonDioxide(carbonDioxideAmount);
+        player.DecreaseOxygenOverTime();
+        player.DecreaseCarbonDioxideByCough();
     }
 }

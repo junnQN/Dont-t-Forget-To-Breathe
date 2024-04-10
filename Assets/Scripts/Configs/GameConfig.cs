@@ -2,7 +2,7 @@ using UnityEngine;
 
 
 [CreateAssetMenu(fileName = "GameConfig", menuName = "Configs/GameConfig", order = 1)]
-public class PlayerConfig : ScriptableObject
+public class GameConfig : ScriptableObject
 {
     [Header("Inhale/Exhale Configs")]
     [Tooltip("Amount of air inhaled")]
@@ -15,6 +15,13 @@ public class PlayerConfig : ScriptableObject
     public float amountCo_2Cough = 10f;
     [Tooltip("The time to change state after coughing (seconds)")]
     public float timeToBreakCoughState = 1f;
+
+    [Tooltip("Max Time Inhale")]
+    public float maxTimeInhale = 3f;
+
+    [Tooltip("Max Time Exhale")]
+
+    public float maxTimeExhale = 3f;
 
     [Header("Game Configs")]
     [Tooltip("The time of each level (seconds)")]

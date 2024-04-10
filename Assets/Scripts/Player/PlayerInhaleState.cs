@@ -11,6 +11,14 @@ public class PlayerInhaleState : PlayerState
     public override void Enter()
     {
         base.Enter();
+        player.StartCoroutine(ChangeHoldBreatheStateStateAfterDelay());
+    }
+
+    private IEnumerator ChangeHoldBreatheStateStateAfterDelay()
+    {
+        var time = GameManager.instance.gameConfig.maxTimeInhale;
+        yield return new WaitForSeconds(time);
+        stateMachine.ChangeState(player.holdBreatheState);
     }
 
     public override void Exit()
@@ -22,11 +30,8 @@ public class PlayerInhaleState : PlayerState
     {
         base.Update();
 
-        var oxygenAmount = player.playerConfig.inhaleRate * Time.deltaTime;
-        var carbonDioxideAmount = player.playerConfig.autoRate * Time.deltaTime;
-
-        player.ChangeCarbonDioxide(carbonDioxideAmount);
-        player.ChangeOxygen(oxygenAmount);
+        player.IncreaseOxygenByInhale();
+        player.IncreaseCarbonDioxideOverTime();
 
         if (Input.GetKeyUp(KeyCode.I))
         {
