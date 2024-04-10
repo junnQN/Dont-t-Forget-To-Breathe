@@ -17,15 +17,18 @@ public class PlayerExhaleState : PlayerState
     {
         base.Exit();
     }
-    
+
     public override void Update()
     {
         base.Update();
-        
-        player.DecreaseCarbonDioxide();
-        player.DecreaseOxygen();
-        if(Input.GetKeyUp(KeyCode.O))
+
+        var oxygenAmount = -player.playerConfig.autoRate * Time.deltaTime;
+        var carbonDioxideAmount = -player.playerConfig.exhaleRate * Time.deltaTime;
+
+        player.ChangeCarbonDioxide(carbonDioxideAmount);
+        player.ChangeOxygen(oxygenAmount);
+        if (Input.GetKeyUp(KeyCode.O))
             player.stateMachine.ChangeState(player.holdBreatheState);
-       
+
     }
 }

@@ -17,13 +17,17 @@ public class PlayerInhaleState : PlayerState
     {
         base.Exit();
     }
-    
+
     public override void Update()
     {
         base.Update();
 
-        player.IncreaseOxygen();
-        player.IncreaseCarbonDioxide();
+        var oxygenAmount = player.playerConfig.inhaleRate * Time.deltaTime;
+        var carbonDioxideAmount = player.playerConfig.autoRate * Time.deltaTime;
+
+        player.ChangeCarbonDioxide(carbonDioxideAmount);
+        player.ChangeOxygen(oxygenAmount);
+
         if (Input.GetKeyUp(KeyCode.I))
         {
             player.stateMachine.ChangeState(player.holdBreatheState);

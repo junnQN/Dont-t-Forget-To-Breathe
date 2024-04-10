@@ -23,8 +23,12 @@ public class PlayerHoldBreatheState : PlayerState
     {
         base.Update();
 
-        player.IncreaseCarbonDioxide();
-        player.DecreaseOxygen();
+        var oxygenAmount = -player.playerConfig.autoRate * Time.deltaTime;
+        var carbonDioxideAmount = player.playerConfig.autoRate * Time.deltaTime;
+
+        player.ChangeCarbonDioxide(carbonDioxideAmount);
+        player.ChangeOxygen(oxygenAmount);
+
         if (Input.GetKey(KeyCode.I))
             player.stateMachine.ChangeState(player.inhaleState);
         else if (Input.GetKey(KeyCode.O))

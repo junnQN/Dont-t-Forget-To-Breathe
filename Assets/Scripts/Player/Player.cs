@@ -40,31 +40,37 @@ public class Player : MonoBehaviour
     private void Update()
     {
         stateMachine.currentState.Update();
-
     }
 
-
-    public void DecreaseOxygen()
+    public void ChangeOxygen(float amount)
     {
-        oxygen -= playerConfig.oxygenRate * Time.deltaTime;
+        oxygen += amount;
     }
 
-    public void DecreaseCarbonDioxide()
+    public void ChangeCarbonDioxide(float amount)
     {
-        carbonDioxide -= playerConfig.carbonDioxideRate * Time.deltaTime;
+        carbonDioxide += amount;
     }
 
-    public void IncreaseOxygen()
-    {
-        oxygen += playerConfig.oxygenRate * Time.deltaTime;
-    }
+    // public void DecreaseOxygen()
+    // {
+    //     oxygen -= playerConfig.inhaleRate * Time.deltaTime;
+    // }
 
-    public void IncreaseCarbonDioxide()
-    {
+    // public void IncreaseOxygenByInhale()
+    // {
+    //     oxygen += playerConfig.inhaleRate * Time.deltaTime;
+    // }
 
-        carbonDioxide += playerConfig.carbonDioxideRate * Time.deltaTime;
+    // public void DecreaseCarbonDioxideByExhale()
+    // {
+    //     carbonDioxide -= playerConfig.autoRate * Time.deltaTime;
+    // }
 
-    }
+    // public void IncreaseCarbonDioxideByTime()
+    // {
+    //     carbonDioxide += playerConfig.autoRate * Time.deltaTime;
+    // }
 }
 
 
