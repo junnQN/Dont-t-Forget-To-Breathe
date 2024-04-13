@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerInhaleState : PlayerState
 {
+    public float currentTime = 0;
     public PlayerInhaleState(Player _player, PlayerStateMachine _stateMachine, string _animBoolName) : base(_player, _stateMachine, _animBoolName)
     {
     }
@@ -16,9 +17,10 @@ public class PlayerInhaleState : PlayerState
 
     private IEnumerator ChangeHoldBreatheStateStateAfterDelay()
     {
-        var time = GameManager.instance.gameConfig.maxTimeInhale;
+        var time = GameManager.instance.gameConfig.maxTimeInhale - currentTime;
         yield return new WaitForSeconds(time);
         stateMachine.ChangeState(player.holdBreatheState);
+        currentTime = 0;
     }
 
     public override void Exit()
@@ -28,6 +30,8 @@ public class PlayerInhaleState : PlayerState
 
     public override void Update()
     {
+        currentTime += Time.deltaTime;
+
         base.Update();
 
         if (GameManager.instance.isHaveSmoke())

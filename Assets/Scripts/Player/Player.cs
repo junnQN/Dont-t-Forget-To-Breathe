@@ -23,7 +23,6 @@ public class Player : MonoBehaviour
     public PlayerDieState dieState { get; private set; }
 
     #endregion
-
     private void Awake()
     {
         stateMachine = new PlayerStateMachine();
