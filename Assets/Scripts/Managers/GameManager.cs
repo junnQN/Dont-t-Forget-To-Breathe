@@ -21,6 +21,14 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI playerStateText;
     #endregion
+    [SerializeField] private Transform spawnPoint;
+
+    private Smoke smoke;
+
+    #region Prefabs
+    [SerializeField] private GameObject smokePrefab;
+    #endregion
+
 
     private void Awake()
     {
@@ -57,5 +65,36 @@ public class GameManager : MonoBehaviour
             player.stateMachine.ChangeState(player.dieState);
             Debug.Log("Game Over");
         }
+    }
+
+    public void SpawnSmoke()
+    {
+        if (smoke == null)
+        {
+            var smokeObject = Instantiate(smokePrefab, spawnPoint.position, Quaternion.identity);
+            smoke = smokeObject.GetComponent<Smoke>();
+        }
+        else
+        {
+            smoke.gameObject.transform.position = spawnPoint.position;
+            smoke.gameObject.SetActive(true);
+        }
+
+        smoke.Init();
+        smoke.ShowSmoke();
+    }
+
+    public void HideSmoke()
+    {
+        smoke.ReduceSmoke();
+    }
+
+    public bool isHaveSmoke()
+    {
+        if (smoke == null)
+        {
+            return false;
+        }
+        return smoke.isPlaying;
     }
 }

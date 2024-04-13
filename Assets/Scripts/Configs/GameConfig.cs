@@ -16,6 +16,11 @@ public class GameConfig : ScriptableObject
     [Tooltip("The time to change state after coughing (seconds)")]
     public float timeToBreakCoughState = 1f;
 
+    [Tooltip("Amount of air inhaled when have smoke")]
+    public float amountAirBySmoke = 10f;
+
+    public float coughRate = 0.7f;
+
     [Tooltip("Max Time Inhale")]
     public float maxTimeInhale = 3f;
 

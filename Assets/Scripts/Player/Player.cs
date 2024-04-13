@@ -76,6 +76,18 @@ public class Player : MonoBehaviour
         oxygen += gameConfig.inhaleRate * Time.deltaTime;
     }
 
+    public void IncreaseOxygenBySmoke()
+    {
+        var gameConfig = GameManager.instance.gameConfig;
+        oxygen += gameConfig.amountAirBySmoke * Time.deltaTime;
+    }
+
+    public void IncreaseCarbonDioxideBySmoke()
+    {
+        var gameConfig = GameManager.instance.gameConfig;
+        carbonDioxide += gameConfig.amountAirBySmoke * Time.deltaTime;
+    }
+
     public void DecreaseCarbonDioxideByExhale()
     {
         var gameConfig = GameManager.instance.gameConfig;

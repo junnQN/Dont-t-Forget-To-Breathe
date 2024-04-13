@@ -23,9 +23,15 @@ public class Smoke : MonoBehaviour
     [SerializeField]
     private float targetAngleShape = 70f;
 
-    private bool isPlaying = false;
+    [HideInInspector]
+    public bool isPlaying = false;
     // Start is called before the first frame update
     void Start()
+    {
+
+    }
+
+    public void Init()
     {
         var emission = smokeParticle.emission;
         emission.rateOverTime = rateOverTime;
@@ -40,9 +46,12 @@ public class Smoke : MonoBehaviour
         }
     }
 
+    Tween swingTween;
     private void SetSwinging()
     {
-        DOVirtual.Float(-1, 1, swingTime, (v) =>
+        swingTween?.Kill();
+
+        swingTween = DOVirtual.Float(-1, 1, swingTime, (v) =>
         {
             var shape = smokeParticle.shape;
             var rotation = shape.rotation;
@@ -52,9 +61,11 @@ public class Smoke : MonoBehaviour
         .SetEase(Ease.InOutSine);
     }
 
+    Tween shapeTween;
     private void SetShapeAngle()
     {
-        DOVirtual.Float(30, targetAngleShape, 2f, (v) =>
+        shapeTween?.Kill();
+        shapeTween = DOVirtual.Float(30, targetAngleShape, 2f, (v) =>
         {
             var shape = smokeParticle.shape;
             shape.angle = v;

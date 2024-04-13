@@ -31,25 +31,4 @@ public class PlayerHoldBreatheState : PlayerState
         else if (Input.GetKeyDown(KeyCode.O))
             player.stateMachine.ChangeState(player.exhaleState);
     }
-
-    void HandleInhaleSmoke()
-    {
-        double probability = 0.7;
-
-        if (ShouldCallFunction(probability))
-        {
-            player.stateMachine.ChangeState(player.coughState);
-        }
-        else
-        {
-            player.stateMachine.ChangeState(player.inhaleState);
-        }
-    }
-
-    bool ShouldCallFunction(double probability)
-    {
-        double randomValue = Random.value;
-
-        return randomValue < probability;
-    }
 }

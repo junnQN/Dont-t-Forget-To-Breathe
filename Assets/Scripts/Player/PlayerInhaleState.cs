@@ -30,12 +30,42 @@ public class PlayerInhaleState : PlayerState
     {
         base.Update();
 
-        player.IncreaseOxygenByInhale();
-        player.IncreaseCarbonDioxideOverTime();
+        if (GameManager.instance.isHaveSmoke())
+        {
+            if (HandleInhaleSmoke()) return;
+
+            player.IncreaseCarbonDioxideBySmoke();
+            player.IncreaseOxygenBySmoke();
+        }
+        else
+        {
+            player.IncreaseOxygenByInhale();
+            player.IncreaseCarbonDioxideOverTime();
+        }
+
 
         if (Input.GetKeyUp(KeyCode.I))
         {
             player.stateMachine.ChangeState(player.holdBreatheState);
         }
+    }
+
+    bool HandleInhaleSmoke()
+    {
+        double probability = GameManager.instance.gameConfig.coughRate;
+
+        if (ShouldCallFunction(probability))
+        {
+            player.stateMachine.ChangeState(player.coughState);
+            return true;
+        }
+        return false;
+    }
+
+    bool ShouldCallFunction(double probability)
+    {
+        double randomValue = Random.value;
+
+        return randomValue < probability;
     }
 }
