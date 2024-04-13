@@ -56,53 +56,55 @@ public class Player : MonoBehaviour
     public void ChangeOxygen(float amount)
     {
         oxygen += amount;
+        oxygen = Mathf.Clamp(oxygen, 0, 100);
     }
 
     public void ChangeCarbonDioxide(float amount)
     {
         carbonDioxide += amount;
+        carbonDioxide = Mathf.Clamp(carbonDioxide, 0, 100);
     }
 
     public void DecreaseOxygenOverTime()
     {
         var gameConfig = GameManager.instance.gameConfig;
-        oxygen -= gameConfig.autoRate * Time.deltaTime;
+        ChangeOxygen(-gameConfig.autoRate * Time.deltaTime);
     }
 
     public void IncreaseOxygenByInhale()
     {
         var gameConfig = GameManager.instance.gameConfig;
-        oxygen += gameConfig.inhaleRate * Time.deltaTime;
+        ChangeOxygen(gameConfig.inhaleRate * Time.deltaTime);
     }
 
     public void IncreaseOxygenBySmoke()
     {
         var gameConfig = GameManager.instance.gameConfig;
-        oxygen += gameConfig.amountAirBySmoke * Time.deltaTime;
+        ChangeOxygen(gameConfig.amountAirBySmoke * Time.deltaTime);
     }
 
     public void IncreaseCarbonDioxideBySmoke()
     {
         var gameConfig = GameManager.instance.gameConfig;
-        carbonDioxide += gameConfig.amountAirBySmoke * Time.deltaTime;
+        ChangeCarbonDioxide(gameConfig.amountAirBySmoke * Time.deltaTime);
     }
 
     public void DecreaseCarbonDioxideByExhale()
     {
         var gameConfig = GameManager.instance.gameConfig;
-        carbonDioxide -= gameConfig.exhaleRate * Time.deltaTime;
+        ChangeCarbonDioxide(-gameConfig.exhaleRate * Time.deltaTime);
     }
 
     public void IncreaseCarbonDioxideOverTime()
     {
         var gameConfig = GameManager.instance.gameConfig;
-        carbonDioxide += gameConfig.autoRate * Time.deltaTime;
+        ChangeCarbonDioxide(gameConfig.autoRate * Time.deltaTime);
     }
 
     public void DecreaseCarbonDioxideByCough()
     {
         var gameConfig = GameManager.instance.gameConfig;
-        carbonDioxide -= gameConfig.amountCo_2Cough * Time.deltaTime;
+        ChangeCarbonDioxide(-gameConfig.amountCo_2Cough * Time.deltaTime);
     }
 }
 

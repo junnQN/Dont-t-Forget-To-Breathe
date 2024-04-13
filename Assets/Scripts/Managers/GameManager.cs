@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour
 
         playerStateText.text = player.stateMachine.currentState.animBoolName ?? "None";
 
-        CheckGameOver();
+        CheckGameWin();
     }
 
     public int GetRemainingTime()
@@ -58,11 +58,11 @@ public class GameManager : MonoBehaviour
         return (int)gameConfig.timeOfLevels[currentLevel - 1] - (int)time;
     }
 
-    private void CheckGameOver()
+    private void CheckGameWin()
     {
         if (time >= gameConfig.timeOfLevels[currentLevel - 1])
         {
-            player.stateMachine.ChangeState(player.dieState);
+            player.stateMachine.ChangeState(player.noneState);
             Debug.Log("Game Over");
         }
     }
