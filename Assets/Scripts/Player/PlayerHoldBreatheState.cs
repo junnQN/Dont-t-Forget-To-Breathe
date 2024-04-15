@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerHoldBreatheState : PlayerState
+public class PlayerHoldBreatheState : PlayerGroundState
 {
     public PlayerHoldBreatheState(Player _player, PlayerStateMachine _stateMachine, string _animBoolName) : base(_player, _stateMachine, _animBoolName)
     {
@@ -29,5 +29,6 @@ public class PlayerHoldBreatheState : PlayerState
             player.stateMachine.ChangeState(player.inhaleState);
         else if (Input.GetKey(KeyCode.O))
             player.stateMachine.ChangeState(player.exhaleState);
+        
     }
 }

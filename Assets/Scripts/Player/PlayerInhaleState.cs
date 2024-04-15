@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerInhaleState : PlayerState
+public class PlayerInhaleState : PlayerGroundState
 {
     public PlayerInhaleState(Player _player, PlayerStateMachine _stateMachine, string _animBoolName) : base(_player, _stateMachine, _animBoolName)
     {
@@ -22,6 +22,7 @@ public class PlayerInhaleState : PlayerState
     {
         base.Update();
 
+        
         player.IncreaseOxygen();
         player.IncreaseCarbonDioxide();
         if (Input.GetKeyUp(KeyCode.I))
