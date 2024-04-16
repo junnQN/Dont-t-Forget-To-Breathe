@@ -20,7 +20,7 @@ public class UI_Bar : MonoBehaviour
         UpdateBar(oxygenSlider, player.oxygen);
         UpdateBar(carbonDioxideSlider, player.carbonDioxide);
         UpdateHeart();
-        if (player.oxygen =< 0f || player.carbonDioxide >= 100f)
+        if (player.oxygen <= 0f || player.carbonDioxide >= 100f)
         {
             health--;
             player.oxygen = 100f;
