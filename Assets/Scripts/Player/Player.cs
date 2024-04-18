@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+//<<<<<<< HEAD
     [Header("Move info")] 
     public float moveSpeed = 12f;
 
@@ -17,6 +18,11 @@ public class Player : MonoBehaviour
     [SerializeField] private float carbonDioxideRate = 10f;
     [SerializeField] private GameObject bucket;
     
+//=======
+    //[SerializeField] public float oxygen = 100f;
+    //[SerializeField] public float carbonDioxide;
+
+//>>>>>>> origin/quan
     #region Components
     public Animator anim { get; private set; }
     public Rigidbody2D rb { get; private set; }
@@ -27,48 +33,81 @@ public class Player : MonoBehaviour
     public PlayerInhaleState inhaleState { get; private set; }
     public PlayerExhaleState exhaleState { get; private set; }
     public PlayerHoldBreatheState holdBreatheState { get; private set; }
+//<<<<<<< HEAD
     
+//=======
+    public PlayerCoughState coughState { get; private set; }
+    public PlayerNoneState noneState { get; private set; }
+    public PlayerDieState dieState { get; private set; }
+
+//>>>>>>> origin/quan
     #endregion
-    
     private void Awake()
     {
         stateMachine = new PlayerStateMachine();
         holdBreatheState = new PlayerHoldBreatheState(this, stateMachine, "HoldBreathe");
+//<<<<<<< HEAD
         inhaleState = new PlayerInhaleState(this,stateMachine,"Inhale");
         exhaleState = new PlayerExhaleState(this,stateMachine,"Exhale");
         
+//=======
+        inhaleState = new PlayerInhaleState(this, stateMachine, "Inhale");
+        exhaleState = new PlayerExhaleState(this, stateMachine, "Exhale");
+        coughState = new PlayerCoughState(this, stateMachine, "Cough");
+        noneState = new PlayerNoneState(this, stateMachine, "None");
+        dieState = new PlayerDieState(this, stateMachine, "Die");
+//>>>>>>> origin/quan
     }
 
     private void Start()
     {
         anim = GetComponentInChildren<Animator>();
+//<<<<<<< HEAD
         rb = GetComponent<Rigidbody2D>();
         stateMachine.Initialize(holdBreatheState);
+//=======
+        stateMachine.Initialize(noneState);
+    }
+
+    public void Init()
+    {
+        oxygen = 100f;
+        carbonDioxide = 0f;
+        stateMachine.ChangeState(holdBreatheState);
+//>>>>>>> origin/quan
     }
 
     private void Update()
     {
+//<<<<<<< HEAD
         stateMachine.currentState.Update();
+//=======
+        if (stateMachine.currentState != null)
+            stateMachine.currentState.Update();
+//>>>>>>> origin/quan
     }
 
-    
-    public void DecreaseOxygen()
+    public void ChangeOxygen(float amount)
     {
-        oxygen -= oxygenRate * Time.deltaTime;
+        oxygen += amount;
+        oxygen = Mathf.Clamp(oxygen, 0, 100);
     }
 
-    public void DecreaseCarbonDioxide()
+    public void ChangeCarbonDioxide(float amount)
     {
-        carbonDioxide -= carbonDioxideRate * Time.deltaTime;
+        carbonDioxide += amount;
+        carbonDioxide = Mathf.Clamp(carbonDioxide, 0, 100);
     }
 
-    public void IncreaseOxygen()
+    public void DecreaseOxygenOverTime()
     {
-        oxygen+= oxygenRate * Time.deltaTime;
+        var gameConfig = GameManager.instance.gameConfig;
+        ChangeOxygen(-gameConfig.autoRate * Time.deltaTime);
     }
-    
-    public void IncreaseCarbonDioxide()
+
+    public void IncreaseOxygenByInhale()
     {
+//<<<<<<< HEAD
         carbonDioxide+= carbonDioxideRate * Time.deltaTime;
     }
 
@@ -83,6 +122,40 @@ public class Player : MonoBehaviour
         {
             bucket.transform.Rotate(0,0,90);
         }
+//=======
+        var gameConfig = GameManager.instance.gameConfig;
+        ChangeOxygen(gameConfig.inhaleRate * Time.deltaTime);
+    }
+
+    public void IncreaseOxygenBySmoke()
+    {
+        var gameConfig = GameManager.instance.gameConfig;
+        ChangeOxygen(gameConfig.amountAirBySmoke * Time.deltaTime);
+    }
+
+    public void IncreaseCarbonDioxideBySmoke()
+    {
+        var gameConfig = GameManager.instance.gameConfig;
+        ChangeCarbonDioxide(gameConfig.amountAirBySmoke * Time.deltaTime);
+    }
+
+    public void DecreaseCarbonDioxideByExhale()
+    {
+        var gameConfig = GameManager.instance.gameConfig;
+        ChangeCarbonDioxide(-gameConfig.exhaleRate * Time.deltaTime);
+    }
+
+    public void IncreaseCarbonDioxideOverTime()
+    {
+        var gameConfig = GameManager.instance.gameConfig;
+        ChangeCarbonDioxide(gameConfig.autoRate * Time.deltaTime);
+    }
+
+    public void DecreaseCarbonDioxideByCough()
+    {
+        var gameConfig = GameManager.instance.gameConfig;
+        ChangeCarbonDioxide(-gameConfig.amountCo_2Cough * Time.deltaTime);
+//>>>>>>> origin/quan
     }
 }
 

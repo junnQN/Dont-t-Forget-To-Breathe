@@ -11,21 +11,29 @@ public class PlayerExhaleState : PlayerGroundState
     public override void Enter()
     {
         base.Enter();
+        player.StartCoroutine(ChangeHoldBreatheStateStateAfterDelay());
+    }
+
+    private IEnumerator ChangeHoldBreatheStateStateAfterDelay()
+    {
+        var time = GameManager.instance.gameConfig.maxTimeExhale;
+        yield return new WaitForSeconds(time);
+        stateMachine.ChangeState(player.holdBreatheState);
     }
 
     public override void Exit()
     {
         base.Exit();
     }
-    
+
     public override void Update()
     {
         base.Update();
-        
-        player.DecreaseCarbonDioxide();
-        player.DecreaseOxygen();
-        if(Input.GetKeyUp(KeyCode.O))
+
+        player.DecreaseCarbonDioxideByExhale();
+        player.DecreaseOxygenOverTime();
+        if (Input.GetKeyUp(KeyCode.O))
             player.stateMachine.ChangeState(player.holdBreatheState);
-       
+
     }
 }

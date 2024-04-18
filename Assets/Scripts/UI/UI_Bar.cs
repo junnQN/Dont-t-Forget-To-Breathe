@@ -12,15 +12,15 @@ public class UI_Bar : MonoBehaviour
     [SerializeField] private Image[] hearts;
     [SerializeField] private Sprite fullHeart;
     [SerializeField] private Sprite emptyHeart;
-    [SerializeField] private int numberOfHearts=4;
+    [SerializeField] private int numberOfHearts = 4;
     [SerializeField] private int health;
-    
+
     private void Update()
     {
-        UpdateBar(oxygenSlider,player.oxygen);
-        UpdateBar(carbonDioxideSlider,player.carbonDioxide);
+        UpdateBar(oxygenSlider, player.oxygen);
+        UpdateBar(carbonDioxideSlider, player.carbonDioxide);
         UpdateHeart();
-        if (player.oxygen < 0f || player.carbonDioxide > 100f)
+        if (player.oxygen <= 0f || player.carbonDioxide >= 100f)
         {
             health--;
             player.oxygen = 100f;
@@ -28,14 +28,14 @@ public class UI_Bar : MonoBehaviour
         }
     }
 
-    private void UpdateBar(Slider bar,float currVal)
+    private void UpdateBar(Slider bar, float currVal)
     {
         bar.value = currVal / 100;
     }
 
     private void UpdateHeart()
     {
-        if (health>numberOfHearts)
+        if (health > numberOfHearts)
         {
             health = numberOfHearts;
         }
@@ -59,5 +59,5 @@ public class UI_Bar : MonoBehaviour
             }
         }
     }
-    
+
 }
