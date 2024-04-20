@@ -9,6 +9,9 @@ public class Player : MonoBehaviour
     [SerializeField] public float oxygen = 100f;
     [SerializeField] public float carbonDioxide;
 
+    [SerializeField] public int currentHealth = 9;
+    [SerializeField] public int maxHealth = 9;
+
     #region Components
     public Animator anim { get; private set; }
     #endregion
@@ -44,13 +47,31 @@ public class Player : MonoBehaviour
     {
         oxygen = 100f;
         carbonDioxide = 0f;
+        currentHealth = 9;
         stateMachine.ChangeState(holdBreatheState);
     }
 
     private void Update()
     {
+        if (oxygen <= 0f || carbonDioxide >= 100f)
+        {
+            currentHealth = Mathf.Clamp(currentHealth - 1, 0, maxHealth);
+            CheckGameOver();
+            oxygen = 100f;
+            carbonDioxide = 0f;
+            return;
+        }
+
         if (stateMachine.currentState != null)
             stateMachine.currentState.Update();
+    }
+
+    public void CheckGameOver()
+    {
+        if (currentHealth <= 0)
+        {
+            GameManager.instance.HandleGameLose();
+        }
     }
 
     public void ChangeOxygen(float amount)

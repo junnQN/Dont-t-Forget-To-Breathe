@@ -7,6 +7,9 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+    public BaseScreen[] screens;
+
+    public Dictionary<string, BaseScreen> screenDict = new Dictionary<string, BaseScreen>();
 
     public GameConfig gameConfig;
     public Player player;
@@ -33,6 +36,12 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        AddScreens();
+    }
+
+    private void Start()
+    {
+        screenDict[ScreenKeys.MENU_SCREEN]?.Open();
     }
 
     public void StartGame()
@@ -40,6 +49,19 @@ public class GameManager : MonoBehaviour
         player.Init();
         time = 0;
         isPlaying = true;
+    }
+
+    public void NextLevel()
+    {
+        player.Init();
+        time = 0;
+        isPlaying = true;
+    }
+
+    public void AddScreens()
+    {
+        foreach (var screen in screens)
+            screenDict.Add(screen.screenName, screen);
     }
 
     private void Update()
@@ -62,9 +84,27 @@ public class GameManager : MonoBehaviour
     {
         if (time >= gameConfig.timeOfLevels[currentLevel - 1])
         {
-            player.stateMachine.ChangeState(player.noneState);
-            Debug.Log("Game Over");
+            HandleGameWin();
         }
+    }
+
+    public void HandleGameWin()
+    {
+        player.stateMachine.ChangeState(player.noneState);
+
+        currentLevel++;
+        var resultScreen = screenDict[ScreenKeys.RESULT_SCREEN] as ResultScreen;
+        resultScreen.UpdateScreen(true);
+        screenDict[ScreenKeys.RESULT_SCREEN].Open();
+    }
+
+    public void HandleGameLose()
+    {
+        player.stateMachine.ChangeState(player.dieState);
+
+        var resultScreen = screenDict[ScreenKeys.RESULT_SCREEN] as ResultScreen;
+        resultScreen.UpdateScreen(false);
+        screenDict[ScreenKeys.RESULT_SCREEN].Open();
     }
 
     public void SpawnSmoke()
