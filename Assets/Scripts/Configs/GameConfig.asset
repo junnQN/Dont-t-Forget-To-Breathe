@@ -17,10 +17,12 @@ MonoBehaviour:
   autoRate: 10
   amountCo_2Cough: 10
   timeToBreakCoughState: 1
+  amountAirBySmoke: 10
+  coughRate: 0.7
   maxTimeInhale: 3
   maxTimeExhale: 3
   timeOfLevels:
-  - 60
+  - 30
   - 120
   - 180
   - 240

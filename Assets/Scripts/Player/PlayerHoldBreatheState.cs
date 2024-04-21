@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerHoldBreatheState : PlayerGroundState
+public class PlayerHoldBreatheState : PlayerMoveState
 {
     public PlayerHoldBreatheState(Player _player, PlayerStateMachine _stateMachine, string _animBoolName) : base(_player, _stateMachine, _animBoolName)
     {

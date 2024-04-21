@@ -18,7 +18,7 @@ public class PlayerExhaleState : PlayerGroundState
     {
         var time = GameManager.instance.gameConfig.maxTimeExhale;
         yield return new WaitForSeconds(time);
-        stateMachine.ChangeState(player.holdBreatheState);
+        stateMachine.ChangeState(player.idleState);
     }
 
     public override void Exit()
@@ -33,7 +33,6 @@ public class PlayerExhaleState : PlayerGroundState
         player.DecreaseCarbonDioxideByExhale();
         player.DecreaseOxygenOverTime();
         if (Input.GetKeyUp(KeyCode.O))
-            player.stateMachine.ChangeState(player.holdBreatheState);
-
+            player.stateMachine.ChangeState(player.idleState);
     }
 }

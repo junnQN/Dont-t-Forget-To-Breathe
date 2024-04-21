@@ -5,12 +5,15 @@ using UnityEngine;
 
 public class PlayerState
 {
+    
+    
+
     protected PlayerStateMachine stateMachine;
     protected Player player;
     protected Rigidbody2D rb;
 
 //<<<<<<< HEAD
-    protected float xInput;
+    public float xInput;
     //private string animBoolName;
     
     //public PlayerState(Player _player,PlayerStateMachine _stateMachine, string _animBoolName)
@@ -34,17 +37,21 @@ public class PlayerState
 //>>>>>>> origin/quan
     }
 
-    public virtual void Update()
-    {
-//<<<<<<< HEAD
-        xInput = Input.GetAxisRaw("Horizontal");
-//=======
-        // Debug.Log("I in " + animBoolName);
-//>>>>>>> origin/quan
-    }
-
     public virtual void Exit()
     {
         player.anim.SetBool(animBoolName, false);
     }
+    
+    public virtual void Update()
+    {
+//<<<<<<< HEAD
+        xInput = Input.GetAxisRaw("Horizontal");
+        player.anim.SetFloat("yVelocity",rb.velocity.y);
+        player.anim.SetFloat("xVelocity",xInput);
+//=======
+        // Debug.Log("I in " + animBoolName);
+//>>>>>>> origin/quan
+    }
+    
+    
 }

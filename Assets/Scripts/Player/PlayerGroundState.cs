@@ -22,11 +22,30 @@ public class PlayerGroundState : PlayerState
     {
         base.Update();
 
-        player.SetVelocity(xInput * player.moveSpeed, rb.velocity.y);
-        
-        if (Input.GetKeyDown(KeyCode.Space))
+
+
+        if (Input.GetKey(KeyCode.I))
         {
-            rb.velocity = new Vector2(rb.velocity.x, player.jumpForce);
+            player.IncreaseOxygenByInhale();
+            player.IncreaseCarbonDioxideOverTime();
         }
+
+        else if (Input.GetKey(KeyCode.O))
+        {
+            player.DecreaseCarbonDioxideByExhale();
+            player.DecreaseOxygenOverTime();
+        }
+        else
+        {
+            player.DecreaseOxygenOverTime();
+            player.IncreaseCarbonDioxideOverTime();   
+        }
+        
+        if (Input.GetKeyDown(KeyCode.Space) && player.IsGroundDetected())
+            stateMachine.ChangeState(player.jumpState);
+        
+        if(Input.GetKeyDown(KeyCode.E)&&player.isPlayerTouching)
+            stateMachine.ChangeState(player.eatState);
+        
     }
 }
