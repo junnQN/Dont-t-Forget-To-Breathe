@@ -37,6 +37,7 @@ public class Player : MonoBehaviour
     #region Components
     public Animator anim { get; private set; }
     public Rigidbody2D rb { get; private set; }
+    public CharacterStats stats { get; private set; }
     #endregion
 
     #region States
@@ -87,6 +88,7 @@ public class Player : MonoBehaviour
         //stateMachine.Initialize(holdBreatheState);
 //=======
         stateMachine.Initialize(noneState);
+        stats = GetComponent<CharacterStats>();
     }
 
     public void Init()

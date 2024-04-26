@@ -25,6 +25,10 @@ public class PlayerJumpState : PlayerState
 
         player.DecreaseOxygenOverTime();
         player.IncreaseCarbonDioxideOverTime();
+        
+        if(xInput!=0)
+            player.SetVelocity(xInput * player.moveSpeed, rb.velocity.y);
+        
         if (rb.velocity.y < 0)
         {
             stateMachine.ChangeState(player.airState);

@@ -12,7 +12,7 @@ public class UI_Bar : MonoBehaviour
     [SerializeField] private Image[] hearts;
     [SerializeField] private Sprite fullHeart;
     [SerializeField] private Sprite emptyHeart;
-    [SerializeField] private int numberOfHearts = 4;
+    [SerializeField] private int numberOfHearts;
     [SerializeField] private int health;
 
     private void Update()

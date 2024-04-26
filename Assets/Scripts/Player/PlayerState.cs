@@ -5,9 +5,6 @@ using UnityEngine;
 
 public class PlayerState
 {
-    
-    
-
     protected PlayerStateMachine stateMachine;
     protected Player player;
     protected Rigidbody2D rb;
