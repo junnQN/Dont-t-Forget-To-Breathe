@@ -22,8 +22,8 @@ MonoBehaviour:
   maxTimeInhale: 3
   maxTimeExhale: 3
   timeOfLevels:
-  - 30
-  - 120
+  - 2
+  - 2
   - 180
   - 240
   - 300

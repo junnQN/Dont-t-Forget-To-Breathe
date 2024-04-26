@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class PlayerInhaleState : PlayerGroundState
 {
+    Tween counterTween;
     public PlayerInhaleState(Player _player, PlayerStateMachine _stateMachine, string _animBoolName) : base(_player, _stateMachine, _animBoolName)
     {
     }
@@ -11,14 +13,20 @@ public class PlayerInhaleState : PlayerGroundState
     public override void Enter()
     {
         base.Enter();
-        player.StartCoroutine(ChangeHoldBreatheStateStateAfterDelay());
+        ChangeHoldBreatheStateStateAfterDelay();
     }
 
-    private IEnumerator ChangeHoldBreatheStateStateAfterDelay()
+    private void ChangeHoldBreatheStateStateAfterDelay()
     {
+        counterTween?.Kill();
         var time = GameManager.instance.gameConfig.maxTimeInhale;
+//<<<<<<< HEAD
         yield return new WaitForSeconds(time);
         stateMachine.ChangeState(player.idleState);
+//=======
+        counterTween = DOVirtual.Float(0, 1, time, (v) => { })
+        .OnComplete(() => player.stateMachine.ChangeState(player.holdBreatheState));
+//>>>>>>> origin/quan
     }
 
     public override void Exit()

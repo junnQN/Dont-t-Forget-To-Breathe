@@ -28,12 +28,18 @@ public class Player : MonoBehaviour
     //[SerializeField] public float oxygen = 100f;
     //[SerializeField] public float carbonDioxide;
 
+//<<<<<<< HEAD
 //>>>>>>> origin/quan
     public int facingDir { get; private set; } = 1;
     private bool facingRight = false; 
     public bool isPlayerTouching = false;
     public bool inAir = false;
     
+//=======
+    [SerializeField] public int currentHealth = 9;
+    [SerializeField] public int maxHealth = 9;
+
+//>>>>>>> origin/quan
     #region Components
     public Animator anim { get; private set; }
     public Rigidbody2D rb { get; private set; }
@@ -95,19 +101,44 @@ public class Player : MonoBehaviour
     {
         oxygen = 100f;
         carbonDioxide = 0f;
+//<<<<<<< HEAD
         stateMachine.ChangeState(idleState);
+//>>>>>>> origin/quan
+//=======
+        currentHealth = 9;
+        stateMachine.ChangeState(holdBreatheState);
 //>>>>>>> origin/quan
     }
 
     private void Update()
     {
+//<<<<<<< HEAD
         
 //<<<<<<< HEAD
         //stateMachine.currentState.Update();
 //=======
+//=======
+        if (oxygen <= 0f || carbonDioxide >= 100f)
+        {
+            currentHealth = Mathf.Clamp(currentHealth - 1, 0, maxHealth);
+            CheckGameOver();
+            oxygen = 100f;
+            carbonDioxide = 0f;
+            return;
+        }
+
+//>>>>>>> origin/quan
         if (stateMachine.currentState != null)
             stateMachine.currentState.Update();
 //>>>>>>> origin/quan
+    }
+
+    public void CheckGameOver()
+    {
+        if (currentHealth <= 0)
+        {
+            GameManager.instance.HandleGameLose();
+        }
     }
 
     public void ChangeOxygen(float amount)
