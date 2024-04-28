@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
-public class PlayerExhaleState : PlayerState
+public class PlayerExhaleState : PlayerGroundState
 {
     Tween counterTween;
 
@@ -22,7 +22,7 @@ public class PlayerExhaleState : PlayerState
         counterTween?.Kill();
         var time = GameManager.instance.gameConfig.maxTimeExhale;
         counterTween = DOVirtual.Float(0, 1, time, (v) => { })
-        .OnComplete(() => player.stateMachine.ChangeState(player.holdBreatheState));
+        .OnComplete(() => player.stateMachine.ChangeState(player.idleState));
     }
 
     public override void Exit()
@@ -37,7 +37,6 @@ public class PlayerExhaleState : PlayerState
         player.DecreaseCarbonDioxideByExhale();
         player.DecreaseOxygenOverTime();
         if (Input.GetKeyUp(KeyCode.O))
-            player.stateMachine.ChangeState(player.holdBreatheState);
-
+            player.stateMachine.ChangeState(player.idleState);
     }
 }
