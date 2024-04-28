@@ -146,8 +146,8 @@ public class Player : MonoBehaviour
 
     public void IncreaseOxygenByInhale()
     {
-        //<<<<<<< HEAD
-        carbonDioxide += carbonDioxideRate * Time.deltaTime;
+        var gameConfig = GameManager.instance.gameConfig;
+        ChangeOxygen(gameConfig.inhaleRate * Time.deltaTime);
     }
 
     public void SetVelocity(float _xVelocity, float _yVelocity)
