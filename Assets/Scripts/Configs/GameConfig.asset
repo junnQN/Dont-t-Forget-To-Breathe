@@ -27,3 +27,5 @@ MonoBehaviour:
   - 180
   - 240
   - 300
+  waterMaxHeight: 7
+  sprintTime: 2

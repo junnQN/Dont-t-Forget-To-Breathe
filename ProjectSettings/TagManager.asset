@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Bowl
+  - FlushButton
   layers:
   - Default
   - TransparentFX

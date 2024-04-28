@@ -25,6 +25,12 @@ public class ResultScreen : BaseScreen
         Close();
     }
 
+    public void HandleNextButton()
+    {
+        GameManager.instance.NextLevel();
+        Close();
+    }
+
     public void UpdateScreen(bool isWin)
     {
         string title = isWin ? "You Win!" : "You Lose!";

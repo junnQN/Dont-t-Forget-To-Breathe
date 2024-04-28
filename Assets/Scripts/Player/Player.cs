@@ -36,6 +36,7 @@ public class Player : MonoBehaviour
     private bool facingRight = false;
     public bool isPlayerTouching = false;
     public bool inAir = false;
+    public bool isTouchFlushButton = false;
 
     #region Components
     public Animator anim { get; private set; }
@@ -115,7 +116,11 @@ public class Player : MonoBehaviour
 
         if (stateMachine.currentState != null)
             stateMachine.currentState.Update();
-        //>>>>>>> origin/quan
+
+        if (isTouchFlushButton && Input.GetKeyDown(KeyCode.E))
+        {
+            GameManager.instance.SprintWater();
+        }
     }
 
     public void CheckGameOver()
@@ -231,6 +236,11 @@ public class Player : MonoBehaviour
         {
             isPlayerTouching = true;
         }
+
+        else if (other.CompareTag("FlushButton"))
+        {
+            isTouchFlushButton = true;
+        }
     }
 
     void OnTriggerExit2D(Collider2D other)
@@ -238,6 +248,10 @@ public class Player : MonoBehaviour
         if (other.CompareTag("Bowl"))
         {
             isPlayerTouching = false;
+        }
+        else if (other.CompareTag("FlushButton"))
+        {
+            isTouchFlushButton = true;
         }
     }
 

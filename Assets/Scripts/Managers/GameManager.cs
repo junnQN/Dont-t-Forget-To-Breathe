@@ -26,10 +26,17 @@ public class GameManager : MonoBehaviour
     #endregion
     [SerializeField] private Transform spawnPoint;
 
+    [SerializeField]
     private Smoke smoke;
+    [SerializeField]
+    private WaterBehavior water;
+
+    [SerializeField]
+    public FlushButton flushButton;
 
     #region Prefabs
     [SerializeField] private GameObject smokePrefab;
+    [SerializeField] private GameObject waterPrefab;
     #endregion
 
 
@@ -56,6 +63,34 @@ public class GameManager : MonoBehaviour
         player.Init();
         time = 0;
         isPlaying = true;
+
+        //Object
+        smoke.gameObject.SetActive(false);
+        water.gameObject.SetActive(false);
+        flushButton.gameObject.SetActive(false);
+
+        switch (currentLevel)
+        {
+            case 1:
+                // PrepareLevel1();
+                break;
+            case 2:
+                // PrepareLevel2();
+                break;
+            case 3:
+                PrepareLevel3();
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void PrepareLevel3()
+    {
+        water.gameObject.SetActive(true);
+        water.Init();
+        flushButton.gameObject.SetActive(true);
+        flushButton.Init();
     }
 
     public void AddScreens()
@@ -82,7 +117,7 @@ public class GameManager : MonoBehaviour
 
     private void CheckGameWin()
     {
-        if (time >= gameConfig.timeOfLevels[currentLevel - 1])
+        if (isPlaying && time >= gameConfig.timeOfLevels[currentLevel - 1])
         {
             HandleGameWin();
         }
@@ -91,7 +126,7 @@ public class GameManager : MonoBehaviour
     public void HandleGameWin()
     {
         player.stateMachine.ChangeState(player.noneState);
-
+        isPlaying = false;
         currentLevel++;
         var resultScreen = screenDict[ScreenKeys.RESULT_SCREEN] as ResultScreen;
         resultScreen.UpdateScreen(true);
@@ -100,6 +135,7 @@ public class GameManager : MonoBehaviour
 
     public void HandleGameLose()
     {
+        isPlaying = false;
         player.stateMachine.ChangeState(player.dieState);
 
         var resultScreen = screenDict[ScreenKeys.RESULT_SCREEN] as ResultScreen;
@@ -123,6 +159,20 @@ public class GameManager : MonoBehaviour
         smoke.Init();
         smoke.ShowSmoke();
     }
+
+    public void SpawnWater()
+    {
+        var waterObject = Instantiate(waterPrefab);
+        water = waterObject.GetComponent<WaterBehavior>();
+        water.Init();
+    }
+
+    public void SprintWater()
+    {
+        water.SprintWater();
+        flushButton.ChangeButtonState(true);
+    }
+
 
     public void HideSmoke()
     {
