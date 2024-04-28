@@ -80,6 +80,9 @@ public class GameManager : MonoBehaviour
         water.gameObject.SetActive(false);
         flushButton.gameObject.SetActive(false);
 
+        thermometer.gameObject.SetActive(true);
+        thermometer.Init();
+
         switch (currentLevel)
         {
             case 1:
@@ -111,9 +114,6 @@ public class GameManager : MonoBehaviour
         {
             thermometer.ReduceTemperature(10);
         });
-
-        thermometer.gameObject.SetActive(true);
-        thermometer.Init();
     }
 
     public void PrepareLevel3()
