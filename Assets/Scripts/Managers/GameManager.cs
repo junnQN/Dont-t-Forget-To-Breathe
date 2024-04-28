@@ -56,6 +56,7 @@ public class GameManager : MonoBehaviour
         player.Init();
         time = 0;
         isPlaying = true;
+        PrepareLevel();
     }
 
     public void NextLevel()
@@ -64,7 +65,11 @@ public class GameManager : MonoBehaviour
         time = 0;
         isPlaying = true;
 
-        //Object
+        PrepareLevel();
+    }
+
+    public void PrepareLevel()
+    {
         smoke.gameObject.SetActive(false);
         water.gameObject.SetActive(false);
         flushButton.gameObject.SetActive(false);
@@ -72,7 +77,7 @@ public class GameManager : MonoBehaviour
         switch (currentLevel)
         {
             case 1:
-                // PrepareLevel1();
+                PrepareLevel1();
                 break;
             case 2:
                 // PrepareLevel2();
@@ -80,9 +85,17 @@ public class GameManager : MonoBehaviour
             case 3:
                 PrepareLevel3();
                 break;
+            case 4:
+                PrepareLevel4();
+                break;
             default:
                 break;
         }
+    }
+
+    public void PrepareLevel1()
+    {
+        //
     }
 
     public void PrepareLevel3()
@@ -91,6 +104,12 @@ public class GameManager : MonoBehaviour
         water.Init();
         flushButton.gameObject.SetActive(true);
         flushButton.Init();
+    }
+
+    public void PrepareLevel4()
+    {
+        smoke.gameObject.SetActive(true);
+        smoke.Init();
     }
 
     public void AddScreens()
