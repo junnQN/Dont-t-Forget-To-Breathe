@@ -32,7 +32,13 @@ public class GameManager : MonoBehaviour
     private WaterBehavior water;
 
     [SerializeField]
-    public FlushButton flushButton;
+    private FlushButton flushButton;
+
+    [SerializeField]
+    private Thermometer thermometer;
+
+    [SerializeField]
+    private Tube tube;
 
     #region Prefabs
     [SerializeField] private GameObject smokePrefab;
@@ -80,7 +86,7 @@ public class GameManager : MonoBehaviour
                 PrepareLevel1();
                 break;
             case 2:
-                // PrepareLevel2();
+                PrepareLevel2();
                 break;
             case 3:
                 PrepareLevel3();
@@ -96,6 +102,18 @@ public class GameManager : MonoBehaviour
     public void PrepareLevel1()
     {
         //
+    }
+
+    public void PrepareLevel2()
+    {
+        tube.gameObject.SetActive(true);
+        tube.Init(() =>
+        {
+            thermometer.ReduceTemperature(10);
+        });
+
+        thermometer.gameObject.SetActive(true);
+        thermometer.Init();
     }
 
     public void PrepareLevel3()
