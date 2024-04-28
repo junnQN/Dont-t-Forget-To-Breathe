@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class GameManager : MonoBehaviour
     public GameConfig gameConfig;
     public Player player;
 
-    private bool isPlaying = false;
+    public bool isPlaying = false;
 
     public float time;
 
@@ -39,7 +40,7 @@ public class GameManager : MonoBehaviour
         AddScreens();
     }
 
-    private void Start()
+    public void Start()
     {
         screenDict[ScreenKeys.MENU_SCREEN]?.Open();
     }
@@ -73,6 +74,7 @@ public class GameManager : MonoBehaviour
         playerStateText.text = player.stateMachine.currentState.animBoolName ?? "None";
 
         CheckGameWin();
+        CheckGameLose();
     }
 
     public int GetRemainingTime()
@@ -98,13 +100,30 @@ public class GameManager : MonoBehaviour
         screenDict[ScreenKeys.RESULT_SCREEN].Open();
     }
 
+    public void CheckGameLose()
+    {
+        if (player.currentHealth==player.tmpHealth-1)
+        {
+            player.tmpHealth = player.tmpHealth-1;
+            player.stateMachine.ChangeState(player.noneState);
+            HandleGameLose();
+        }
+    }
     public void HandleGameLose()
     {
         player.stateMachine.ChangeState(player.dieState);
-
         var resultScreen = screenDict[ScreenKeys.RESULT_SCREEN] as ResultScreen;
-        resultScreen.UpdateScreen(false);
-        screenDict[ScreenKeys.RESULT_SCREEN].Open();
+        if (player.currentHealth == 0f)
+        {
+            resultScreen.BackToMainMenu();
+            screenDict[ScreenKeys.RESULT_SCREEN].Open();
+        }
+        else
+        {
+            resultScreen.UpdateScreen(false);
+            screenDict[ScreenKeys.RESULT_SCREEN].Open();
+        }
+        
     }
 
     public void SpawnSmoke()
@@ -136,5 +155,17 @@ public class GameManager : MonoBehaviour
             return false;
         }
         return smoke.isPlaying;
+    }
+
+    public void RestartScene()
+    {
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
+    }
+
+    public void ResetScene()
+    {
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(currentSceneIndex);
     }
 }

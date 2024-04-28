@@ -14,6 +14,8 @@ public class ResultScreen : BaseScreen
     [SerializeField]
     private GameObject nextLevelButton;
 
+    [SerializeField] private GameObject backToMenuBtn;
+
     public void HandleQuitButton()
     {
         Application.Quit();
@@ -31,5 +33,14 @@ public class ResultScreen : BaseScreen
         this.title.text = title;
         replayButton.SetActive(!isWin);
         nextLevelButton.SetActive(isWin);
+        backToMenuBtn.SetActive(false);
+    }
+
+    public void BackToMainMenu()
+    {
+        this.title.text = "You Lose!";
+        backToMenuBtn.SetActive(true);
+        replayButton.SetActive(false);
+        nextLevelButton.SetActive(false);
     }
 }

@@ -13,10 +13,10 @@ public class PlayerInhaleState : PlayerGroundState
     public override void Enter()
     {
         base.Enter();
-        ChangeHoldBreatheStateStateAfterDelay();
+        //ChangeHoldBreatheStateStateAfterDelay();
     }
 
-    private void ChangeHoldBreatheStateStateAfterDelay()
+    /*private void ChangeHoldBreatheStateStateAfterDelay()
     {
         counterTween?.Kill();
         var time = GameManager.instance.gameConfig.maxTimeInhale;
@@ -27,7 +27,7 @@ public class PlayerInhaleState : PlayerGroundState
         counterTween = DOVirtual.Float(0, 1, time, (v) => { })
         .OnComplete(() => player.stateMachine.ChangeState(player.holdBreatheState));
 //>>>>>>> origin/quan
-    }
+    }*/
 
     public override void Exit()
     {

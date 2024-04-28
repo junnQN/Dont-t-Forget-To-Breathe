@@ -9,9 +9,11 @@ public class UI : MonoBehaviour
     public static UI instance; 
     
     [Header("End screen")]
-    [SerializeField] private UI_FadeScreen fadeScreen;
-    [SerializeField] private GameObject endText;
-    [SerializeField] private GameObject restartButton;
+    public UI_FadeScreen fadeScreen;
+    public GameObject endText;
+    public GameObject restartButton;
+    public GameObject winText;
+    public GameObject nextLvButton;
     
    
     //[SerializeField] private GameObject inGameUI;
@@ -23,7 +25,7 @@ public class UI : MonoBehaviour
         else 
             instance = this;
         
-        fadeScreen.gameObject.SetActive(true);
+        //fadeScreen.gameObject.SetActive(true);
     }
 
     private void Start()
@@ -50,8 +52,6 @@ public class UI : MonoBehaviour
         {
             _menu.SetActive(true);
         }
-
-        
     }
 
     public void SwitchWithKeyTo(GameObject _menu)
@@ -77,8 +77,8 @@ public class UI : MonoBehaviour
 
     public void SwitchOnEndScreen()
     {
+        fadeScreen.gameObject.SetActive(true);
         fadeScreen.FadeOut();
-        StartCoroutine(EndScreenCoroutine());
         StartCoroutine(EndScreenCoroutine());
     }
 
@@ -89,5 +89,22 @@ public class UI : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         restartButton.SetActive(true);
     }
+
+    public void RestartGameButton() => GameManager.instance.RestartScene();
     
+    public void SwitchOnWinScreen()
+    {
+        fadeScreen.gameObject.SetActive(true);
+        fadeScreen.FadeOut();
+        StartCoroutine(WinScreenCoroutine());
+        
+    }
+
+    IEnumerator WinScreenCoroutine()
+    {
+        yield return new WaitForSeconds(1);
+        winText.SetActive(true);
+        yield return new WaitForSeconds(1.5f);
+        nextLvButton.SetActive(true);
+    }
 }

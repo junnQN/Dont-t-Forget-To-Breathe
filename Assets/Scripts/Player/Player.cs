@@ -22,28 +22,39 @@ public class Player : MonoBehaviour
     [SerializeField] private float oxygenRate = 10f;
     [SerializeField] public float carbonDioxide;
     [SerializeField] private float carbonDioxideRate = 10f;
-    [SerializeField] private GameObject bucket;
-    
-//=======
+    //[SerializeField] private GameObject bucket;
+    [Header("Swim info")] 
+    [SerializeField] private GameObject water;
+    public float swimForce = 5f; // Lực nổi khi ấn Space
+    public float swimHorizontalForce = 3f; // Lực di chuyển sang trái và phải khi bơi
+    public float gravity = 1f; // Gravitational pull
+    public float maxVelocity = 5f; // Tốc độ tối đa của player
+    public bool isSwimming = false;
+    public float swimDrag = 2f; // Lực cản nước
+//=======   
     //[SerializeField] public float oxygen = 100f;
     //[SerializeField] public float carbonDioxide;
-
+    
 //<<<<<<< HEAD
 //>>>>>>> origin/quan
+    
     public int facingDir { get; private set; } = 1;
     private bool facingRight = false; 
     public bool isPlayerTouching = false;
     public bool inAir = false;
+    public bool shouldMove = false;
     
 //=======
-    [SerializeField] public int currentHealth = 9;
-    [SerializeField] public int maxHealth = 9;
-
+    public int currentHealth = 9;
+    public int tmpHealth = 9;
+    public int maxHealth = 9;
+    public GameObject UI_Game;
+    
+    
 //>>>>>>> origin/quan
     #region Components
     public Animator anim { get; private set; }
     public Rigidbody2D rb { get; private set; }
-    public CharacterStats stats { get; private set; }
     #endregion
 
     #region States
@@ -56,6 +67,8 @@ public class Player : MonoBehaviour
     public PlayerJumpState jumpState { get; private set; }
     public PlayerAirState airState { get; private set; }
     public PlayerEatState eatState { get; private set; }
+    public PlayerFirstMoveState firstState { get; private set; }
+    public PlayerSwimState swimState { get; private set; }
 //<<<<<<< HEAD
     
 //=======
@@ -77,6 +90,8 @@ public class Player : MonoBehaviour
         jumpState = new PlayerJumpState(this, stateMachine, "Jump");
         airState = new PlayerAirState(this, stateMachine, "Jump");
         eatState = new PlayerEatState(this, stateMachine, "Eat");
+        firstState = new PlayerFirstMoveState(this, stateMachine, "Move");
+        swimState = new PlayerSwimState(this, stateMachine, "Move");
 //=======
         inhaleState = new PlayerInhaleState(this, stateMachine, "Inhale");
         exhaleState = new PlayerExhaleState(this, stateMachine, "Exhale");
@@ -93,8 +108,15 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         //stateMachine.Initialize(holdBreatheState);
 //=======
-        stateMachine.Initialize(noneState);
-        stats = GetComponent<CharacterStats>();
+        stateMachine.Initialize(firstState);
+    }
+
+    private void FixedUpdate()
+    {
+        if (!isSwimming)
+        {
+            ApplyGravity();
+        }
     }
 
     public void Init()
@@ -105,8 +127,8 @@ public class Player : MonoBehaviour
         stateMachine.ChangeState(idleState);
 //>>>>>>> origin/quan
 //=======
-        currentHealth = 9;
-        stateMachine.ChangeState(holdBreatheState);
+        currentHealth = tmpHealth;
+        //stateMachine.ChangeState(holdBreatheState);
 //>>>>>>> origin/quan
     }
 
@@ -115,7 +137,7 @@ public class Player : MonoBehaviour
 //<<<<<<< HEAD
         
 //<<<<<<< HEAD
-        //stateMachine.currentState.Update();
+        stateMachine.currentState.Update();
 //=======
 //=======
         if (oxygen <= 0f || carbonDioxide >= 100f)
@@ -162,7 +184,9 @@ public class Player : MonoBehaviour
     public void IncreaseOxygenByInhale()
     {
 //<<<<<<< HEAD
-        carbonDioxide+= carbonDioxideRate * Time.deltaTime;
+        var gameConfig = GameManager.instance.gameConfig;
+        ChangeOxygen(gameConfig.inhaleRate * Time.deltaTime);
+        //carbonDioxide+= carbonDioxideRate * Time.deltaTime;
     }
 
     public void SetVelocity(float _xVelocity, float _yVelocity)
@@ -175,7 +199,7 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            bucket.transform.Rotate(0,0,90);
+            //bucket.transform.Rotate(0,0,90);
         }
 //=======
         var gameConfig = GameManager.instance.gameConfig;
@@ -255,8 +279,25 @@ public class Player : MonoBehaviour
             isPlayerTouching = false;
         }
     }
+
+    public void ActiveUI()
+    {
+        UI_Game.SetActive(true);
+    }
+
     
     
+    private void ApplyGravity()
+    {
+        // Áp dụng trọng lực
+        rb.AddForce(Vector2.down * gravity, ForceMode2D.Force);
+    }
+
+    public void ChangeSwimState()
+    {
+        stateMachine.ChangeState(swimState);
+        water.SetActive(true);
+    }
 }
 
 

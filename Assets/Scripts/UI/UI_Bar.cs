@@ -6,6 +6,15 @@ using UnityEngine.UI;
 
 public class UI_Bar : MonoBehaviour
 {
+    public static UI_Bar instance;
+    private void Awake()
+    {
+        if(instance!=null)
+            Destroy(instance.gameObject);
+        else 
+            instance = this;
+    }
+    
     [SerializeField] private Slider oxygenSlider;
     [SerializeField] private Slider carbonDioxideSlider;
     [SerializeField] private Player player;
@@ -15,6 +24,7 @@ public class UI_Bar : MonoBehaviour
 //<<<<<<< HEAD
     [SerializeField] private int numberOfHearts;
     [SerializeField] private int health;
+    [SerializeField] public int life;
 
 //=====
 //>>>>>>> origin/quan
@@ -23,6 +33,7 @@ public class UI_Bar : MonoBehaviour
         UpdateBar(oxygenSlider, player.oxygen);
         UpdateBar(carbonDioxideSlider, player.carbonDioxide);
         UpdateHeart();
+        UpdateHealth();
     }
 
     private void UpdateBar(Slider bar, float currVal)
@@ -50,6 +61,14 @@ public class UI_Bar : MonoBehaviour
             {
                 hearts[i].enabled = false;
             }
+        }
+    }
+
+    public void UpdateHealth()
+    {
+        if (player.oxygen <= 0 || player.carbonDioxide >= 100f)
+        {
+            life--;
         }
     }
 
