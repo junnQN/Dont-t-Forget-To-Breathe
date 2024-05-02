@@ -17,18 +17,23 @@ public class PlayerExhaleState : PlayerGroundState
         //ChangeHoldBreatheStateStateAfterDelay();
     }
 
-    /*private void ChangeHoldBreatheStateStateAfterDelay()
+    private void ChangeHoldBreatheStateStateAfterDelay()
     {
         counterTween?.Kill();
         var time = GameManager.instance.gameConfig.maxTimeExhale;
-<<<<<<< HEAD
+
         yield return new WaitForSeconds(time);
         stateMachine.ChangeState(player.idleState);
-=======
+
         counterTween = DOVirtual.Float(0, 1, time, (v) => { })
         .OnComplete(() => player.stateMachine.ChangeState(player.holdBreatheState));
->>>>>>> origin/quan
-    }*/
+
+    
+
+        counterTween = DOVirtual.Float(0, 1, time, (v) => { })
+        .OnComplete(() => player.stateMachine.ChangeState(player.idleState));
+    }
+
 
     public override void Exit()
     {

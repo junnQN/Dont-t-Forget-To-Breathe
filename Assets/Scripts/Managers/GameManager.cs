@@ -27,10 +27,23 @@ public class GameManager : MonoBehaviour
     #endregion
     [SerializeField] private Transform spawnPoint;
 
+    [SerializeField]
     private Smoke smoke;
+    [SerializeField]
+    private WaterBehavior water;
+
+    [SerializeField]
+    private FlushButton flushButton;
+
+    [SerializeField]
+    private Thermometer thermometer;
+
+    [SerializeField]
+    private Tube tube;
 
     #region Prefabs
     [SerializeField] private GameObject smokePrefab;
+    [SerializeField] private GameObject waterPrefab;
     #endregion
 
 
@@ -50,6 +63,7 @@ public class GameManager : MonoBehaviour
         player.Init();
         time = 0;
         isPlaying = true;
+        PrepareLevel();
     }
 
     public void NextLevel()
@@ -57,6 +71,64 @@ public class GameManager : MonoBehaviour
         player.Init();
         time = 0;
         isPlaying = true;
+
+        PrepareLevel();
+    }
+
+    public void PrepareLevel()
+    {
+        smoke.gameObject.SetActive(false);
+        water.gameObject.SetActive(false);
+        flushButton.gameObject.SetActive(false);
+
+        thermometer.gameObject.SetActive(true);
+        thermometer.Init();
+
+        switch (currentLevel)
+        {
+            case 1:
+                PrepareLevel1();
+                break;
+            case 2:
+                PrepareLevel2();
+                break;
+            case 3:
+                PrepareLevel3();
+                break;
+            case 4:
+                PrepareLevel4();
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void PrepareLevel1()
+    {
+        //
+    }
+
+    public void PrepareLevel2()
+    {
+        tube.gameObject.SetActive(true);
+        tube.Init(() =>
+        {
+            thermometer.ReduceTemperature(10);
+        });
+    }
+
+    public void PrepareLevel3()
+    {
+        water.gameObject.SetActive(true);
+        water.Init();
+        flushButton.gameObject.SetActive(true);
+        flushButton.Init();
+    }
+
+    public void PrepareLevel4()
+    {
+        smoke.gameObject.SetActive(true);
+        smoke.Init();
     }
 
     public void AddScreens()
@@ -84,7 +156,7 @@ public class GameManager : MonoBehaviour
 
     private void CheckGameWin()
     {
-        if (time >= gameConfig.timeOfLevels[currentLevel - 1])
+        if (isPlaying && time >= gameConfig.timeOfLevels[currentLevel - 1])
         {
             HandleGameWin();
         }
@@ -93,7 +165,7 @@ public class GameManager : MonoBehaviour
     public void HandleGameWin()
     {
         player.stateMachine.ChangeState(player.noneState);
-
+        isPlaying = false;
         currentLevel++;
         var resultScreen = screenDict[ScreenKeys.RESULT_SCREEN] as ResultScreen;
         resultScreen.UpdateScreen(true);
@@ -111,6 +183,7 @@ public class GameManager : MonoBehaviour
     }
     public void HandleGameLose()
     {
+        isPlaying = false;
         player.stateMachine.ChangeState(player.dieState);
         var resultScreen = screenDict[ScreenKeys.RESULT_SCREEN] as ResultScreen;
         if (player.currentHealth == 0f)
@@ -142,6 +215,20 @@ public class GameManager : MonoBehaviour
         smoke.Init();
         smoke.ShowSmoke();
     }
+
+    public void SpawnWater()
+    {
+        var waterObject = Instantiate(waterPrefab);
+        water = waterObject.GetComponent<WaterBehavior>();
+        water.Init();
+    }
+
+    public void SprintWater()
+    {
+        water.SprintWater();
+        flushButton.ChangeButtonState(true);
+    }
+
 
     public void HideSmoke()
     {

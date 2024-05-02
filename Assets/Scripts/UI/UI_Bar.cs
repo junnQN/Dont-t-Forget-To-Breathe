@@ -21,6 +21,7 @@ public class UI_Bar : MonoBehaviour
     [SerializeField] private Image[] hearts;
     [SerializeField] private Sprite fullHeart;
     [SerializeField] private Sprite emptyHeart;
+
 //<<<<<<< HEAD
     [SerializeField] private int numberOfHearts;
     [SerializeField] private int health;
@@ -28,6 +29,7 @@ public class UI_Bar : MonoBehaviour
 
 //=====
 //>>>>>>> origin/quan
+
     private void Update()
     {
         UpdateBar(oxygenSlider, player.oxygen);

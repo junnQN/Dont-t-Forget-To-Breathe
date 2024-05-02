@@ -6,23 +6,23 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-//<<<<<<< HEAD
-    [Header("Move info")] 
+    //<<<<<<< HEAD
+    [Header("Move info")]
     public float moveSpeed = 12f;
     public float jumpForce;
-    
+
     [Header("Collision info")]
     [SerializeField] private Transform groundCheck;
     [SerializeField] private float groundCheckDistance;
     [SerializeField] private Transform wallCheck;
     [SerializeField] private float wallCheckDistance;
     [SerializeField] private LayerMask whatIsGround;
-    
-    [SerializeField] public float oxygen=100f;
+
+    [SerializeField] public float oxygen = 100f;
     [SerializeField] private float oxygenRate = 10f;
     [SerializeField] public float carbonDioxide;
     [SerializeField] private float carbonDioxideRate = 10f;
-    //[SerializeField] private GameObject bucket;
+
     [Header("Swim info")] 
     [SerializeField] private GameObject water;
     public float swimForce = 5f; // Lực nổi khi ấn Space
@@ -37,11 +37,22 @@ public class Player : MonoBehaviour
     
 //<<<<<<< HEAD
 //>>>>>>> origin/quan
-    
+
+    [SerializeField] private GameObject bucket;
+
+    //=======
+    //[SerializeField] public float oxygen = 100f;
+    //[SerializeField] public float carbonDioxide;
+
+    //[SerializeField] public int currentHealth = 9;
+    //[SerializeField] public int maxHealth = 9;
+
+    //>>>>>>> origin/quan
     public int facingDir { get; private set; } = 1;
-    private bool facingRight = false; 
+    private bool facingRight = false;
     public bool isPlayerTouching = false;
     public bool inAir = false;
+
     public bool shouldMove = false;
     
 //=======
@@ -52,6 +63,10 @@ public class Player : MonoBehaviour
     
     
 //>>>>>>> origin/quan
+
+    public bool isTouchFlushButton = false;
+
+
     #region Components
     public Animator anim { get; private set; }
     public Rigidbody2D rb { get; private set; }
@@ -67,16 +82,18 @@ public class Player : MonoBehaviour
     public PlayerJumpState jumpState { get; private set; }
     public PlayerAirState airState { get; private set; }
     public PlayerEatState eatState { get; private set; }
+
     public PlayerFirstMoveState firstState { get; private set; }
     public PlayerSwimState swimState { get; private set; }
 //<<<<<<< HEAD
     
 //=======
+
     public PlayerCoughState coughState { get; private set; }
     public PlayerNoneState noneState { get; private set; }
     public PlayerDieState dieState { get; private set; }
 
-//>>>>>>> origin/quan
+    //>>>>>>> origin/quan
     #endregion
     private void Awake()
     {
@@ -84,29 +101,34 @@ public class Player : MonoBehaviour
         idleState = new PlayerIdleState(this, stateMachine, "Idle");
         moveState = new PlayerMoveState(this, stateMachine, "Move");
         //holdBreatheState = new PlayerHoldBreatheState(this, stateMachine, "HoldBreathe");
-//<<<<<<< HEAD
-        inhaleState = new PlayerInhaleState(this,stateMachine,"Inhale");
+        //<<<<<<< HEAD
+        inhaleState = new PlayerInhaleState(this, stateMachine, "Inhale");
         //exhaleState = new PlayerExhaleState(this,stateMachine,"Exhale");
         jumpState = new PlayerJumpState(this, stateMachine, "Jump");
         airState = new PlayerAirState(this, stateMachine, "Jump");
         eatState = new PlayerEatState(this, stateMachine, "Eat");
+
         firstState = new PlayerFirstMoveState(this, stateMachine, "Move");
         swimState = new PlayerSwimState(this, stateMachine, "Move");
 //=======
+
+        //=======
+
         inhaleState = new PlayerInhaleState(this, stateMachine, "Inhale");
         exhaleState = new PlayerExhaleState(this, stateMachine, "Exhale");
         coughState = new PlayerCoughState(this, stateMachine, "Cough");
         noneState = new PlayerNoneState(this, stateMachine, "None");
         dieState = new PlayerDieState(this, stateMachine, "Die");
-//>>>>>>> origin/quan
+        //>>>>>>> origin/quan
     }
 
     private void Start()
     {
         anim = GetComponentInChildren<Animator>();
-//<<<<<<< HEAD
+        //<<<<<<< HEAD
         rb = GetComponent<Rigidbody2D>();
         //stateMachine.Initialize(holdBreatheState);
+
 //=======
         stateMachine.Initialize(firstState);
     }
@@ -117,12 +139,17 @@ public class Player : MonoBehaviour
         {
             ApplyGravity();
         }
+
+        //=======
+        stateMachine.Initialize(noneState);
+
     }
 
     public void Init()
     {
         oxygen = 100f;
         carbonDioxide = 0f;
+
 //<<<<<<< HEAD
         stateMachine.ChangeState(idleState);
 //>>>>>>> origin/quan
@@ -130,16 +157,22 @@ public class Player : MonoBehaviour
         currentHealth = tmpHealth;
         //stateMachine.ChangeState(holdBreatheState);
 //>>>>>>> origin/quan
+
+        currentHealth = 9;
+        stateMachine.ChangeState(idleState);
+
     }
 
     private void Update()
     {
+
 //<<<<<<< HEAD
         
 //<<<<<<< HEAD
         stateMachine.currentState.Update();
 //=======
 //=======
+
         if (oxygen <= 0f || carbonDioxide >= 100f)
         {
             currentHealth = Mathf.Clamp(currentHealth - 1, 0, maxHealth);
@@ -149,10 +182,16 @@ public class Player : MonoBehaviour
             return;
         }
 
+
 //>>>>>>> origin/quan
+
         if (stateMachine.currentState != null)
             stateMachine.currentState.Update();
-//>>>>>>> origin/quan
+
+        if (isTouchFlushButton && Input.GetKeyDown(KeyCode.E))
+        {
+            GameManager.instance.SprintWater();
+        }
     }
 
     public void CheckGameOver()
@@ -183,10 +222,12 @@ public class Player : MonoBehaviour
 
     public void IncreaseOxygenByInhale()
     {
+
 //<<<<<<< HEAD
         var gameConfig = GameManager.instance.gameConfig;
         ChangeOxygen(gameConfig.inhaleRate * Time.deltaTime);
         //carbonDioxide+= carbonDioxideRate * Time.deltaTime;
+        
     }
 
     public void SetVelocity(float _xVelocity, float _yVelocity)
@@ -199,9 +240,13 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
+
             //bucket.transform.Rotate(0,0,90);
+
+            bucket.transform.Rotate(0, 0, 90);
+
         }
-//=======
+        //=======
         var gameConfig = GameManager.instance.gameConfig;
         ChangeOxygen(gameConfig.inhaleRate * Time.deltaTime);
     }
@@ -234,22 +279,22 @@ public class Player : MonoBehaviour
     {
         var gameConfig = GameManager.instance.gameConfig;
         ChangeCarbonDioxide(-gameConfig.amountCo_2Cough * Time.deltaTime);
-//>>>>>>> origin/quan
+        //>>>>>>> origin/quan
     }
 
     public bool IsGroundDetected() =>
         Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, whatIsGround);
     private void OnDrawGizmos()
     {
-        Gizmos.DrawLine(groundCheck.position, new Vector3(groundCheck.position.x,groundCheck.position.y-groundCheckDistance));
-        Gizmos.DrawLine(wallCheck.position, new Vector3(wallCheck.position.x+wallCheckDistance,wallCheck.position.y));
+        Gizmos.DrawLine(groundCheck.position, new Vector3(groundCheck.position.x, groundCheck.position.y - groundCheckDistance));
+        Gizmos.DrawLine(wallCheck.position, new Vector3(wallCheck.position.x + wallCheckDistance, wallCheck.position.y));
     }
 
     public void Flip()
     {
         facingDir = facingDir * -1;
         facingRight = !facingRight;
-        transform.Rotate(0,180,0);
+        transform.Rotate(0, 180, 0);
     }
 
     public void FlipController(float _x)
@@ -258,17 +303,22 @@ public class Player : MonoBehaviour
         {
             Flip();
         }
-        else if (_x<0&&facingRight)
+        else if (_x < 0 && facingRight)
         {
             Flip();
         }
     }
-    
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Bowl"))
         {
             isPlayerTouching = true;
+        }
+
+        else if (other.CompareTag("FlushButton"))
+        {
+            isTouchFlushButton = true;
         }
     }
 
@@ -278,7 +328,12 @@ public class Player : MonoBehaviour
         {
             isPlayerTouching = false;
         }
+        else if (other.CompareTag("FlushButton"))
+        {
+            isTouchFlushButton = true;
+        }
     }
+
 
     public void ActiveUI()
     {
@@ -298,6 +353,7 @@ public class Player : MonoBehaviour
         stateMachine.ChangeState(swimState);
         water.SetActive(true);
     }
+
 }
 
 
