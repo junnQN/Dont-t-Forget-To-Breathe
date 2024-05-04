@@ -106,6 +106,7 @@ public class Player : MonoBehaviour
     public void Init()
     {
         isDisableInput = false;
+        isAffectedBySmoke = false;
         oxygen = 100f;
         carbonDioxide = 0f;
         currentHealth = 9;
