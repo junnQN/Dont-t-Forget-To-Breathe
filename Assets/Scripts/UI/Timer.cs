@@ -13,6 +13,7 @@ public class Timer : MonoBehaviour
         if (remainTime <= 0)
         {
             timerText.text = "0";
+            //UI.instance.SwitchOnWinScreen();
             return;
         }
 

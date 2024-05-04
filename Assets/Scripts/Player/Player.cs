@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    
     //<<<<<<< HEAD
     [Header("Move info")]
     public float moveSpeed = 12f;
@@ -23,26 +24,61 @@ public class Player : MonoBehaviour
     [SerializeField] private float oxygenRate = 10f;
     [SerializeField] public float carbonDioxide;
     [SerializeField] private float carbonDioxideRate = 10f;
-    [SerializeField] private GameObject bucket;
+
+    [Header("Swim info")] 
+    [SerializeField] private GameObject water;
+    public float swimForce = 5f; // Lực nổi khi ấn Space
+    public float swimHorizontalForce = 3f; // Lực di chuyển sang trái và phải khi bơi
+    public float gravity = 1f; // Gravitational pull
+    public float maxVelocity = 5f; // Tốc độ tối đa của player
+    public bool isSwimming = false;
+    public float swimDrag = 2f; // Lực cản nước
+//=======   
+    //[SerializeField] public float oxygen = 100f;
+    //[SerializeField] public float carbonDioxide;
+    
+//<<<<<<< HEAD
+//>>>>>>> origin/quan
+
 
     //=======
     //[SerializeField] public float oxygen = 100f;
     //[SerializeField] public float carbonDioxide;
 
-    [SerializeField] public int currentHealth = 9;
-    [SerializeField] public int maxHealth = 9;
+    //[SerializeField] public int currentHealth = 9;
+    //[SerializeField] public int maxHealth = 9;
 
     //>>>>>>> origin/quan
     public int facingDir { get; private set; } = 1;
-    private bool facingRight = false;
+    [SerializeField]private bool facingRight = false;
     public bool isPlayerTouching = false;
     public bool inAir = false;
+
+    public bool shouldMove = false;
+    
+//=======
+    public int currentHealth = 9;
+    public int tmpHealth = 9;
+    public int maxHealth = 9;
+    public GameObject UI_Game;
+    public float inhaleTime=3f;
+    public float exhaleTime=3f;
+    private float decreaseRate = 1f;
+    public float discountRatePerSecond = 1f; // Tỷ lệ giảm giá mỗi giây
+
+    private float currentTime;
+    private float currentValue;
+
+    [Header("Cold level")]
+    public bool isCold = false;
+//>>>>>>> origin/quan
+
     public bool isTouchFlushButton = false;
+
 
     #region Components
     public Animator anim { get; private set; }
     public Rigidbody2D rb { get; private set; }
-    public CharacterStats stats { get; private set; }
     #endregion
 
     #region States
@@ -55,9 +91,13 @@ public class Player : MonoBehaviour
     public PlayerJumpState jumpState { get; private set; }
     public PlayerAirState airState { get; private set; }
     public PlayerEatState eatState { get; private set; }
-    //<<<<<<< HEAD
 
-    //=======
+    public PlayerFirstMoveState firstState { get; private set; }
+    public PlayerSwimState swimState { get; private set; }
+//<<<<<<< HEAD
+    
+//=======
+
     public PlayerCoughState coughState { get; private set; }
     public PlayerNoneState noneState { get; private set; }
     public PlayerDieState dieState { get; private set; }
@@ -73,6 +113,7 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
+        
         stateMachine = new PlayerStateMachine();
         idleState = new PlayerIdleState(this, stateMachine, "Idle");
         moveState = new PlayerMoveState(this, stateMachine, "Move");
@@ -83,7 +124,13 @@ public class Player : MonoBehaviour
         jumpState = new PlayerJumpState(this, stateMachine, "Jump");
         airState = new PlayerAirState(this, stateMachine, "Jump");
         eatState = new PlayerEatState(this, stateMachine, "Eat");
+
+        firstState = new PlayerFirstMoveState(this, stateMachine, "Move");
+        swimState = new PlayerSwimState(this, stateMachine, "Move");
+//=======
+
         //=======
+
         inhaleState = new PlayerInhaleState(this, stateMachine, "Inhale");
         exhaleState = new PlayerExhaleState(this, stateMachine, "Exhale");
         coughState = new PlayerCoughState(this, stateMachine, "Cough");
@@ -91,16 +138,27 @@ public class Player : MonoBehaviour
         dieState = new PlayerDieState(this, stateMachine, "Die");
         //>>>>>>> origin/quan
     }
-
+    
+    
     private void Start()
     {
+        currentTime = Time.time;
         anim = GetComponentInChildren<Animator>();
         //<<<<<<< HEAD
         rb = GetComponent<Rigidbody2D>();
         //stateMachine.Initialize(holdBreatheState);
-        //=======
-        stateMachine.Initialize(noneState);
-        stats = GetComponent<CharacterStats>();
+
+//=======
+        stateMachine.Initialize(firstState);
+        StartCoroutine(DecreaseOverTime(inhaleTime));
+    }
+
+    private void FixedUpdate()
+    {
+        if (!isSwimming)
+        {
+            ApplyGravity();
+        }
     }
 
     public void Init()
@@ -109,12 +167,32 @@ public class Player : MonoBehaviour
         isAffectedBySmoke = false;
         oxygen = 100f;
         carbonDioxide = 0f;
-        currentHealth = 9;
+
+//<<<<<<< HEAD
+        stateMachine.ChangeState(idleState);
+//>>>>>>> origin/quan
+//=======
+        currentHealth = tmpHealth;
+        //stateMachine.ChangeState(holdBreatheState);
+//>>>>>>> origin/quan
+
+        //currentHealth = 9;
         stateMachine.ChangeState(idleState);
     }
 
     private void Update()
     {
+        if (shouldMove)
+        {
+            stateMachine.ChangeState(firstState);
+        }
+//<<<<<<< HEAD
+        
+//<<<<<<< HEAD
+        stateMachine.currentState.Update();
+//=======
+//=======
+
         if (oxygen <= 0f || carbonDioxide >= 100f)
         {
             currentHealth = Mathf.Clamp(currentHealth - 1, 0, maxHealth);
@@ -123,6 +201,9 @@ public class Player : MonoBehaviour
             carbonDioxide = 0f;
             return;
         }
+
+
+//>>>>>>> origin/quan
 
         if (stateMachine.currentState != null)
             stateMachine.currentState.Update();
@@ -161,8 +242,19 @@ public class Player : MonoBehaviour
 
     public void IncreaseOxygenByInhale()
     {
+        
         var gameConfig = GameManager.instance.gameConfig;
         ChangeOxygen(gameConfig.inhaleRate * Time.deltaTime);
+        //carbonDioxide+= carbonDioxideRate * Time.deltaTime;
+        
+    }
+    
+    public void IncreaseOxygenByCold()
+    {
+        var gameConfig = GameManager.instance.gameConfig;
+        ChangeOxygen(gameConfig.inhaleRate*0.5f * Time.deltaTime);
+        
+        
     }
 
     public void SetVelocity(float _xVelocity, float _yVelocity)
@@ -175,7 +267,9 @@ public class Player : MonoBehaviour
     {
         if (!isDisableInput && Input.GetKeyDown(KeyCode.E))
         {
-            bucket.transform.Rotate(0, 0, 90);
+
+            //bucket.transform.Rotate(0,0,90);
+
         }
         //=======
         var gameConfig = GameManager.instance.gameConfig;
@@ -252,6 +346,12 @@ public class Player : MonoBehaviour
         ChangeCarbonDioxide(gameConfig.autoRate * Time.deltaTime);
     }
 
+    public void DecreaseCarbonDioxideByCold()
+    {
+        var gameConfig = GameManager.instance.gameConfig;
+        ChangeCarbonDioxide(-gameConfig.exhaleRate*0.5f * Time.deltaTime);
+    }
+
     public void DecreaseCarbonDioxideByCough()
     {
         var gameConfig = GameManager.instance.gameConfig;
@@ -315,6 +415,83 @@ public class Player : MonoBehaviour
     }
 
 
+    public void ActiveUI()
+    {
+        UI_Game.SetActive(true);
+    }
+
+    
+    
+    private void ApplyGravity()
+    {
+        // Áp dụng trọng lực
+        rb.AddForce(Vector2.down * gravity, ForceMode2D.Force);
+    }
+
+    public void ChangeSwimState()
+    {
+        stateMachine.ChangeState(swimState);
+        water.SetActive(true);
+    }
+
+    public void ReturnStartPos()
+    {
+        if (facingRight)
+        {
+            Flip();
+        }
+        transform.position = new Vector3(0.23f, -2.156f, transform.position.z);
+        shouldMove = true;
+    }
+    
+    IEnumerator DecreaseOverTime(float breathTime)
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1f); // Giảm mỗi giây
+
+            // Giảm giá trị
+            breathTime -= decreaseRate;
+
+            // Kiểm tra nếu giá trị đã giảm hết
+            if (breathTime <= 0)
+            {
+                breathTime = 0; // Đảm bảo giá trị không âm
+                break;
+            }
+            
+        }
+    }
+
+    public void DecreaseInhaleTime()
+    {
+        
+        StartCoroutine(DecreaseOverTime(inhaleTime));
+    }
+
+    public void DecreaseExhaleTime()
+    {
+       
+        StartCoroutine(DecreaseOverTime(exhaleTime));
+    }
+
+    public void DecreaseTime(float currentValue)
+    {
+        float elapsedTime = Time.time - currentTime; // Thời gian đã trôi qua kể từ lần cập nhật trước
+        currentTime = Time.time; // Cập nhật thời gian hiện tại
+
+        // Giảm giá trị dựa trên thời gian trôi qua
+        currentValue -= elapsedTime * discountRatePerSecond;
+
+        // Kiểm tra nếu giá trị đã giảm xuống dưới 0
+        if (currentValue < 0f)
+        {
+            currentValue = 0f;
+        }
+
+        // In ra giá trị hiện tại sau khi giảm giá
+        Debug.Log("Current value: " + currentValue);
+    }
 }
 
 

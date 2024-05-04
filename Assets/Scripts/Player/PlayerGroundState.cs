@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class PlayerGroundState : PlayerState
 {
+    Tween counterTween;
+
     public PlayerGroundState(Player _player, PlayerStateMachine _stateMachine, string _animBoolName) : base(_player, _stateMachine, _animBoolName)
     {
     }
@@ -26,14 +29,33 @@ public class PlayerGroundState : PlayerState
 
         if (!player.isDisableInput && Input.GetKey(KeyCode.I))
         {
-            player.IncreaseOxygenByInhale();
-            player.IncreaseCarbonDioxideOverTime();
+            if (player.isCold == true)
+            {
+                player.IncreaseOxygenByCold();
+                player.IncreaseCarbonDioxideOverTime();
+            }
+            else
+            {
+                player.DecreaseTime(player.inhaleTime);
+                player.IncreaseOxygenByInhale();
+                player.IncreaseCarbonDioxideOverTime();
+            }
         }
 
         else if (!player.isDisableInput && Input.GetKey(KeyCode.O))
         {
-            player.DecreaseCarbonDioxideByExhale();
-            player.DecreaseOxygenOverTime();
+            if (player.isCold == true)
+            {
+                player.DecreaseCarbonDioxideByCold();
+                player.DecreaseOxygenOverTime();
+            }
+            else
+            {
+                player.DecreaseExhaleTime();
+                player.DecreaseCarbonDioxideByExhale();
+                player.DecreaseOxygenOverTime();
+            }
+
         }
         else
         {
@@ -48,4 +70,24 @@ public class PlayerGroundState : PlayerState
             stateMachine.ChangeState(player.eatState);
 
     }
+
+    bool HandleInhaleSmoke()
+    {
+        double probability = GameManager.instance.gameConfig.coughRate;
+
+        if (ShouldCallFunction(probability))
+        {
+            player.stateMachine.ChangeState(player.coughState);
+            return true;
+        }
+        return false;
+    }
+
+    bool ShouldCallFunction(double probability)
+    {
+        double randomValue = Random.value;
+
+        return randomValue < probability;
+    }
+
 }
