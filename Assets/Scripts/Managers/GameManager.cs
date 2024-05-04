@@ -46,6 +46,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject waterPrefab;
     #endregion
 
+    [SerializeField] private GameObject UI_Game;
+    [SerializeField] private GameObject block;
 
     private void Awake()
     {
@@ -110,15 +112,29 @@ public class GameManager : MonoBehaviour
 
     public void PrepareLevel2()
     {
+        player.isCold = true;
+        player.ReturnStartPos();
+        player.gameObject.SetActive(false);
+        UI_Game.SetActive(false);
+        Hand.instance.canPlay = true;
+        Hand.instance.moveDown = true;
         tube.gameObject.SetActive(true);
         tube.Init(() =>
         {
             thermometer.ReduceTemperature(10);
         });
+        
     }
 
     public void PrepareLevel3()
     {
+        player.ReturnStartPos();
+        player.gameObject.SetActive(false);
+        UI_Game.SetActive(false);
+        Hand.instance.canPlay = true;
+        Hand.instance.moveDown = true;
+        tube.gameObject.SetActive(true);
+        block.SetActive(false);
         water.gameObject.SetActive(true);
         water.Init();
         flushButton.gameObject.SetActive(true);
@@ -127,6 +143,12 @@ public class GameManager : MonoBehaviour
 
     public void PrepareLevel4()
     {
+        block.SetActive(false);
+        player.ReturnStartPos();
+        player.gameObject.SetActive(false);
+        UI_Game.SetActive(false);
+        Hand.instance.canPlay = true;
+        Hand.instance.moveDown = true;
         smoke.gameObject.SetActive(true);
         smoke.Init();
     }

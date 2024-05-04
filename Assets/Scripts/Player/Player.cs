@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    
     //<<<<<<< HEAD
     [Header("Move info")]
     public float moveSpeed = 12f;
@@ -38,7 +39,6 @@ public class Player : MonoBehaviour
 //<<<<<<< HEAD
 //>>>>>>> origin/quan
 
-    [SerializeField] private GameObject bucket;
 
     //=======
     //[SerializeField] public float oxygen = 100f;
@@ -49,7 +49,7 @@ public class Player : MonoBehaviour
 
     //>>>>>>> origin/quan
     public int facingDir { get; private set; } = 1;
-    private bool facingRight = false;
+    [SerializeField]private bool facingRight = false;
     public bool isPlayerTouching = false;
     public bool inAir = false;
 
@@ -60,8 +60,16 @@ public class Player : MonoBehaviour
     public int tmpHealth = 9;
     public int maxHealth = 9;
     public GameObject UI_Game;
-    
-    
+    public float inhaleTime=3f;
+    public float exhaleTime=3f;
+    private float decreaseRate = 1f;
+    public float discountRatePerSecond = 1f; // Tỷ lệ giảm giá mỗi giây
+
+    private float currentTime;
+    private float currentValue;
+
+    [Header("Cold level")]
+    public bool isCold = false;
 //>>>>>>> origin/quan
 
     public bool isTouchFlushButton = false;
@@ -97,6 +105,7 @@ public class Player : MonoBehaviour
     #endregion
     private void Awake()
     {
+        
         stateMachine = new PlayerStateMachine();
         idleState = new PlayerIdleState(this, stateMachine, "Idle");
         moveState = new PlayerMoveState(this, stateMachine, "Move");
@@ -121,9 +130,11 @@ public class Player : MonoBehaviour
         dieState = new PlayerDieState(this, stateMachine, "Die");
         //>>>>>>> origin/quan
     }
-
+    
+    
     private void Start()
     {
+        currentTime = Time.time;
         anim = GetComponentInChildren<Animator>();
         //<<<<<<< HEAD
         rb = GetComponent<Rigidbody2D>();
@@ -131,6 +142,7 @@ public class Player : MonoBehaviour
 
 //=======
         stateMachine.Initialize(firstState);
+        StartCoroutine(DecreaseOverTime(inhaleTime));
     }
 
     private void FixedUpdate()
@@ -139,10 +151,6 @@ public class Player : MonoBehaviour
         {
             ApplyGravity();
         }
-
-        //=======
-        stateMachine.Initialize(noneState);
-
     }
 
     public void Init()
@@ -158,14 +166,16 @@ public class Player : MonoBehaviour
         //stateMachine.ChangeState(holdBreatheState);
 //>>>>>>> origin/quan
 
-        currentHealth = 9;
+        //currentHealth = 9;
         stateMachine.ChangeState(idleState);
-
     }
 
     private void Update()
     {
-
+        if (shouldMove)
+        {
+            stateMachine.ChangeState(firstState);
+        }
 //<<<<<<< HEAD
         
 //<<<<<<< HEAD
@@ -222,11 +232,18 @@ public class Player : MonoBehaviour
 
     public void IncreaseOxygenByInhale()
     {
-
-//<<<<<<< HEAD
+        
         var gameConfig = GameManager.instance.gameConfig;
         ChangeOxygen(gameConfig.inhaleRate * Time.deltaTime);
         //carbonDioxide+= carbonDioxideRate * Time.deltaTime;
+        
+    }
+    
+    public void IncreaseOxygenByCold()
+    {
+        var gameConfig = GameManager.instance.gameConfig;
+        ChangeOxygen(gameConfig.inhaleRate*0.5f * Time.deltaTime);
+        
         
     }
 
@@ -242,8 +259,6 @@ public class Player : MonoBehaviour
         {
 
             //bucket.transform.Rotate(0,0,90);
-
-            bucket.transform.Rotate(0, 0, 90);
 
         }
         //=======
@@ -273,6 +288,12 @@ public class Player : MonoBehaviour
     {
         var gameConfig = GameManager.instance.gameConfig;
         ChangeCarbonDioxide(gameConfig.autoRate * Time.deltaTime);
+    }
+
+    public void DecreaseCarbonDioxideByCold()
+    {
+        var gameConfig = GameManager.instance.gameConfig;
+        ChangeCarbonDioxide(-gameConfig.exhaleRate*0.5f * Time.deltaTime);
     }
 
     public void DecreaseCarbonDioxideByCough()
@@ -354,6 +375,64 @@ public class Player : MonoBehaviour
         water.SetActive(true);
     }
 
+    public void ReturnStartPos()
+    {
+        if (facingRight)
+        {
+            Flip();
+        }
+        transform.position = new Vector3(0.23f, -2.156f, transform.position.z);
+        shouldMove = true;
+    }
+    
+    IEnumerator DecreaseOverTime(float breathTime)
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1f); // Giảm mỗi giây
+
+            // Giảm giá trị
+            breathTime -= decreaseRate;
+
+            // Kiểm tra nếu giá trị đã giảm hết
+            if (breathTime <= 0)
+            {
+                breathTime = 0; // Đảm bảo giá trị không âm
+                break;
+            }
+            
+        }
+    }
+
+    public void DecreaseInhaleTime()
+    {
+        
+        StartCoroutine(DecreaseOverTime(inhaleTime));
+    }
+
+    public void DecreaseExhaleTime()
+    {
+       
+        StartCoroutine(DecreaseOverTime(exhaleTime));
+    }
+
+    public void DecreaseTime(float currentValue)
+    {
+        float elapsedTime = Time.time - currentTime; // Thời gian đã trôi qua kể từ lần cập nhật trước
+        currentTime = Time.time; // Cập nhật thời gian hiện tại
+
+        // Giảm giá trị dựa trên thời gian trôi qua
+        currentValue -= elapsedTime * discountRatePerSecond;
+
+        // Kiểm tra nếu giá trị đã giảm xuống dưới 0
+        if (currentValue < 0f)
+        {
+            currentValue = 0f;
+        }
+
+        // In ra giá trị hiện tại sau khi giảm giá
+        Debug.Log("Current value: " + currentValue);
+    }
 }
 
 

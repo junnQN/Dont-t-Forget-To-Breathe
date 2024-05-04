@@ -13,27 +13,16 @@ public class PlayerInhaleState : PlayerGroundState
     public override void Enter()
     {
         base.Enter();
-        //ChangeHoldBreatheStateStateAfterDelay();
+        ChangeHoldBreatheStateStateAfterDelay();
     }
 
     private void ChangeHoldBreatheStateStateAfterDelay()
     {
         counterTween?.Kill();
         var time = GameManager.instance.gameConfig.maxTimeInhale;
-
-//<<<<<<< HEAD
-        yield return new WaitForSeconds(time);
-        stateMachine.ChangeState(player.idleState);
-//=======
         counterTween = DOVirtual.Float(0, 1, time, (v) => { })
-        .OnComplete(() => player.stateMachine.ChangeState(player.holdBreatheState));
-//>>>>>>> origin/quan
-    
-
-        counterTween = DOVirtual.Float(0, 1, time, (v) => { })
-        .OnComplete(() => player.stateMachine.ChangeState(player.idleState));
+            .OnComplete(() => player.stateMachine.ChangeState(player.idleState));
     }
-
 
     public override void Exit()
     {
@@ -44,11 +33,7 @@ public class PlayerInhaleState : PlayerGroundState
     {
         base.Update();
 
-        //<<<<<<< HEAD
-
-        //player.IncreaseOxygen();
-        //player.IncreaseCarbonDioxide();
-        //=======
+        
         if (GameManager.instance.isHaveSmoke())
         {
             if (HandleInhaleSmoke()) return;
@@ -61,9 +46,7 @@ public class PlayerInhaleState : PlayerGroundState
             player.IncreaseOxygenByInhale();
             player.IncreaseCarbonDioxideOverTime();
         }
-
-
-        //>>>>>>> origin/quan
+        
         if (Input.GetKeyUp(KeyCode.I))
         {
             player.stateMachine.ChangeState(player.idleState);

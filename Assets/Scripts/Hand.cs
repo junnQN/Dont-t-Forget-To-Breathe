@@ -11,12 +11,13 @@ public class Hand : MonoBehaviour
     [SerializeField] private float startY = 8f;
     [SerializeField] private float stopY = -2.17f;
     [SerializeField] private Sprite handnocat;
+    [SerializeField] private Sprite handwithcat;
     [SerializeField] private GameObject player;
     public bool canPlay = false;
 
     private SpriteRenderer hand;
 
-    private bool moveDown = true;
+    public bool moveDown = true;
 
     private void Awake()
     {
@@ -58,7 +59,7 @@ public class Hand : MonoBehaviour
             {
                 // Đặt vị trí chính xác là vị trí ban đầu
                 transform.position = new Vector3(transform.position.x, startY, transform.position.z);
-                
+                hand.sprite = handwithcat;
             }
         }
     }
