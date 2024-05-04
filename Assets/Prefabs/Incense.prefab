@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8098527296387672499}
   m_Layer: 7
   m_Name: Particle System
-  m_TagString: Untagged
+  m_TagString: Smoke
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3798,7 +3798,7 @@ ParticleSystem:
     maxCollisionShapes: 256
     quality: 0
     voxelSize: 0.5
-    collisionMessages: 0
+    collisionMessages: 1
     collidesWithDynamic: 1
     interiorCollisions: 0
   TriggerModule:

@@ -36,4 +36,8 @@ public class GameConfig : ScriptableObject
     public float waterMaxHeight = 6f;
     [Tooltip("The time to change water height (seconds)")]
     public float sprintTime = 2f;
+
+    [Header("Smoke Configs")]
+    public float timeAffectedBySmoke = 1f;
+    public float smokeImmunityTime = 0.5f;
 }

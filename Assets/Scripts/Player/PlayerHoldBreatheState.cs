@@ -26,10 +26,10 @@ public class PlayerHoldBreatheState : PlayerMoveState
         player.DecreaseOxygenOverTime();
         player.IncreaseCarbonDioxideOverTime();
 
-        if (Input.GetKeyDown(KeyCode.I))
+        if (!player.isDisableInput && Input.GetKeyDown(KeyCode.I))
             player.stateMachine.ChangeState(player.inhaleState);
-        else if (Input.GetKeyDown(KeyCode.O))
+        else if (!player.isDisableInput && Input.GetKeyDown(KeyCode.O))
             player.stateMachine.ChangeState(player.exhaleState);
-        
+
     }
 }

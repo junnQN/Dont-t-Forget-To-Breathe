@@ -21,14 +21,14 @@ public class PlayerEatState : PlayerState
     public override void Update()
     {
         base.Update();
-        
-        if (Input.GetKey(KeyCode.I))
+
+        if (!player.isDisableInput && Input.GetKey(KeyCode.I))
         {
             player.IncreaseOxygenByInhale();
             player.IncreaseCarbonDioxideOverTime();
         }
 
-        else if (Input.GetKey(KeyCode.O))
+        else if (!player.isDisableInput && Input.GetKey(KeyCode.O))
         {
             player.DecreaseCarbonDioxideByExhale();
             player.DecreaseOxygenOverTime();
@@ -36,10 +36,10 @@ public class PlayerEatState : PlayerState
         else
         {
             player.DecreaseOxygenOverTime();
-            player.IncreaseCarbonDioxideOverTime();   
+            player.IncreaseCarbonDioxideOverTime();
         }
-        
-        if(xInput!=0)
+
+        if (xInput != 0)
             stateMachine.ChangeState(player.moveState);
     }
 }

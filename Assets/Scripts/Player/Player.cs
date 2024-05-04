@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 
@@ -61,8 +62,15 @@ public class Player : MonoBehaviour
     public PlayerNoneState noneState { get; private set; }
     public PlayerDieState dieState { get; private set; }
 
+    private bool isAffectedBySmoke;
+
     //>>>>>>> origin/quan
     #endregion
+
+    public bool isDisableInput = false;
+
+    Tween smokeAffectedTween;
+
     private void Awake()
     {
         stateMachine = new PlayerStateMachine();
@@ -97,6 +105,7 @@ public class Player : MonoBehaviour
 
     public void Init()
     {
+        isDisableInput = false;
         oxygen = 100f;
         carbonDioxide = 0f;
         currentHealth = 9;
@@ -117,7 +126,7 @@ public class Player : MonoBehaviour
         if (stateMachine.currentState != null)
             stateMachine.currentState.Update();
 
-        if (isTouchFlushButton && Input.GetKeyDown(KeyCode.E))
+        if (isTouchFlushButton && !isDisableInput && Input.GetKeyDown(KeyCode.E))
         {
             GameManager.instance.SprintWater();
         }
@@ -163,13 +172,59 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (!isDisableInput && Input.GetKeyDown(KeyCode.E))
         {
             bucket.transform.Rotate(0, 0, 90);
         }
         //=======
         var gameConfig = GameManager.instance.gameConfig;
         ChangeOxygen(gameConfig.inhaleRate * Time.deltaTime);
+    }
+
+    private void OnParticleCollision(GameObject other)
+    {
+        switch (other.tag)
+        {
+            case "Smoke":
+                AffectedBySmoke();
+                break;
+            default:
+                break;
+        }
+
+    }
+
+    void AffectedBySmoke()
+    {
+        if (isAffectedBySmoke) return;
+
+        isAffectedBySmoke = true;
+        isDisableInput = true;
+        var gameConfig = GameManager.instance.gameConfig;
+        ChangeOxygen(-gameConfig.amountAirBySmoke);
+        ChangeCarbonDioxide(-gameConfig.amountAirBySmoke);
+
+
+        var temp = DOTween.Sequence()
+            .AppendCallback(() => gameObject.SetActive(false))
+            .AppendInterval(0.1f)
+            .AppendCallback(() => gameObject.SetActive(true))
+            .AppendInterval(0.1f)
+            .SetLoops(-1);
+
+        smokeAffectedTween?.Kill();
+        smokeAffectedTween = DOVirtual.DelayedCall(gameConfig.timeAffectedBySmoke, () =>
+        {
+            isDisableInput = false;
+
+            DOVirtual.DelayedCall(gameConfig.smokeImmunityTime, () =>
+            {
+                temp.Kill();
+                isAffectedBySmoke = false;
+                gameObject.SetActive(true);
+            });
+        });
+
     }
 
     public void IncreaseOxygenBySmoke()
@@ -232,14 +287,17 @@ public class Player : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Bowl"))
+        switch (other.tag)
         {
-            isPlayerTouching = true;
-        }
-
-        else if (other.CompareTag("FlushButton"))
-        {
-            isTouchFlushButton = true;
+            case "Bowl":
+                isPlayerTouching = true;
+                break;
+            case "FlushButton":
+                isTouchFlushButton = true;
+                break;
+            default:
+                Debug.Log(other.tag);
+                break;
         }
     }
 

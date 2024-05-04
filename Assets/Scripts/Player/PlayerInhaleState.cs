@@ -53,7 +53,7 @@ public class PlayerInhaleState : PlayerGroundState
 
 
         //>>>>>>> origin/quan
-        if (Input.GetKeyUp(KeyCode.I))
+        if (!player.isDisableInput && Input.GetKeyUp(KeyCode.I))
         {
             player.stateMachine.ChangeState(player.idleState);
         }

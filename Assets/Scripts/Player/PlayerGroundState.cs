@@ -17,20 +17,20 @@ public class PlayerGroundState : PlayerState
     {
         base.Exit();
     }
-    
+
     public override void Update()
     {
         base.Update();
 
 
 
-        if (Input.GetKey(KeyCode.I))
+        if (!player.isDisableInput && Input.GetKey(KeyCode.I))
         {
             player.IncreaseOxygenByInhale();
             player.IncreaseCarbonDioxideOverTime();
         }
 
-        else if (Input.GetKey(KeyCode.O))
+        else if (!player.isDisableInput && Input.GetKey(KeyCode.O))
         {
             player.DecreaseCarbonDioxideByExhale();
             player.DecreaseOxygenOverTime();
@@ -38,14 +38,14 @@ public class PlayerGroundState : PlayerState
         else
         {
             player.DecreaseOxygenOverTime();
-            player.IncreaseCarbonDioxideOverTime();   
+            player.IncreaseCarbonDioxideOverTime();
         }
-        
-        if (Input.GetKeyDown(KeyCode.Space) && player.IsGroundDetected())
+
+        if (!player.isDisableInput && Input.GetKeyDown(KeyCode.Space) && player.IsGroundDetected())
             stateMachine.ChangeState(player.jumpState);
-        
-        if(Input.GetKeyDown(KeyCode.E)&&player.isPlayerTouching)
+
+        if (!player.isDisableInput && Input.GetKeyDown(KeyCode.E) && player.isPlayerTouching)
             stateMachine.ChangeState(player.eatState);
-        
+
     }
 }
