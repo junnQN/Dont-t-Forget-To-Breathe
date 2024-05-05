@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class PlayerFirstMoveState : PlayerState
 {
-    
+
     public PlayerFirstMoveState(Player _player, PlayerStateMachine _stateMachine, string _animBoolName) : base(_player, _stateMachine, _animBoolName)
     {
-        
+
     }
 
     public override void Enter()
     {
         base.Enter();
-        
+
     }
 
     public override void Exit()
@@ -24,7 +24,7 @@ public class PlayerFirstMoveState : PlayerState
     public override void Update()
     {
         base.Update();
-        
+
         if (player.shouldMove)
         {
             // Di chuyển vật thể sang trái
@@ -33,16 +33,16 @@ public class PlayerFirstMoveState : PlayerState
             // Kiểm tra nếu đến vị trí dừng
             if (player.transform.position.x <= -7f)
             {
-                
+
                 player.shouldMove = false;
                 player.Flip();
                 player.ActiveUI();
                 if (GameManager.instance.currentLevel == 1)
-                { 
+                {
                     stateMachine.ChangeState(player.noneState);
                 }
 
-                if (GameManager.instance.currentLevel==2)
+                if (GameManager.instance.currentLevel >= 2)
                 {
                     stateMachine.ChangeState(player.idleState);
                     GameManager.instance.isPlaying = true;
