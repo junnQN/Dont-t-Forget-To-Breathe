@@ -8,13 +8,19 @@ public class WaterBehavior : MonoBehaviour
     public float waterMaxHeight = 0.5f;
     public float waterCurrentHeight = 0.5f;
 
+    public float startY = -3.48f;
+    public float endY = 2.5f;
+
     public GameObject waterObject;
     Tween sprintTween;
+    private Tween spawnTween;
+
     public void Init()
     {
+        GameManager.instance.tube.ShowWaterFall();
         var gameConfig = GameManager.instance.gameConfig;
         waterMaxHeight = gameConfig.waterMaxHeight;
-        SetWaterHeight(waterMaxHeight);
+        SpawnWater();
     }
 
     public void SetWaterHeight(float height)
@@ -22,8 +28,7 @@ public class WaterBehavior : MonoBehaviour
         Camera mainCamera = Camera.main;
 
         waterCurrentHeight = height;
-        waterObject.transform.localScale = new Vector3(waterObject.transform.localScale.x, waterCurrentHeight, waterObject.transform.localScale.z);
-        waterObject.transform.localPosition = new Vector3(waterObject.transform.localPosition.x, -mainCamera.orthographicSize + waterCurrentHeight / 2, waterObject.transform.localPosition.z);
+        waterObject.transform.localPosition = new Vector3(waterObject.transform.localPosition.x, height, waterObject.transform.localPosition.z);
     }
 
     public void ChangeWaterHeight(float amount)
@@ -40,6 +45,19 @@ public class WaterBehavior : MonoBehaviour
     {
         sprintTween?.Kill();
         var time = GameManager.instance.gameConfig.sprintTime;
-        sprintTween = DOVirtual.Float(waterCurrentHeight, 0, time, (v) => SetWaterHeight(v));
+        sprintTween = DOVirtual.Float(waterCurrentHeight, 0, time, (v) =>
+        {
+            SetWaterHeight(v);
+        });
+    }
+
+    public void SpawnWater()
+    {
+        spawnTween?.Kill();
+        var time = GameManager.instance.gameConfig.spawnTime;
+        spawnTween = DOVirtual.Float(startY, waterMaxHeight, time, (v) =>
+        {
+            SetWaterHeight(v);
+        });
     }
 }

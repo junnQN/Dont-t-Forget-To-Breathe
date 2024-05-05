@@ -13,10 +13,22 @@ public class Tube : MonoBehaviour
 
     Tween moveTween;
 
+    [SerializeField] private GameObject waterFall;
+
     public void Init(Action onComplete)
     {
         moveTween?.Kill();
         transform.localPosition = new Vector3(startX, transform.localPosition.y, transform.localPosition.z);
-        moveTween = transform.DOMoveX(endX, speed).OnComplete(() => onComplete());
+        moveTween = transform.DOLocalMoveX(endX, speed).OnComplete(() => onComplete());
+    }
+
+    public void ShowWaterFall()
+    {
+        waterFall.SetActive(true);
+    }
+
+    public void HideWaterFall()
+    {
+        waterFall.SetActive(false);
     }
 }
