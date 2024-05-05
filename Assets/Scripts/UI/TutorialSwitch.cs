@@ -33,7 +33,7 @@ public class TutorialSwitch : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && isTutorial == true)
         {
             if(currentIndex<3)
             {
@@ -44,8 +44,7 @@ public class TutorialSwitch : MonoBehaviour
             {
                 isTutorial = false;
                 tutorialObject.SetActive(false);
-                UI_Game.SetActive(false);
-                Hand.instance.canPlay = true;
+                Player.instance.ChangeStateFisrtLv();
             }
         }
     }

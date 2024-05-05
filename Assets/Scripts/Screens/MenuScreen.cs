@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MenuScreen : BaseScreen
 {
-    [SerializeField] private GameObject UI_Tutorials;
+    [SerializeField] private GameObject UI_Game;
     public void HandleQuitButton()
     {
         Application.Quit();
@@ -12,11 +12,12 @@ public class MenuScreen : BaseScreen
 
     public void HandleRestartButton()
     {
-        //GameManager.instance.StartGame();
-        //Hand.instance.canPlay = true;
-        UI_Tutorials.SetActive(true);
-        TutorialSwitch.instance.isTutorial = true;
+        UI_Game.SetActive(false);
+        Hand.instance.canPlay = true;
         Close();
+        //GameManager.instance.StartGame();
+        //UI_Tutorials.SetActive(true);
+        //TutorialSwitch.instance.isTutorial = true;
         //UI_game.SetActive(false);
     }
 }

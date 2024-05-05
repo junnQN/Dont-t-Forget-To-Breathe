@@ -8,6 +8,7 @@ public class PlayerState
     protected PlayerStateMachine stateMachine;
     protected Player player;
     protected Rigidbody2D rb;
+    protected float stateTimer;
 
     //<<<<<<< HEAD
     public float xInput;
@@ -46,8 +47,7 @@ public class PlayerState
         player.anim.SetFloat("yVelocity", rb.velocity.y);
         player.anim.SetFloat("xVelocity", xInput);
         //=======
-        // Debug.Log("I in " + animBoolName);
-        //>>>>>>> origin/quan
+        stateTimer -= Time.deltaTime;
     }
 
 

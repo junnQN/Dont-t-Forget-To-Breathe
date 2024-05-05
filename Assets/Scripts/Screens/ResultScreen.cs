@@ -23,8 +23,43 @@ public class ResultScreen : BaseScreen
 
     public void HandleRestartButton()
     {
-        GameManager.instance.StartGame();
-        Close();
+        if (GameManager.instance.currentLevel == 1)
+        {
+            Player.instance.ReturnDefaultPos();
+            GameManager.instance.StartGame();
+            Close();
+        }
+
+        if (GameManager.instance.currentLevel==2)
+        {
+            if (Player.instance.currentHealth < 9)
+            {
+                Player.instance.ReturnDefaultPos();
+                Player.instance.ChangeStateFisrtLv();
+                GameManager.instance.RestartGame();
+                Close();
+            }
+            else
+            {
+                GameManager.instance.NextLevel();
+                Close();
+            }
+        }
+        if (GameManager.instance.currentLevel==3)
+        {
+            if (Player.instance.currentHealth < 9)
+            {
+                Player.instance.ReturnDefaultPos();
+                Player.instance.ChangeStateFisrtLv();
+                GameManager.instance.RestartGame();
+                Close();
+            }
+            else
+            {
+                GameManager.instance.NextLevel();
+                Close();
+            }
+        }
     }
 
     public void HandleNextButton()

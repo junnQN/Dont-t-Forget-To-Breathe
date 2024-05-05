@@ -5,38 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a9c810fa-ed7d-40bb-bf85-df6e949cb9bc" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/FlushButton.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FlushButton.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/Highlight.mat.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/Highlight.mat.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Dont-t-Forget-To-Breathe/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Dont-t-Forget-To-Breathe/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Animation/Player/Player_AC.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animation/Player/Player_AC.controller" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Canvas.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Canvas.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/FlushButton.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/FlushButton.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Incense.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Incense.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Screens.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Screens.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Water.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Water.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/glass.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/glass.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Game.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Game.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/GameDemo 1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/GameDemo 1.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Test Gameplay.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Test Gameplay.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Configs/GameConfig.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Configs/GameConfig.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Hand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Hand.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/GameManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/Player.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerExhaleState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerExhaleState.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerGroundState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerGroundState.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerInhaleState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerInhaleState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerFirstMoveState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerFirstMoveState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerNoneState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerNoneState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerState.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Screens/MenuScreen.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Screens/MenuScreen.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/bowl.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/bowl.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/bát_ăn.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/bát_ăn.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/eating.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/eating.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/jumping.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/jumping.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/tay-1.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/tay-1.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/tay-2.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/tay-2.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/tube.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/tube.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/walking.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/walking.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Thermometer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Thermometer.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Tube.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Tube.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/WaterBehavior.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/WaterBehavior.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Screens/ResultScreen.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Screens/ResultScreen.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/TutorialSwitch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/TutorialSwitch.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -176,7 +161,10 @@
       <workItem from="1714701941486" duration="2158000" />
       <workItem from="1714721802785" duration="4692000" />
       <workItem from="1714763510170" duration="4071000" />
-      <workItem from="1714792638824" duration="5302000" />
+      <workItem from="1714792638824" duration="6081000" />
+      <workItem from="1714828247895" duration="4086000" />
+      <workItem from="1714849052109" duration="3256000" />
+      <workItem from="1714874673714" duration="9224000" />
     </task>
     <servers />
   </component>
