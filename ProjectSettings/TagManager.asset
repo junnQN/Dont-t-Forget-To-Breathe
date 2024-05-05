@@ -7,7 +7,7 @@ TagManager:
   - Bowl
   - FlushButton
   - Smoke
-  - WaterGlass
+  - Box
   layers:
   - Default
   - TransparentFX

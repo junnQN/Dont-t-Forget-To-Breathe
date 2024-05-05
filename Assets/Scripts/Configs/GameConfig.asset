@@ -23,9 +23,9 @@ MonoBehaviour:
   maxTimeExhale: 3
   timeOfLevels:
   - 1
-  - 100
+  - 20
   - 1
-  - 10
+  - 1
   - 10
   waterMaxHeight: 2.5
   sprintTime: 2

@@ -61,6 +61,23 @@ public class GameManager : MonoBehaviour
     public void Start()
     {
         screenDict[ScreenKeys.MENU_SCREEN]?.Open();
+
+        tube.onCollisionBox += () =>
+        {
+            if (currentLevel == 2)
+            {
+                Debug.Log("Tube Collision");
+                cold.ExitCold(() =>
+                {
+                    Debug.Log("Exit Cold");
+                    player.isCold = false;
+                });
+            }
+            else if (currentLevel == 3)
+            {
+                // water.ChangeWaterHeight(0.1f);
+            }
+        };
     }
 
     public void StartGame()
@@ -153,7 +170,7 @@ public class GameManager : MonoBehaviour
         water.Init();
         flushButton.gameObject.SetActive(true);
         flushButton.Init();
-        player.ChangeSwimState();
+        // player.ChangeSwimState();
     }
 
     public void PrepareLevel4()
