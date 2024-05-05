@@ -107,7 +107,7 @@ public class GameManager : MonoBehaviour
 
     public void PrepareLevel1()
     {
-        //
+        // player.ChangeSwimState();
     }
 
     public void PrepareLevel2()
@@ -123,7 +123,7 @@ public class GameManager : MonoBehaviour
         {
             thermometer.ReduceTemperature(10);
         });
-        
+
     }
 
     public void PrepareLevel3()
@@ -139,6 +139,7 @@ public class GameManager : MonoBehaviour
         water.Init();
         flushButton.gameObject.SetActive(true);
         flushButton.Init();
+        player.ChangeSwimState();
     }
 
     public void PrepareLevel4()
@@ -196,9 +197,9 @@ public class GameManager : MonoBehaviour
 
     public void CheckGameLose()
     {
-        if (player.currentHealth==player.tmpHealth-1)
+        if (player.currentHealth == player.tmpHealth - 1)
         {
-            player.tmpHealth = player.tmpHealth-1;
+            player.tmpHealth = player.tmpHealth - 1;
             player.stateMachine.ChangeState(player.noneState);
             HandleGameLose();
         }
@@ -218,7 +219,7 @@ public class GameManager : MonoBehaviour
             resultScreen.UpdateScreen(false);
             screenDict[ScreenKeys.RESULT_SCREEN].Open();
         }
-        
+
     }
 
     public void SpawnSmoke()
