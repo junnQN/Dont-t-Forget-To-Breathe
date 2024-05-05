@@ -13,6 +13,7 @@ public class PlayerFirstMoveState : PlayerState
     public override void Enter()
     {
         base.Enter();
+        
     }
 
     public override void Exit()
@@ -32,10 +33,20 @@ public class PlayerFirstMoveState : PlayerState
             // Kiểm tra nếu đến vị trí dừng
             if (player.transform.position.x <= -7f)
             {
+                
                 player.shouldMove = false;
                 player.Flip();
                 player.ActiveUI();
-                stateMachine.ChangeState(player.noneState);
+                if (GameManager.instance.currentLevel == 1)
+                { 
+                    stateMachine.ChangeState(player.noneState);
+                }
+
+                if (GameManager.instance.currentLevel==2)
+                {
+                    stateMachine.ChangeState(player.idleState);
+                    GameManager.instance.isPlaying = true;
+                }
             }
         }
     }

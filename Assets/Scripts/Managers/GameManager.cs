@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour
         screenDict[ScreenKeys.MENU_SCREEN]?.Open();
     }
 
-    public void StartGame()
+    public void  StartGame()
     {
         player.Init();
         time = 0;
@@ -70,11 +70,17 @@ public class GameManager : MonoBehaviour
 
     public void NextLevel()
     {
-        player.Init();
+        player.Init2();
         time = 0;
-        isPlaying = true;
+        isPlaying = false;
 
         PrepareLevel();
+    }
+
+    public void RestartGame()
+    {
+        time = 0;
+        isPlaying = true;
     }
 
     public void PrepareLevel()
@@ -123,7 +129,6 @@ public class GameManager : MonoBehaviour
         {
             thermometer.ReduceTemperature(10);
         });
-        
     }
 
     public void PrepareLevel3()
@@ -198,7 +203,7 @@ public class GameManager : MonoBehaviour
     {
         if (player.currentHealth==player.tmpHealth-1)
         {
-            player.tmpHealth = player.tmpHealth-1;
+            player.tmpHealth -= 1;
             player.stateMachine.ChangeState(player.noneState);
             HandleGameLose();
         }

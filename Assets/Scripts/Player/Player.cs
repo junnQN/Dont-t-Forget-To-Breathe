@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    
+    public static Player instance;
     //<<<<<<< HEAD
     [Header("Move info")]
     public float moveSpeed = 12f;
@@ -59,7 +59,6 @@ public class Player : MonoBehaviour
     public int currentHealth = 9;
     public int tmpHealth = 9;
     public int maxHealth = 9;
-    public GameObject UI_Game;
     public float inhaleTime=3f;
     public float exhaleTime=3f;
     private float decreaseRate = 1f;
@@ -67,13 +66,17 @@ public class Player : MonoBehaviour
 
     private float currentTime;
     private float currentValue;
+    public float timer=5;
 
+    [Header("UI")]
+    public GameObject UI_Game;
+    public GameObject UI_Tutorials;
+    
     [Header("Cold level")]
     public bool isCold = false;
 //>>>>>>> origin/quan
 
     public bool isTouchFlushButton = false;
-
 
     #region Components
     public Animator anim { get; private set; }
@@ -105,7 +108,10 @@ public class Player : MonoBehaviour
     #endregion
     private void Awake()
     {
-        
+        if(instance!=null)
+            Destroy(instance.gameObject);
+        else 
+            instance = this;
         stateMachine = new PlayerStateMachine();
         idleState = new PlayerIdleState(this, stateMachine, "Idle");
         moveState = new PlayerMoveState(this, stateMachine, "Move");
@@ -167,9 +173,18 @@ public class Player : MonoBehaviour
 //>>>>>>> origin/quan
 
         //currentHealth = 9;
-        stateMachine.ChangeState(idleState);
+        //stateMachine.ChangeState(idleState);
     }
 
+    public void Init2()
+    {
+        oxygen = 100f;
+        carbonDioxide = 0f;
+        currentHealth = maxHealth;
+        tmpHealth = maxHealth;
+        currentHealth = tmpHealth;
+        stateMachine.ChangeState(noneState);
+    }
     private void Update()
     {
         if (shouldMove)
@@ -432,6 +447,20 @@ public class Player : MonoBehaviour
 
         // In ra giá trị hiện tại sau khi giảm giá
         Debug.Log("Current value: " + currentValue);
+    }
+
+    public void ChangeStateFisrtLv()
+    {
+        stateMachine.ChangeState(idleState);
+    }
+
+    public void ReturnDefaultPos()
+    {
+        transform.position = new Vector2(-6.984f, -2.371f);
+        if (!facingRight)
+        {
+            Flip();
+        }
     }
 }
 
