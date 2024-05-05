@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform spawnPoint;
 
     [SerializeField]
-    private Smoke smoke;
+    public Smoke smoke;
     [SerializeField]
     private WaterBehavior water;
 
@@ -95,6 +95,7 @@ public class GameManager : MonoBehaviour
 
         thermometer.gameObject.SetActive(true);
         thermometer.Init();
+        fallGlass.Init();
 
         switch (currentLevel)
         {
@@ -131,6 +132,7 @@ public class GameManager : MonoBehaviour
         tube.gameObject.SetActive(true);
         tube.Init(() =>
         {
+            cold.gameObject.SetActive(true);
             cold.Init(() =>
             {
                 player.isCold = true;
