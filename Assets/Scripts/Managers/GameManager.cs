@@ -38,8 +38,11 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private Thermometer thermometer;
 
-    [SerializeField]
-    private Tube tube;
+    public Tube tube;
+
+    public FallGlass fallGlass;
+
+    public Cold cold;
 
     #region Prefabs
     [SerializeField] private GameObject smokePrefab;
@@ -82,6 +85,7 @@ public class GameManager : MonoBehaviour
         smoke.gameObject.SetActive(false);
         water.gameObject.SetActive(false);
         flushButton.gameObject.SetActive(false);
+        cold.gameObject.SetActive(false);
 
         thermometer.gameObject.SetActive(true);
         thermometer.Init();
@@ -121,7 +125,10 @@ public class GameManager : MonoBehaviour
         tube.gameObject.SetActive(true);
         tube.Init(() =>
         {
-            thermometer.ReduceTemperature(10);
+            cold.Init(() =>
+            {
+                player.isCold = true;
+            });
         });
 
     }
@@ -241,8 +248,7 @@ public class GameManager : MonoBehaviour
 
     public void SpawnWater()
     {
-        var waterObject = Instantiate(waterPrefab);
-        water = waterObject.GetComponent<WaterBehavior>();
+        water.gameObject.SetActive(true);
         water.Init();
     }
 
