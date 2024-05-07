@@ -113,10 +113,10 @@ TextureImporter:
       name: jumping_0
       rect:
         serializedVersion: 2
-        x: 10
-        y: 745
-        width: 596
-        height: 755
+        x: 106
+        y: 752
+        width: 495
+        height: 478
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -134,10 +134,10 @@ TextureImporter:
       name: jumping_1
       rect:
         serializedVersion: 2
-        x: 606
-        y: 745
-        width: 596
-        height: 755
+        x: 685
+        y: 771
+        width: 530
+        height: 514
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -155,10 +155,10 @@ TextureImporter:
       name: jumping_2
       rect:
         serializedVersion: 2
-        x: 1202
-        y: 745
-        width: 596
-        height: 755
+        x: 1186
+        y: 927
+        width: 615
+        height: 396
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -176,10 +176,10 @@ TextureImporter:
       name: jumping_3
       rect:
         serializedVersion: 2
-        x: 1798
-        y: 745
-        width: 596
-        height: 755
+        x: 1887
+        y: 777
+        width: 411
+        height: 448
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -197,10 +197,10 @@ TextureImporter:
       name: jumping_4
       rect:
         serializedVersion: 2
-        x: 2394
-        y: 745
-        width: 596
-        height: 755
+        x: 2413
+        y: 771
+        width: 495
+        height: 476
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
