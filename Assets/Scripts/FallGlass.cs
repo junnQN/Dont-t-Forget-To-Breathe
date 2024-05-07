@@ -19,6 +19,8 @@ public class FallGlass : MonoBehaviour
 
     public void Init()
     {
+        GetComponent<BoxCollider2D>().isTrigger = false;
+        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
         water.SetActive(false);
         anim.SetBool("FallGlass", false);
     }
@@ -41,12 +43,11 @@ public class FallGlass : MonoBehaviour
 
         if (other.gameObject.tag == "Player")
         {
-            var boundYPlayer = other.collider.bounds.size.y;
-            var boundYGlass = GetComponent<BoxCollider2D>().bounds.size.y;
-            if (other.transform.position.y - boundYPlayer / 2 > transform.position.y + boundYGlass / 2)
+            Debug.Log("FallGlass" + Player.instance.IsGroundDetected());
+            if (!Player.instance.IsGroundDetected())
             {
                 isFallGlass = true;
-                if (other.transform.rotation.y == -180)
+                if (other.transform.rotation.y < 0)
                 {
                     transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, -180, transform.rotation.eulerAngles.z);
                 }
@@ -54,7 +55,8 @@ public class FallGlass : MonoBehaviour
                 {
                     transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, 0, transform.rotation.eulerAngles.z);
                 }
-
+                GetComponent<BoxCollider2D>().isTrigger = true;
+                GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
                 anim.SetBool("FallGlass", true);
             }
         }
@@ -62,7 +64,6 @@ public class FallGlass : MonoBehaviour
 
     public void OnGlassFallen()
     {
-        anim.SetBool("FallGlass", false);
         water.SetActive(true);
     }
 }
