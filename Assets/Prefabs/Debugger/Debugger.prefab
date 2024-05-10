@@ -332,8 +332,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEnable: 1
-  debugger: {fileID: 0}
-  text: {fileID: 0}
+  debugger: {fileID: 2584167017247395020}
+  text: {fileID: 1725965536675375285}
 --- !u!1 &3996253809904065369
 GameObject:
   m_ObjectHideFlags: 0
@@ -371,7 +371,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -210, y: -64}
+  m_AnchoredPosition: {x: -210, y: -50}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6937141438323759840

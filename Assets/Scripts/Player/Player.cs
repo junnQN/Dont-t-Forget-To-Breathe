@@ -241,12 +241,14 @@ public class Player : MonoBehaviour
 
     public void ChangeOxygen(float amount)
     {
+        if (GameManager.instance.isDisableBreath) return;
         oxygen += amount;
         oxygen = Mathf.Clamp(oxygen, 0, 100);
     }
 
     public void ChangeCarbonDioxide(float amount)
     {
+        if (GameManager.instance.isDisableBreath) return;
         carbonDioxide += amount;
         carbonDioxide = Mathf.Clamp(carbonDioxide, 0, 100);
     }

@@ -18,6 +18,7 @@ public class Debugger : MonoBehaviour
 
     public void DisableBreath(bool isDisable)
     {
-        //
+        if (GameManager.instance != null)
+            GameManager.instance.isDisableBreath = isDisable;
     }
 }

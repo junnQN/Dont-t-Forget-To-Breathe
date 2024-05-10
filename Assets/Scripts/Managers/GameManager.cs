@@ -52,6 +52,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject UI_Game;
     [SerializeField] private GameObject block;
 
+    public bool isDisableBreath = false;
+
     private void Awake()
     {
         instance = this;

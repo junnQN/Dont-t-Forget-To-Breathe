@@ -10,6 +10,11 @@ public class BreatheButton : MonoBehaviour
 
     private void Start()
     {
+        if (GameManager.instance != null)
+        {
+            isEnable = !GameManager.instance.isDisableBreath;
+        }
+
         UpdateText();
     }
     public void OnClick()
