@@ -5,11 +5,8 @@ using UnityEngine;
 
 public class WaterBehavior : MonoBehaviour
 {
-    public float waterMaxHeight = 0.5f;
-    public float waterCurrentHeight = 0.5f;
-
-    public float startY = -3.48f;
-    public float endY = 2.5f;
+    public Transform start;
+    public Transform end;
 
     public GameObject waterObject;
     Tween sprintTween;
@@ -19,33 +16,25 @@ public class WaterBehavior : MonoBehaviour
     {
         GameManager.instance.tube.ShowWaterFall();
         var gameConfig = GameManager.instance.gameConfig;
-        waterMaxHeight = gameConfig.waterMaxHeight;
+        SetWaterHeight(start.localPosition.y);
         SpawnWater();
     }
 
     public void SetWaterHeight(float height)
     {
-        Camera mainCamera = Camera.main;
-
-        waterCurrentHeight = height;
         waterObject.transform.localPosition = new Vector3(waterObject.transform.localPosition.x, height, waterObject.transform.localPosition.z);
     }
 
     public void ChangeWaterHeight(float amount)
     {
-        waterCurrentHeight += amount;
-        if (waterCurrentHeight > waterMaxHeight)
-        {
-            waterCurrentHeight = waterMaxHeight;
-        }
-        SetWaterHeight(waterCurrentHeight);
+        SetWaterHeight(amount);
     }
 
     public void SprintWater()
     {
         sprintTween?.Kill();
         var time = GameManager.instance.gameConfig.sprintTime;
-        sprintTween = DOVirtual.Float(waterCurrentHeight, 0, time, (v) =>
+        sprintTween = DOVirtual.Float(waterObject.transform.localPosition.y, start.localPosition.y, time, (v) =>
         {
             SetWaterHeight(v);
         });
@@ -55,7 +44,7 @@ public class WaterBehavior : MonoBehaviour
     {
         spawnTween?.Kill();
         var time = GameManager.instance.gameConfig.spawnTime;
-        spawnTween = DOVirtual.Float(startY, waterMaxHeight, time, (v) =>
+        spawnTween = DOVirtual.Float(start.localPosition.y, end.localPosition.y, time, (v) =>
         {
             SetWaterHeight(v);
         });

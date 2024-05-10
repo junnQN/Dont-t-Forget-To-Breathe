@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6003003903395457472}
   - component: {fileID: 8392671455763637259}
   - component: {fileID: 3461583915210276409}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,9 +118,9 @@ GameObject:
   - component: {fileID: 2620394448399786812}
   - component: {fileID: 1792781970613868724}
   - component: {fileID: 250938367446135896}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Tube
-  m_TagString: Untagged
+  m_TagString: Tube
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

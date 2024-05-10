@@ -8,6 +8,9 @@ TagManager:
   - FlushButton
   - Smoke
   - Box
+  - WaterGlass
+  - Tube
+  - Water
   layers:
   - Default
   - TransparentFX
@@ -20,7 +23,7 @@ TagManager:
   - Ground
   - Background
   - Bowl
-  - 
+  - Tube
   - 
   - 
   - 
