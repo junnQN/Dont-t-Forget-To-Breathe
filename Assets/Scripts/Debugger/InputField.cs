@@ -42,16 +42,34 @@ public class InputField : MonoBehaviour
             return;
         }
 
-        var type = gameConfig.GetType();
-        var field = type.GetField(fieldName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-        if (field != null)
+        if (fieldName.Contains("timeOfLevels"))
         {
-            field.SetValue(gameConfig, value);
-            Debug.Log("Field updated: " + fieldName);
+            // Split the fieldName to get the level index
+            string[] split = fieldName.Split(' ');
+            if (split.Length > 1)
+            {
+                int levelIndex = int.Parse(split[1]);
+                gameConfig.timeOfLevels[levelIndex - 1] = value;
+                Debug.Log("Field updated: " + fieldName);
+            }
+            else
+            {
+                Debug.LogError("Invalid fieldName format: " + fieldName);
+            }
         }
         else
         {
-            Debug.LogError("Field not found: " + fieldName);
+            var type = gameConfig.GetType();
+            var field = type.GetField(fieldName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+            if (field != null)
+            {
+                field.SetValue(gameConfig, value);
+                Debug.Log("Field updated: " + fieldName);
+            }
+            else
+            {
+                Debug.LogError("Field not found: " + fieldName);
+            }
         }
     }
 }
