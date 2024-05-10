@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5590939212560425701}
   - component: {fileID: 7328423677462964613}
   m_Layer: 5
-  m_Name: DebugPanel
+  m_Name: GameConfig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -54,7 +54,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 0
+  m_ChildAlignment: 4
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1

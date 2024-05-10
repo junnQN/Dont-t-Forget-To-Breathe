@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Reflection;
 using System;
 
-public class Debugger : MonoBehaviour
+public class GameConfigDebugger : MonoBehaviour
 {
     public GameConfig gameConfig;
 
