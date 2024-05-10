@@ -23,8 +23,8 @@ MonoBehaviour:
   maxTimeExhale: 3
   timeOfLevels:
   - 1
-  - 100
   - 1
+  - 100
   - 100
   - 10
   waterMaxHeight: 2.5
