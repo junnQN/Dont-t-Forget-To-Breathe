@@ -216,7 +216,7 @@ MonoBehaviour:
   inhaleTime: 3
   exhaleTime: 3
   discountRatePerSecond: 1
-  timer: 5
+  timer: 2
   UI_Game: {fileID: 0}
   UI_Tutorials: {fileID: 0}
   isCold: 0
