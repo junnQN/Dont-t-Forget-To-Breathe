@@ -36,7 +36,7 @@ public class PlayerExhaleState : PlayerGroundState
 
         player.DecreaseCarbonDioxideByExhale();
         player.DecreaseOxygenOverTime();
-        if (Input.GetKeyUp(KeyCode.O))
+        if (!player.isDisableInput && Input.GetKeyUp(KeyCode.O))
             player.stateMachine.ChangeState(player.idleState);
     }
 }

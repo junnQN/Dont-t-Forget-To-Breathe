@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform spawnPoint;
 
     [SerializeField]
-    private Smoke smoke;
+    public Smoke smoke;
     [SerializeField]
     private WaterBehavior water;
 
@@ -38,8 +38,11 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private Thermometer thermometer;
 
-    [SerializeField]
-    private Tube tube;
+    public Tube tube;
+
+    public FallGlass fallGlass;
+
+    public Cold cold;
 
     #region Prefabs
     [SerializeField] private GameObject smokePrefab;
@@ -48,6 +51,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject UI_Game;
     [SerializeField] private GameObject block;
+
+    public bool isDisableBreath = false;
 
     private void Awake()
     {
@@ -58,9 +63,26 @@ public class GameManager : MonoBehaviour
     public void Start()
     {
         screenDict[ScreenKeys.MENU_SCREEN]?.Open();
+
+        tube.onCollisionBox += () =>
+        {
+            if (currentLevel == 2)
+            {
+                Debug.Log("Tube Collision");
+                cold.ExitCold(() =>
+                {
+                    Debug.Log("Exit Cold");
+                    player.isCold = false;
+                });
+            }
+            else if (currentLevel == 3)
+            {
+                // water.ChangeWaterHeight(0.1f);
+            }
+        };
     }
 
-    public void  StartGame()
+    public void StartGame()
     {
         player.Init();
         time = 0;
@@ -88,9 +110,11 @@ public class GameManager : MonoBehaviour
         smoke.gameObject.SetActive(false);
         water.gameObject.SetActive(false);
         flushButton.gameObject.SetActive(false);
+        cold.gameObject.SetActive(false);
 
         thermometer.gameObject.SetActive(true);
         thermometer.Init();
+        fallGlass.Init();
 
         switch (currentLevel)
         {
@@ -113,7 +137,7 @@ public class GameManager : MonoBehaviour
 
     public void PrepareLevel1()
     {
-        //
+        // player.ChangeSwimState();
     }
 
     public void PrepareLevel2()
@@ -127,7 +151,11 @@ public class GameManager : MonoBehaviour
         tube.gameObject.SetActive(true);
         tube.Init(() =>
         {
-            thermometer.ReduceTemperature(10);
+            cold.gameObject.SetActive(true);
+            cold.Init(() =>
+            {
+                player.isCold = true;
+            });
         });
     }
 
@@ -144,6 +172,7 @@ public class GameManager : MonoBehaviour
         water.Init();
         flushButton.gameObject.SetActive(true);
         flushButton.Init();
+        // player.ChangeSwimState();
     }
 
     public void PrepareLevel4()
@@ -201,7 +230,7 @@ public class GameManager : MonoBehaviour
 
     public void CheckGameLose()
     {
-        if (player.currentHealth==player.tmpHealth-1)
+        if (player.currentHealth == player.tmpHealth - 1)
         {
             player.tmpHealth -= 1;
             player.stateMachine.ChangeState(player.noneState);
@@ -223,7 +252,7 @@ public class GameManager : MonoBehaviour
             resultScreen.UpdateScreen(false);
             screenDict[ScreenKeys.RESULT_SCREEN].Open();
         }
-        
+
     }
 
     public void SpawnSmoke()
@@ -245,8 +274,7 @@ public class GameManager : MonoBehaviour
 
     public void SpawnWater()
     {
-        var waterObject = Instantiate(waterPrefab);
-        water = waterObject.GetComponent<WaterBehavior>();
+        water.gameObject.SetActive(true);
         water.Init();
     }
 

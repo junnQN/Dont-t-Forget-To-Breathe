@@ -33,7 +33,12 @@ public class GameConfig : ScriptableObject
     public float[] timeOfLevels = new float[] { 60f, 120f, 180f, 240f, 300f };
 
     [Header("Water Configs")]
-    public float waterMaxHeight = 6f;
+    public float waterMaxHeight = 2.5f;
     [Tooltip("The time to change water height (seconds)")]
     public float sprintTime = 2f;
+    public float spawnTime = 2f;
+
+    [Header("Smoke Configs")]
+    public float timeAffectedBySmoke = 1f;
+    public float smokeImmunityTime = 0.5f;
 }

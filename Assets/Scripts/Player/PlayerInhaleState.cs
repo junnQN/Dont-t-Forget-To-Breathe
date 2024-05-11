@@ -33,7 +33,7 @@ public class PlayerInhaleState : PlayerGroundState
     {
         base.Update();
 
-        
+
         if (GameManager.instance.isHaveSmoke())
         {
             if (HandleInhaleSmoke()) return;
@@ -46,8 +46,10 @@ public class PlayerInhaleState : PlayerGroundState
             player.IncreaseOxygenByInhale();
             player.IncreaseCarbonDioxideOverTime();
         }
-        
-        if (Input.GetKeyUp(KeyCode.I))
+
+
+        //>>>>>>> origin/quan
+        if (!player.isDisableInput && Input.GetKeyUp(KeyCode.I))
         {
             player.stateMachine.ChangeState(player.idleState);
         }

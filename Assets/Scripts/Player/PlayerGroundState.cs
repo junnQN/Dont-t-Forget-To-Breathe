@@ -6,7 +6,7 @@ using DG.Tweening;
 public class PlayerGroundState : PlayerState
 {
     Tween counterTween;
-    
+
     public PlayerGroundState(Player _player, PlayerStateMachine _stateMachine, string _animBoolName) : base(_player, _stateMachine, _animBoolName)
     {
     }
@@ -20,14 +20,16 @@ public class PlayerGroundState : PlayerState
     {
         base.Exit();
     }
-    
+
     public override void Update()
     {
         base.Update();
 
-        if (Input.GetKey(KeyCode.I))
+
+
+        if (!player.isDisableInput && Input.GetKey(KeyCode.I))
         {
-            if (player.isCold==true)
+            if (player.isCold == true)
             {
                 player.IncreaseOxygenByCold();
                 player.IncreaseCarbonDioxideOverTime();
@@ -40,7 +42,7 @@ public class PlayerGroundState : PlayerState
             }
         }
 
-        else if (Input.GetKey(KeyCode.O))
+        else if (!player.isDisableInput && Input.GetKey(KeyCode.O))
         {
             if (player.isCold == true)
             {
@@ -53,22 +55,22 @@ public class PlayerGroundState : PlayerState
                 player.DecreaseCarbonDioxideByExhale();
                 player.DecreaseOxygenOverTime();
             }
-            
+
         }
         else
         {
             player.DecreaseOxygenOverTime();
-            player.IncreaseCarbonDioxideOverTime();   
+            player.IncreaseCarbonDioxideOverTime();
         }
-        
-        if (Input.GetKeyDown(KeyCode.Space) && player.IsGroundDetected())
+
+        if (!player.isDisableInput && Input.GetKeyDown(KeyCode.Space) && player.IsGroundDetected())
             stateMachine.ChangeState(player.jumpState);
-        
-        if(Input.GetKeyDown(KeyCode.E)&&player.isPlayerTouching)
+
+        if (!player.isDisableInput && Input.GetKeyDown(KeyCode.E) && player.isPlayerTouching)
             stateMachine.ChangeState(player.eatState);
-        
+
     }
-    
+
     bool HandleInhaleSmoke()
     {
         double probability = GameManager.instance.gameConfig.coughRate;
@@ -87,5 +89,5 @@ public class PlayerGroundState : PlayerState
 
         return randomValue < probability;
     }
-    
+
 }

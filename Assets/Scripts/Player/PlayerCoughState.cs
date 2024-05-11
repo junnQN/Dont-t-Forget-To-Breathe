@@ -20,9 +20,9 @@ public class PlayerCoughState : PlayerState
         var time = GameManager.instance.gameConfig.timeToBreakCoughState;
         yield return new WaitForSeconds(time);
 
-        if (Input.GetKey(KeyCode.I))
+        if (!player.isDisableInput && Input.GetKey(KeyCode.I))
             player.stateMachine.ChangeState(player.inhaleState);
-        else if (Input.GetKey(KeyCode.O))
+        else if (!player.isDisableInput && Input.GetKey(KeyCode.O))
             player.stateMachine.ChangeState(player.exhaleState);
         else player.stateMachine.ChangeState(player.holdBreatheState);
     }

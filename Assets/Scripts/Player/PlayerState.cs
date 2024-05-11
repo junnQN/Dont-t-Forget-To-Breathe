@@ -10,16 +10,16 @@ public class PlayerState
     protected Rigidbody2D rb;
     protected float stateTimer;
 
-//<<<<<<< HEAD
+    //<<<<<<< HEAD
     public float xInput;
     //private string animBoolName;
-    
+
     //public PlayerState(Player _player,PlayerStateMachine _stateMachine, string _animBoolName)
-//=======
+    //=======
     public string animBoolName;
 
     public PlayerState(Player _player, PlayerStateMachine _stateMachine, string _animBoolName)
-//>>>>>>> origin/quan
+    //>>>>>>> origin/quan
     {
         this.player = _player;
         this.stateMachine = _stateMachine;
@@ -27,30 +27,28 @@ public class PlayerState
     }
     public virtual void Enter()
     {
-//<<<<<<< HEAD
-        player.anim.SetBool(animBoolName,true);
-        rb = player.rb;
-//=======
+        //<<<<<<< HEAD
         player.anim.SetBool(animBoolName, true);
-//>>>>>>> origin/quan
+        rb = player.rb;
+        //=======
+        player.anim.SetBool(animBoolName, true);
+        //>>>>>>> origin/quan
     }
 
     public virtual void Exit()
     {
         player.anim.SetBool(animBoolName, false);
     }
-    
+
     public virtual void Update()
     {
+        //<<<<<<< HEAD
+        xInput = player.isDisableInput ? 0 : Input.GetAxisRaw("Horizontal");
+        player.anim.SetFloat("yVelocity", rb.velocity.y);
+        player.anim.SetFloat("xVelocity", xInput);
+        //=======
         stateTimer -= Time.deltaTime;
-//<<<<<<< HEAD
-        xInput = Input.GetAxisRaw("Horizontal");
-        player.anim.SetFloat("yVelocity",rb.velocity.y);
-        player.anim.SetFloat("xVelocity",xInput);
-//=======
-        // Debug.Log("I in " + animBoolName);
-//>>>>>>> origin/quan
     }
-    
-    
+
+
 }

@@ -186,6 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6d1196790cdc144f86b703e757acb68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 1931666104721946484}
   moveSpeed: 8
   jumpForce: 12
   groundCheck: {fileID: 549751179583448625}
@@ -221,6 +222,7 @@ MonoBehaviour:
   UI_Tutorials: {fileID: 0}
   isCold: 0
   isTouchFlushButton: 0
+  isDisableInput: 0
 --- !u!70 &7606255906183817831
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -269,7 +271,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 5
   m_AngularDrag: 0.05
   m_GravityScale: 3.5
   m_Material: {fileID: 0}

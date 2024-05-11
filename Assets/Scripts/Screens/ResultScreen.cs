@@ -30,22 +30,7 @@ public class ResultScreen : BaseScreen
             Close();
         }
 
-        if (GameManager.instance.currentLevel==2)
-        {
-            if (Player.instance.currentHealth < 9)
-            {
-                Player.instance.ReturnDefaultPos();
-                Player.instance.ChangeStateFisrtLv();
-                GameManager.instance.RestartGame();
-                Close();
-            }
-            else
-            {
-                GameManager.instance.NextLevel();
-                Close();
-            }
-        }
-        if (GameManager.instance.currentLevel==3)
+        if (GameManager.instance.currentLevel >= 2)
         {
             if (Player.instance.currentHealth < 9)
             {

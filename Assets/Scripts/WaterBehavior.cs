@@ -5,41 +5,48 @@ using UnityEngine;
 
 public class WaterBehavior : MonoBehaviour
 {
-    public float waterMaxHeight = 0.5f;
-    public float waterCurrentHeight = 0.5f;
+    public Transform start;
+    public Transform end;
 
     public GameObject waterObject;
     Tween sprintTween;
+    private Tween spawnTween;
+
     public void Init()
     {
+        GameManager.instance.tube.ShowWaterFall();
         var gameConfig = GameManager.instance.gameConfig;
-        waterMaxHeight = gameConfig.waterMaxHeight;
-        SetWaterHeight(waterMaxHeight);
+        SetWaterHeight(start.localPosition.y);
+        SpawnWater();
     }
 
     public void SetWaterHeight(float height)
     {
-        Camera mainCamera = Camera.main;
-
-        waterCurrentHeight = height;
-        waterObject.transform.localScale = new Vector3(waterObject.transform.localScale.x, waterCurrentHeight, waterObject.transform.localScale.z);
-        waterObject.transform.localPosition = new Vector3(waterObject.transform.localPosition.x, -mainCamera.orthographicSize + waterCurrentHeight / 2, waterObject.transform.localPosition.z);
+        waterObject.transform.localPosition = new Vector3(waterObject.transform.localPosition.x, height, waterObject.transform.localPosition.z);
     }
 
     public void ChangeWaterHeight(float amount)
     {
-        waterCurrentHeight += amount;
-        if (waterCurrentHeight > waterMaxHeight)
-        {
-            waterCurrentHeight = waterMaxHeight;
-        }
-        SetWaterHeight(waterCurrentHeight);
+        SetWaterHeight(amount);
     }
 
     public void SprintWater()
     {
         sprintTween?.Kill();
         var time = GameManager.instance.gameConfig.sprintTime;
-        sprintTween = DOVirtual.Float(waterCurrentHeight, 0, time, (v) => SetWaterHeight(v));
+        sprintTween = DOVirtual.Float(waterObject.transform.localPosition.y, start.localPosition.y, time, (v) =>
+        {
+            SetWaterHeight(v);
+        });
+    }
+
+    public void SpawnWater()
+    {
+        spawnTween?.Kill();
+        var time = GameManager.instance.gameConfig.spawnTime;
+        spawnTween = DOVirtual.Float(start.localPosition.y, end.localPosition.y, time, (v) =>
+        {
+            SetWaterHeight(v);
+        });
     }
 }
