@@ -21,11 +21,24 @@ public class FallGlass : MonoBehaviour
 
     public void Init()
     {
-        GetComponent<BoxCollider2D>().isTrigger = false;
-        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+        IgnoreCollision(false);
         water.SetActive(false);
         anim.SetBool("FallGlass", false);
         transform.position = defaultPos;
+    }
+
+    public void IgnoreCollision(bool isIgnore = true)
+    {
+        if (isIgnore)
+        {
+            GetComponent<BoxCollider2D>().isTrigger = true;
+            GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+        }
+        else
+        {
+            GetComponent<BoxCollider2D>().isTrigger = false;
+            GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -58,8 +71,7 @@ public class FallGlass : MonoBehaviour
                 {
                     transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, 0, transform.rotation.eulerAngles.z);
                 }
-                GetComponent<BoxCollider2D>().isTrigger = true;
-                GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+                IgnoreCollision(true);
                 anim.SetBool("FallGlass", true);
             }
         }

@@ -35,6 +35,7 @@ public class PlayerFirstMoveState : PlayerState
             {
 
                 player.shouldMove = false;
+                GameManager.instance.fallGlass.IgnoreCollision(false);
                 player.Flip();
                 player.ActiveUI();
                 if (GameManager.instance.currentLevel == 1)
@@ -42,7 +43,7 @@ public class PlayerFirstMoveState : PlayerState
                     stateMachine.ChangeState(player.noneState);
                 }
 
-                if (GameManager.instance.currentLevel== 2||GameManager.instance.currentLevel>3)
+                if (GameManager.instance.currentLevel == 2 || GameManager.instance.currentLevel > 3)
                 {
                     stateMachine.ChangeState(player.idleState);
                     GameManager.instance.isPlaying = true;

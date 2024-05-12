@@ -118,6 +118,8 @@ public class GameManager : MonoBehaviour
         fallGlass.Init();
         box.Init();
 
+        fallGlass.IgnoreCollision(true);
+
         switch (currentLevel)
         {
             case 1:
