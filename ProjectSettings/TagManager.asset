@@ -15,7 +15,7 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
   - Item
@@ -24,7 +24,7 @@ TagManager:
   - Background
   - Bowl
   - Tube
-  - 
+  - Box
   - 
   - 
   - 

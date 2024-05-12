@@ -42,9 +42,14 @@ public class PlayerFirstMoveState : PlayerState
                     stateMachine.ChangeState(player.noneState);
                 }
 
-                if (GameManager.instance.currentLevel >= 2)
+                if (GameManager.instance.currentLevel== 2||GameManager.instance.currentLevel>3)
                 {
                     stateMachine.ChangeState(player.idleState);
+                    GameManager.instance.isPlaying = true;
+                }
+                if (GameManager.instance.currentLevel == 3)
+                {
+                    stateMachine.ChangeState(player.swimState);
                     GameManager.instance.isPlaying = true;
                 }
             }

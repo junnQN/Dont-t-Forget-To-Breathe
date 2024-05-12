@@ -23,34 +23,23 @@ public class PlayerSwimState : PlayerState
     {
         base.Update();
         
-        if (Input.GetKey(KeyCode.Space))
-        {
-            player.isSwimming = true;
-        }
-        else{
-            player.isSwimming = false;
-        }
-        if (player.isSwimming&&player.transform.position.y<2.47f)
+        player.SetVelocity(xInput * player.moveSpeed, rb.velocity.y);
+        if (Input.GetKey(KeyCode.Space)&&player.transform.position.y<2.54f)
         {
             Swim();
         }
+        Sink();
     }
     
-    public void Swim()
+    private void Swim()
     {
-        // Tạo lực nổi khi ấn Space
-        rb.AddForce(Vector2.up * player.swimForce, ForceMode2D.Force);
+        // Áp dụng lực đẩy lên nhân vật khi bơi
+        rb.AddForce(Vector2.up * player.swimForce, ForceMode2D.Impulse);
+    }
 
-        // Giới hạn tốc độ nếu nó vượt quá maxVelocity
-        if (rb.velocity.magnitude > player.maxVelocity)
-        {
-            rb.velocity = rb.velocity.normalized * player.maxVelocity;
-        }
-
-        if (!player.IsGroundDetected())
-        {
-            rb.AddForce(Vector2.right * xInput * player.swimHorizontalForce, ForceMode2D.Force);
-            //rb.AddForce(-rb.velocity * player.swimDrag);
-        }
+    private void Sink()
+    {
+        // Áp dụng lực chìm khi không bơi
+        rb.AddForce(Vector2.down * player.sinkSpeed, ForceMode2D.Force);
     }
 }

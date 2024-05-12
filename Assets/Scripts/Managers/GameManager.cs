@@ -172,7 +172,7 @@ public class GameManager : MonoBehaviour
         water.Init();
         flushButton.gameObject.SetActive(true);
         flushButton.Init();
-        // player.ChangeSwimState();
+        //player.ChangeSwimState();
     }
 
     public void PrepareLevel4()

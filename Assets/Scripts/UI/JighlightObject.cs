@@ -7,6 +7,7 @@ public class JighlightObject : MonoBehaviour
 {
     [SerializeField]private Sprite newSprite;
     [SerializeField] private Sprite original;
+    [SerializeField] private GameObject key;
     private SpriteRenderer spriteRenderer;
 
     private void Start()
@@ -19,6 +20,7 @@ public class JighlightObject : MonoBehaviour
         if (other.CompareTag("Player")) // Kiểm tra xem có chạm vào nhân vật không
         {
             ChangeSprite(newSprite); // Thay đổi material thành highlight material
+            key.SetActive(true);
         }
     }
 
@@ -27,6 +29,7 @@ public class JighlightObject : MonoBehaviour
         if (other.CompareTag("Player")) // Kiểm tra xem có chạm vào nhân vật không
         {
             ChangeSprite(original); // Thay đổi material về material ban đầu
+            key.SetActive(false);
         }
     }
     

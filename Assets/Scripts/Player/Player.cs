@@ -34,7 +34,8 @@ public class Player : MonoBehaviour
     public float gravity = 1f; // Gravitational pull
     public float maxVelocity = 5f; // Tốc độ tối đa của player
     public bool isSwimming = false;
-    public float swimDrag = 2f; // Lực cản nước
+    public float swimDrag = 2f;
+    public float sinkSpeed = 2f; // Lực cản nước
                                 //=======   
                                 //[SerializeField] public float oxygen = 100f;
                                 //[SerializeField] public float carbonDioxide;
@@ -199,6 +200,7 @@ public class Player : MonoBehaviour
     }
     private void Update()
     {
+        
         if (shouldMove)
         {
             stateMachine.ChangeState(firstState);
@@ -451,7 +453,7 @@ public class Player : MonoBehaviour
     public void ChangeSwimState()
     {
         stateMachine.ChangeState(swimState);
-        water.SetActive(true);
+        //water.SetActive(true);
     }
 
     public void ReturnStartPos()
