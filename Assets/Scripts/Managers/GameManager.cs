@@ -236,14 +236,13 @@ public class GameManager : MonoBehaviour
         if (player.currentHealth == player.tmpHealth - 1)
         {
             player.tmpHealth -= 1;
-            player.stateMachine.ChangeState(player.noneState);
-            HandleGameLose();
+            player.stateMachine.ChangeState(player.dieState);
+            // HandleGameLose();
         }
     }
     public void HandleGameLose()
     {
         isPlaying = false;
-        player.stateMachine.ChangeState(player.dieState);
         var resultScreen = screenDict[ScreenKeys.RESULT_SCREEN] as ResultScreen;
         if (player.currentHealth == 0f)
         {

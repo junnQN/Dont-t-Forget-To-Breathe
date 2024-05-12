@@ -11,13 +11,14 @@ public class PlayerDieState : PlayerState
     public override void Enter()
     {
         base.Enter();
-        
-        
+        player.anim.SetBool("die", true);
+
     }
 
     public override void Exit()
     {
         base.Exit();
+        player.anim.SetBool("die", false);
     }
 
     public override void Update()
