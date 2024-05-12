@@ -51,6 +51,9 @@ TagManager:
   - name: Background
     uniqueID: 1681855853
     locked: 0
+  - name: Box
+    uniqueID: 250538203
+    locked: 0
   - name: Player
     uniqueID: 3111329489
     locked: 0

@@ -175,10 +175,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: cold
       objectReference: {fileID: 0}
-    - target: {fileID: 6864644428781478574, guid: a5f1f150e6e487c46a4c422cd14f1681, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -484,10 +480,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Incense
       objectReference: {fileID: 0}
-    - target: {fileID: 8272710346951050863, guid: 23022a9a61a172b4fafa2803758f9bbd, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -665,7 +657,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1663882061
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 7e8860e4e6aed7e4586f5454555f6ec7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -930,7 +922,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1183637807
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 7897930fa51b93c4183924e2137d0364, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1026,10 +1018,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: FlushButton
       objectReference: {fileID: 0}
-    - target: {fileID: 8125431385526326642, guid: 041eec2568295ac4a957bd8c425f2af0, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1117,7 +1105,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1183637807
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 4a2628c45c568b448b40dbc812cb27cf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1154,10 +1142,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 549751179583448625, guid: 8f5ecb401473c8e459690d2fe8bebd1f, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1.666
-      objectReference: {fileID: 0}
     - target: {fileID: 840664207930477086, guid: 8f5ecb401473c8e459690d2fe8bebd1f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.23
@@ -1198,34 +1182,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 891752837187184898, guid: 8f5ecb401473c8e459690d2fe8bebd1f, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1891646454480750790, guid: 8f5ecb401473c8e459690d2fe8bebd1f, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2723005714655603641, guid: 8f5ecb401473c8e459690d2fe8bebd1f, type: 3}
-      propertyPath: timer
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 2723005714655603641, guid: 8f5ecb401473c8e459690d2fe8bebd1f, type: 3}
       propertyPath: UI_Game
       value: 
       objectReference: {fileID: 46820932}
-    - target: {fileID: 2723005714655603641, guid: 8f5ecb401473c8e459690d2fe8bebd1f, type: 3}
-      propertyPath: jumpForce
-      value: 18
-      objectReference: {fileID: 0}
-    - target: {fileID: 2723005714655603641, guid: 8f5ecb401473c8e459690d2fe8bebd1f, type: 3}
-      propertyPath: sinkSpeed
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2723005714655603641, guid: 8f5ecb401473c8e459690d2fe8bebd1f, type: 3}
-      propertyPath: swimForce
-      value: 0.2
-      objectReference: {fileID: 0}
     - target: {fileID: 2723005714655603641, guid: 8f5ecb401473c8e459690d2fe8bebd1f, type: 3}
       propertyPath: UI_Tutorials
       value: 
@@ -1233,18 +1193,6 @@ PrefabInstance:
     - target: {fileID: 3208001036552212250, guid: 8f5ecb401473c8e459690d2fe8bebd1f, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 3208001036552212250, guid: 8f5ecb401473c8e459690d2fe8bebd1f, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3208001036552212250, guid: 8f5ecb401473c8e459690d2fe8bebd1f, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7234743578101197121, guid: 8f5ecb401473c8e459690d2fe8bebd1f, type: 3}
-      propertyPath: m_Layer
-      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
