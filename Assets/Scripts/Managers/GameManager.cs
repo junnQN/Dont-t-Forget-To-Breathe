@@ -44,13 +44,14 @@ public class GameManager : MonoBehaviour
 
     public Cold cold;
 
+    public BaseItem box;
+
     #region Prefabs
     [SerializeField] private GameObject smokePrefab;
     [SerializeField] private GameObject waterPrefab;
     #endregion
 
     [SerializeField] private GameObject UI_Game;
-    [SerializeField] private GameObject block;
 
     public bool isDisableBreath = false;
 
@@ -112,9 +113,10 @@ public class GameManager : MonoBehaviour
         flushButton.gameObject.SetActive(false);
         cold.gameObject.SetActive(false);
 
-        thermometer.gameObject.SetActive(true);
+        // thermometer.gameObject.SetActive(true);
         thermometer.Init();
         fallGlass.Init();
+        box.Init();
 
         switch (currentLevel)
         {
@@ -167,7 +169,7 @@ public class GameManager : MonoBehaviour
         Hand.instance.canPlay = true;
         Hand.instance.moveDown = true;
         tube.gameObject.SetActive(true);
-        block.SetActive(false);
+        box.gameObject.SetActive(false);
         water.gameObject.SetActive(true);
         water.Init();
         flushButton.gameObject.SetActive(true);
@@ -177,7 +179,7 @@ public class GameManager : MonoBehaviour
 
     public void PrepareLevel4()
     {
-        block.SetActive(false);
+        box.gameObject.SetActive(false);
         player.ReturnStartPos();
         player.gameObject.SetActive(false);
         UI_Game.SetActive(false);
