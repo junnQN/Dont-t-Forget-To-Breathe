@@ -45,13 +45,14 @@ public class GameManager : MonoBehaviour
 
     public Cold cold;
 
+    public BaseItem box;
+
     #region Prefabs
     [SerializeField] private GameObject smokePrefab;
     [SerializeField] private GameObject waterPrefab;
     #endregion
 
     [SerializeField] private GameObject UI_Game;
-    [SerializeField] private GameObject block;
 
     public bool isDisableBreath = false;
 
@@ -113,9 +114,12 @@ public class GameManager : MonoBehaviour
         flushButton.gameObject.SetActive(false);
         cold.gameObject.SetActive(false);
 
-        thermometer.gameObject.SetActive(true);
+        // thermometer.gameObject.SetActive(true);
         thermometer.Init();
         fallGlass.Init();
+        box.Init();
+
+        fallGlass.IgnoreCollision(true);
 
         switch (currentLevel)
         {
@@ -143,7 +147,6 @@ public class GameManager : MonoBehaviour
 
     public void PrepareLevel2()
     {
-        player.isCold = true;
         player.ReturnStartPos();
         player.gameObject.SetActive(false);
         UI_Game.SetActive(false);
@@ -168,7 +171,7 @@ public class GameManager : MonoBehaviour
         Hand.instance.canPlay = true;
         Hand.instance.moveDown = true;
         tube.gameObject.SetActive(true);
-        block.SetActive(false);
+        box.gameObject.SetActive(false);
         water.gameObject.SetActive(true);
         water.Init();
         flushButton.gameObject.SetActive(true);
@@ -178,7 +181,7 @@ public class GameManager : MonoBehaviour
 
     public void PrepareLevel4()
     {
-        block.SetActive(false);
+        box.gameObject.SetActive(false);
         player.ReturnStartPos();
         player.gameObject.SetActive(false);
         UI_Game.SetActive(false);
@@ -234,14 +237,13 @@ public class GameManager : MonoBehaviour
         if (player.currentHealth == player.tmpHealth - 1)
         {
             player.tmpHealth -= 1;
-            player.stateMachine.ChangeState(player.noneState);
-            HandleGameLose();
+            player.stateMachine.ChangeState(player.dieState);
+            // HandleGameLose();
         }
     }
     public void HandleGameLose()
     {
         isPlaying = false;
-        player.stateMachine.ChangeState(player.dieState);
         var resultScreen = screenDict[ScreenKeys.RESULT_SCREEN] as ResultScreen;
         if (player.currentHealth == 0f)
         {

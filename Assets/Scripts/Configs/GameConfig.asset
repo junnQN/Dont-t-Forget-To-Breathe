@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inhaleRate: 10
   exhaleRate: 10
-  autoRate: 1
+  autoRate: 10
   amountCo_2Cough: 10
   timeToBreakCoughState: 1
   amountAirBySmoke: 10
@@ -22,7 +22,7 @@ MonoBehaviour:
   maxTimeInhale: 3
   maxTimeExhale: 3
   timeOfLevels:
-  - 1
+  - 100
   - 1
   - 100
   - 100

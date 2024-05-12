@@ -36,9 +36,9 @@ public class Player : MonoBehaviour
     public bool isSwimming = false;
     public float swimDrag = 2f;
     public float sinkSpeed = 2f; // Lực cản nước
-                                //=======   
-                                //[SerializeField] public float oxygen = 100f;
-                                //[SerializeField] public float carbonDioxide;
+                                 //=======   
+                                 //[SerializeField] public float oxygen = 100f;
+                                 //[SerializeField] public float carbonDioxide;
 
     //<<<<<<< HEAD
     //>>>>>>> origin/quan
@@ -196,11 +196,12 @@ public class Player : MonoBehaviour
         currentHealth = maxHealth;
         tmpHealth = maxHealth;
         currentHealth = tmpHealth;
+        isCold = false;
         stateMachine.ChangeState(noneState);
     }
     private void Update()
     {
-        
+
         if (shouldMove)
         {
             stateMachine.ChangeState(firstState);
