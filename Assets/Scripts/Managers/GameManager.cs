@@ -144,7 +144,6 @@ public class GameManager : MonoBehaviour
 
     public void PrepareLevel2()
     {
-        player.isCold = true;
         player.ReturnStartPos();
         player.gameObject.SetActive(false);
         UI_Game.SetActive(false);
