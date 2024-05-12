@@ -10,6 +10,7 @@ public class Hand : MonoBehaviour
     [SerializeField] private float speed = 5f;
     [SerializeField] private float startY = 8f;
     [SerializeField] private float stopY = -2.17f;
+    [SerializeField] private float stopWaterY=0.5f;
     [SerializeField] private Sprite handnocat;
     [SerializeField] private Sprite handwithcat;
     [SerializeField] private GameObject player;
@@ -41,8 +42,11 @@ public class Hand : MonoBehaviour
             // Di chuyển vật thể từ trên xuống dưới
             transform.Translate(Vector3.down * speed * Time.deltaTime);
 
-            // Kiểm tra nếu đến vị trí dừng
-            if (transform.position.y <= stopY)
+            if (GameManager.instance.currentLevel == 3&&transform.position.y <= stopWaterY)
+            {
+                moveDown = false;
+            }
+            else if(GameManager.instance.currentLevel != 3&&transform.position.y <= stopY)
             {
                 moveDown = false;
             }

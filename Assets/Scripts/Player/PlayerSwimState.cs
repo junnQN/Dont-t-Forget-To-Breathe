@@ -22,6 +22,29 @@ public class PlayerSwimState : PlayerState
     public override void Update()
     {
         base.Update();
+
+        if (!player.isDisableInput && Input.GetKey(KeyCode.I)&&player.transform.position.y<=0.09f)
+        {
+            player.oxygen -= 100;
+        }
+        else if (!player.isDisableInput && Input.GetKey(KeyCode.I)&&player.transform.position.y>0.09f)
+        {
+            player.DecreaseTime(player.inhaleTime);
+            player.IncreaseOxygenByInhale();
+            player.IncreaseCarbonDioxideOverTime();
+        }
+
+        else if (!player.isDisableInput && Input.GetKey(KeyCode.O))
+        {
+            player.DecreaseExhaleTime();
+            player.DecreaseCarbonDioxideByExhale();
+            player.DecreaseOxygenOverTime();
+        }
+        else
+        {
+            player.DecreaseOxygenOverTime();
+            player.IncreaseCarbonDioxideOverTime();
+        }
         
         player.SetVelocity(xInput * player.moveSpeed, rb.velocity.y);
         if (Input.GetKey(KeyCode.Space)&&player.transform.position.y<2.54f)

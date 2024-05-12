@@ -51,14 +51,14 @@ TagManager:
   - name: Background
     uniqueID: 1681855853
     locked: 0
+  - name: Player
+    uniqueID: 3111329489
+    locked: 0
   - name: Bowl
     uniqueID: 3611812161
     locked: 0
   - name: Item
     uniqueID: 1930022047
-    locked: 0
-  - name: Player
-    uniqueID: 3111329489
     locked: 0
   - name: UI
     uniqueID: 521387049

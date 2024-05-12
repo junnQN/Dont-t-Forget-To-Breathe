@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     public float time;
 
     public int currentLevel = 1;
+    public bool isWater=true;
 
     #region Debug
     [SerializeField]
@@ -161,7 +162,7 @@ public class GameManager : MonoBehaviour
 
     public void PrepareLevel3()
     {
-        player.ReturnStartPos();
+        player.ReturnSwimPos();
         player.gameObject.SetActive(false);
         UI_Game.SetActive(false);
         Hand.instance.canPlay = true;
@@ -280,8 +281,10 @@ public class GameManager : MonoBehaviour
 
     public void SprintWater()
     {
+        isWater = false;
         water.SprintWater();
         flushButton.ChangeButtonState(true);
+        player.ChangeStateFisrtLv();
     }
 
 

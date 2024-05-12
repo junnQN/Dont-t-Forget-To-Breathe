@@ -135,7 +135,7 @@ public class Player : MonoBehaviour
         eatState = new PlayerEatState(this, stateMachine, "Eat");
 
         firstState = new PlayerFirstMoveState(this, stateMachine, "Move");
-        swimState = new PlayerSwimState(this, stateMachine, "Move");
+        swimState = new PlayerSwimState(this, stateMachine, "Jump");
         //=======
 
         //=======
@@ -230,6 +230,7 @@ public class Player : MonoBehaviour
         if (isTouchFlushButton && !isDisableInput && Input.GetKeyDown(KeyCode.E))
         {
             GameManager.instance.SprintWater();
+            
         }
     }
 
@@ -417,6 +418,9 @@ public class Player : MonoBehaviour
                 break;
             case "FlushButton":
                 isTouchFlushButton = true;
+                break;                                  
+            case "WaterGlass":
+                isPlayerTouching = true;
                 break;
             default:
                 Debug.Log(other.tag);
@@ -463,6 +467,16 @@ public class Player : MonoBehaviour
             Flip();
         }
         transform.position = new Vector3(0.23f, -2.156f, transform.position.z);
+        shouldMove = true;
+    }
+    
+    public void ReturnSwimPos()
+    {
+        if (facingRight)
+        {
+            Flip();
+        }
+        transform.position = new Vector3(0.23f, 2.4f, transform.position.z);
         shouldMove = true;
     }
 
@@ -519,6 +533,7 @@ public class Player : MonoBehaviour
     {
         stateMachine.ChangeState(idleState);
     }
+    
 
     public void ReturnDefaultPos()
     {

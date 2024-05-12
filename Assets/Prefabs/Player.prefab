@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6136566747269956961}
   - component: {fileID: 1931666104721946484}
   - component: {fileID: 7069904747609846471}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Animator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1183637807
-  m_SortingLayer: 4
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 87853536, guid: bf07491bda0269d439b753fe0bec225c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -115,7 +115,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 549751179583448625}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -131,7 +131,7 @@ Transform:
   m_GameObject: {fileID: 1891646454480750790}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.186, y: -1.768, z: 0}
+  m_LocalPosition: {x: 0.186, y: -1.666, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -149,7 +149,7 @@ GameObject:
   - component: {fileID: 2723005714655603641}
   - component: {fileID: 7606255906183817831}
   - component: {fileID: 1947860560611256871}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -188,7 +188,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 1931666104721946484}
   moveSpeed: 8
-  jumpForce: 12
+  jumpForce: 18
   groundCheck: {fileID: 549751179583448625}
   groundCheckDistance: 0.22
   wallCheck: {fileID: 8841291103651086307}
@@ -201,12 +201,13 @@ MonoBehaviour:
   carbonDioxide: 0
   carbonDioxideRate: 10
   water: {fileID: 0}
-  swimForce: 5
+  swimForce: 0.2
   swimHorizontalForce: 3
   gravity: 1
   maxVelocity: 5
   isSwimming: 0
   swimDrag: 2
+  sinkSpeed: 0.1
   facingRight: 0
   isPlayerTouching: 0
   inAir: 0
@@ -294,7 +295,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8841291103651086307}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: WallCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -47,10 +47,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   startY: 8
-  stopY: -2.17
+  stopY: 0
+  stopWaterY: 1
   handnocat: {fileID: 21300000, guid: 216b2f41ad1c3024fba092d1db1be404, type: 3}
+  handwithcat: {fileID: 21300000, guid: 76706d044b7411141a461533eb6e5621, type: 3}
   player: {fileID: 0}
   canPlay: 0
+  moveDown: 1
 --- !u!212 &120848480964860511
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -90,7 +93,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1183637807
-  m_SortingLayer: 4
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 76706d044b7411141a461533eb6e5621, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

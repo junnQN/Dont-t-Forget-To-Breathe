@@ -30,7 +30,7 @@ public class ResultScreen : BaseScreen
             Close();
         }
 
-        if (GameManager.instance.currentLevel >= 2)
+        if (GameManager.instance.currentLevel == 2 || GameManager.instance.currentLevel > 3)
         {
             if (Player.instance.currentHealth < 9)
             {
@@ -45,6 +45,23 @@ public class ResultScreen : BaseScreen
                 Close();
             }
         }
+        
+        if (GameManager.instance.currentLevel == 3)
+        {
+            if (Player.instance.currentHealth < 9)
+            {
+                Player.instance.ReturnSwimPos();
+                Player.instance.ChangeSwimState();
+                GameManager.instance.RestartGame();
+                Close();
+            }
+            else
+            {
+                GameManager.instance.NextLevel();
+                Close();
+            }
+        }
+        
     }
 
     public void HandleNextButton()

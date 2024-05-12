@@ -30,8 +30,17 @@ public class PlayerFirstMoveState : PlayerState
             // Di chuyển vật thể sang trái
             player.transform.Translate(Vector3.left * 2f * Time.deltaTime);
 
+            if (GameManager.instance.currentLevel == 3)
+            {
+                player.shouldMove = false;
+                //player.Flip();
+                player.ActiveUI();
+                stateMachine.ChangeState(player.swimState);
+                GameManager.instance.isPlaying = true;
+            }
+            
             // Kiểm tra nếu đến vị trí dừng
-            if (player.transform.position.x <= -7f)
+            else if (player.transform.position.x <= -7f)
             {
 
                 player.shouldMove = false;
@@ -47,11 +56,7 @@ public class PlayerFirstMoveState : PlayerState
                     stateMachine.ChangeState(player.idleState);
                     GameManager.instance.isPlaying = true;
                 }
-                if (GameManager.instance.currentLevel == 3)
-                {
-                    stateMachine.ChangeState(player.swimState);
-                    GameManager.instance.isPlaying = true;
-                }
+                
             }
         }
     }
