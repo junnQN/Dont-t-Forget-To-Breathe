@@ -6,11 +6,11 @@ using UnityEngine;
 public class Hand : MonoBehaviour
 {
     public static Hand instance;
-    
+
     [SerializeField] private float speed = 5f;
     [SerializeField] private float startY = 8f;
     [SerializeField] private float stopY = -2.17f;
-    [SerializeField] private float stopWaterY=0.5f;
+    [SerializeField] private float stopWaterY = 0.5f;
     [SerializeField] private Sprite handnocat;
     [SerializeField] private Sprite handwithcat;
     [SerializeField] private GameObject player;
@@ -22,36 +22,37 @@ public class Hand : MonoBehaviour
 
     private void Awake()
     {
-        if(instance!=null)
+        if (instance != null)
             Destroy(instance.gameObject);
-        else 
+        else
             instance = this;
-        
+
     }
-    
+
     private void Start()
     {
-        hand=GetComponent<SpriteRenderer>();
+        hand = GetComponent<SpriteRenderer>();
         startY = transform.position.y;
     }
 
     private void Update()
     {
-        if (moveDown&&canPlay==true)
+        if (moveDown && canPlay == true)
         {
+            GameManager.instance.fallGlass.IgnoreCollision();
             // Di chuyển vật thể từ trên xuống dưới
             transform.Translate(Vector3.down * speed * Time.deltaTime);
 
-            if (GameManager.instance.currentLevel == 3&&transform.position.y <= stopWaterY)
+            if (GameManager.instance.currentLevel == 3 && transform.position.y <= stopWaterY)
             {
                 moveDown = false;
             }
-            else if(GameManager.instance.currentLevel != 3&&transform.position.y <= stopY)
+            else if (GameManager.instance.currentLevel != 3 && transform.position.y <= stopY)
             {
                 moveDown = false;
             }
         }
-        else if(!moveDown)
+        else if (!moveDown)
         {
             player.SetActive(true);
             hand.sprite = handnocat;
