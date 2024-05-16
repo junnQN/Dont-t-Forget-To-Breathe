@@ -63,7 +63,6 @@ public class Player : MonoBehaviour
 
     [Header("Cold level")]
     public bool isCold = false;
-    //>>>>>>> origin/quan
 
     public bool isTouchFlushButton = false;
 
@@ -331,7 +330,6 @@ public class Player : MonoBehaviour
     {
         var gameConfig = GameManager.instance.gameConfig;
         ChangeCarbonDioxide(-gameConfig.amountCo_2Cough * Time.deltaTime);
-        //>>>>>>> origin/quan
     }
 
     public bool IsGroundDetected() =>
