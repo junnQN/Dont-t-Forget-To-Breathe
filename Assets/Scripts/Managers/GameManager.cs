@@ -199,14 +199,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (water.gameObject == true)
-        {
-            isWater = true;
-        }
-        else
-        {
-            isWater = false;
-        }
+        
         
         if (!isPlaying) return;
 
