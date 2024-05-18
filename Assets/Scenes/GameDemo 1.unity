@@ -1701,7 +1701,7 @@ PrefabInstance:
       objectReference: {fileID: 46820932}
     - target: {fileID: 6960504478687575841, guid: c44f5da725ed0b645a993175f031600d, type: 3}
       propertyPath: isWater
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6960504478687575841, guid: c44f5da725ed0b645a993175f031600d, type: 3}
       propertyPath: fallGlass
