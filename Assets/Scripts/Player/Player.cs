@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
 
     public SpriteRenderer spriteRenderer;
     public static Player instance;
-    //<<<<<<< HEAD
+
     [Header("Move info")]
     public float moveSpeed = 12f;
     public float jumpForce;
@@ -36,22 +36,7 @@ public class Player : MonoBehaviour
     public bool isSwimming = false;
     public float swimDrag = 2f;
     public float sinkSpeed = 2f; // Lực cản nước
-                                 //=======   
-                                 //[SerializeField] public float oxygen = 100f;
-                                 //[SerializeField] public float carbonDioxide;
 
-    //<<<<<<< HEAD
-    //>>>>>>> origin/quan
-
-
-    //=======
-    //[SerializeField] public float oxygen = 100f;
-    //[SerializeField] public float carbonDioxide;
-
-    //[SerializeField] public int currentHealth = 9;
-    //[SerializeField] public int maxHealth = 9;
-
-    //>>>>>>> origin/quan
     public int facingDir { get; private set; } = 1;
     [SerializeField] private bool facingRight = false;
     public bool isPlayerTouching = false;
@@ -78,7 +63,6 @@ public class Player : MonoBehaviour
 
     [Header("Cold level")]
     public bool isCold = false;
-    //>>>>>>> origin/quan
 
     public bool isTouchFlushButton = false;
 
@@ -100,9 +84,6 @@ public class Player : MonoBehaviour
 
     public PlayerFirstMoveState firstState { get; private set; }
     public PlayerSwimState swimState { get; private set; }
-    //<<<<<<< HEAD
-
-    //=======
 
     public PlayerCoughState coughState { get; private set; }
     public PlayerNoneState noneState { get; private set; }
@@ -126,8 +107,7 @@ public class Player : MonoBehaviour
         stateMachine = new PlayerStateMachine();
         idleState = new PlayerIdleState(this, stateMachine, "Idle");
         moveState = new PlayerMoveState(this, stateMachine, "Move");
-        //holdBreatheState = new PlayerHoldBreatheState(this, stateMachine, "HoldBreathe");
-        //<<<<<<< HEAD
+
         inhaleState = new PlayerInhaleState(this, stateMachine, "Inhale");
         //exhaleState = new PlayerExhaleState(this,stateMachine,"Exhale");
         jumpState = new PlayerJumpState(this, stateMachine, "Jump");
@@ -136,16 +116,12 @@ public class Player : MonoBehaviour
 
         firstState = new PlayerFirstMoveState(this, stateMachine, "Move");
         swimState = new PlayerSwimState(this, stateMachine, "Jump");
-        //=======
-
-        //=======
 
         inhaleState = new PlayerInhaleState(this, stateMachine, "Inhale");
         exhaleState = new PlayerExhaleState(this, stateMachine, "Exhale");
         coughState = new PlayerCoughState(this, stateMachine, "Cough");
         noneState = new PlayerNoneState(this, stateMachine, "None");
         dieState = new PlayerDieState(this, stateMachine, "Die");
-        //>>>>>>> origin/quan
     }
 
 
@@ -153,7 +129,6 @@ public class Player : MonoBehaviour
     {
         currentTime = Time.time;
         anim = GetComponentInChildren<Animator>();
-        //<<<<<<< HEAD
         rb = GetComponent<Rigidbody2D>();
         //stateMachine.Initialize(holdBreatheState);
 
@@ -172,25 +147,6 @@ public class Player : MonoBehaviour
 
     public void Init()
     {
-        isDisableInput = false;
-        isAffectedBySmoke = false;
-        oxygen = 100f;
-        carbonDioxide = 0f;
-
-        //<<<<<<< HEAD
-        stateMachine.ChangeState(idleState);
-        //>>>>>>> origin/quan
-        //=======
-        currentHealth = tmpHealth;
-        //stateMachine.ChangeState(holdBreatheState);
-        //>>>>>>> origin/quan
-
-        //currentHealth = 9;
-        //stateMachine.ChangeState(idleState);
-    }
-
-    public void Init2()
-    {
         oxygen = 100f;
         carbonDioxide = 0f;
         currentHealth = maxHealth;
@@ -199,6 +155,7 @@ public class Player : MonoBehaviour
         isCold = false;
         stateMachine.ChangeState(noneState);
     }
+
     private void Update()
     {
 
@@ -206,12 +163,8 @@ public class Player : MonoBehaviour
         {
             stateMachine.ChangeState(firstState);
         }
-        //<<<<<<< HEAD
 
-        //<<<<<<< HEAD
         stateMachine.currentState.Update();
-        //=======
-        //=======
 
         if (oxygen <= 0f || carbonDioxide >= 100f)
         {
@@ -222,16 +175,13 @@ public class Player : MonoBehaviour
             return;
         }
 
-
-        //>>>>>>> origin/quan
-
         if (stateMachine.currentState != null)
             stateMachine.currentState.Update();
 
         if (isTouchFlushButton && !isDisableInput && Input.GetKeyDown(KeyCode.E))
         {
             GameManager.instance.SprintWater();
-            
+
         }
     }
 
@@ -380,7 +330,6 @@ public class Player : MonoBehaviour
     {
         var gameConfig = GameManager.instance.gameConfig;
         ChangeCarbonDioxide(-gameConfig.amountCo_2Cough * Time.deltaTime);
-        //>>>>>>> origin/quan
     }
 
     public bool IsGroundDetected() =>
@@ -419,7 +368,7 @@ public class Player : MonoBehaviour
                 break;
             case "FlushButton":
                 isTouchFlushButton = true;
-                break;                                  
+                break;
             case "WaterGlass":
                 isPlayerTouching = true;
                 break;
@@ -470,7 +419,7 @@ public class Player : MonoBehaviour
         transform.position = new Vector3(0.23f, -2.156f, transform.position.z);
         shouldMove = true;
     }
-    
+
     public void ReturnSwimPos()
     {
         if (facingRight)
@@ -534,7 +483,7 @@ public class Player : MonoBehaviour
     {
         stateMachine.ChangeState(idleState);
     }
-    
+
 
     public void ReturnDefaultPos()
     {

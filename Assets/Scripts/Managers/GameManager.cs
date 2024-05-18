@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     public float time;
 
     public int currentLevel = 1;
-    public bool isWater=true;
+    public bool isWater = true;
 
     #region Debug
     [SerializeField]
@@ -94,7 +94,6 @@ public class GameManager : MonoBehaviour
 
     public void NextLevel()
     {
-        player.Init2();
         time = 0;
         isPlaying = false;
 
