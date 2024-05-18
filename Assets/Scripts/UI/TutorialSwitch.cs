@@ -35,7 +35,7 @@ public class TutorialSwitch : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && isTutorial == true)
         {
-            if(currentIndex<3)
+            if(currentIndex<4 )
             {
                 currentIndex = (currentIndex + 1) % images.Length;
                 UpdateImage();
