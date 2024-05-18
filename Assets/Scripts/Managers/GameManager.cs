@@ -180,6 +180,7 @@ public class GameManager : MonoBehaviour
 
     public void PrepareLevel4()
     {
+        ResetPos.instance.ResetPosition();
         box.gameObject.SetActive(false);
         player.ReturnStartPos();
         player.gameObject.SetActive(false);
@@ -198,6 +199,15 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        if (water.gameObject == true)
+        {
+            isWater = true;
+        }
+        else
+        {
+            isWater = false;
+        }
+        
         if (!isPlaying) return;
 
         time += Time.deltaTime;
