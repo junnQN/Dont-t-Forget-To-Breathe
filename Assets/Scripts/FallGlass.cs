@@ -13,6 +13,8 @@ public class FallGlass : MonoBehaviour
 
     private Vector2 defaultPos;
 
+    private bool isReady = false;
+
     private void Start()
     {
         anim = GetComponent<Animator>();
@@ -25,34 +27,29 @@ public class FallGlass : MonoBehaviour
         water.SetActive(false);
         anim.SetBool("FallGlass", false);
         transform.position = defaultPos;
+        isReady = false;
+
     }
 
     public void IgnoreCollision(bool isIgnore = true)
     {
         if (isIgnore)
         {
+            isReady = false;
             GetComponent<BoxCollider2D>().isTrigger = true;
             GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
         }
         else
         {
+            isReady = true;
             GetComponent<BoxCollider2D>().isTrigger = false;
             GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            anim.SetBool("FallGlass", true);
-        }
-    }
-
-
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (anim.GetBool("FallGlass") == true)
+        if (!isReady || anim.GetBool("FallGlass") == true)
         {
             return;
         }
