@@ -212,7 +212,6 @@ public class Player : MonoBehaviour
     {
         var gameConfig = GameManager.instance.gameConfig;
         ChangeOxygen(gameConfig.inhaleRate * Time.deltaTime);
-        ChangeCarbonDioxide(gameConfig.inhaleRate * Time.deltaTime);
     }
 
     public void IncreaseOxygenByCold()
@@ -299,7 +298,6 @@ public class Player : MonoBehaviour
     {
         var gameConfig = GameManager.instance.gameConfig;
         ChangeCarbonDioxide(-gameConfig.exhaleRate * Time.deltaTime);
-        ChangeOxygen(-gameConfig.exhaleRate * Time.deltaTime);
     }
 
     public void IncreaseCarbonDioxideOverTime()
