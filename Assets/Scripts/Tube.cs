@@ -19,7 +19,15 @@ public class Tube : MonoBehaviour
 
     public void Init(Action onComplete)
     {
-        AudioManager.instance.PlaySFX(11);
+        if (GameManager.instance.currentLevel == 2)
+        {
+            AudioManager.instance.PlaySFX(11);
+        }
+        else
+        {
+            AudioManager.instance.StopSFX(11);
+        }
+
         moveTween?.Kill();
         transform.localPosition = new Vector3(startX, transform.localPosition.y, transform.localPosition.z);
         moveTween = transform.DOLocalMoveX(endX, speed).OnComplete(() => onComplete());
