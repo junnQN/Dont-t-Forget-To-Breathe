@@ -81,8 +81,7 @@ public class ResultScreen : BaseScreen
 
     public void BackToMainMenu()
     {
-        this.title.text = "
-         Lose!";
+        this.title.text = "You Lose!";
         backToMenuBtn.SetActive(true);
         replayButton.SetActive(false);
         nextLevelButton.SetActive(false);
