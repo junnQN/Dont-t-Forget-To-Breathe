@@ -90,6 +90,11 @@ public class GameManager : MonoBehaviour
         player.Init(!isRestart);
         time = 0;
         isPlaying = true;
+
+        if (currentLevel == 3)
+        {
+            player.ChangeSwimState();
+        }
     }
 
     public void StartDropCat()
