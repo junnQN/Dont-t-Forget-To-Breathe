@@ -26,13 +26,13 @@ public class PlayerEatState : PlayerState
 
         if (!player.isDisableInput && Input.GetKey(KeyCode.I))
         {
-            player.IncreaseOxygenByInhale();
+            player.IncreaseAirByInhale();
             player.IncreaseCarbonDioxideOverTime();
         }
 
         else if (!player.isDisableInput && Input.GetKey(KeyCode.O))
         {
-            player.DecreaseCarbonDioxideByExhale();
+            player.DecreaseAirByExhale();
             player.DecreaseOxygenOverTime();
         }
         else

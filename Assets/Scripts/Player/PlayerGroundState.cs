@@ -37,7 +37,7 @@ public class PlayerGroundState : PlayerState
             else
             {
                 player.DecreaseTime(player.inhaleTime);
-                player.IncreaseOxygenByInhale();
+                player.IncreaseAirByInhale();
                 player.IncreaseCarbonDioxideOverTime();
             }
         }
@@ -52,7 +52,7 @@ public class PlayerGroundState : PlayerState
             else
             {
                 player.DecreaseExhaleTime();
-                player.DecreaseCarbonDioxideByExhale();
+                player.DecreaseAirByExhale();
                 player.DecreaseOxygenOverTime();
             }
 
@@ -66,9 +66,9 @@ public class PlayerGroundState : PlayerState
         if (!player.isDisableInput && Input.GetKeyDown(KeyCode.Space) && player.IsGroundDetected())
             stateMachine.ChangeState(player.jumpState);
 
-        if (!player.isDisableInput && Input.GetKeyDown(KeyCode.E) && player.isPlayerTouching&&GameManager.instance.currentLevel!=3)
+        if (!player.isDisableInput && Input.GetKeyDown(KeyCode.E) && player.isPlayerTouching && GameManager.instance.currentLevel != 3)
             stateMachine.ChangeState(player.eatState);
-        
+
     }
 
     bool HandleInhaleSmoke()

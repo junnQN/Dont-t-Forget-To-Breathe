@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerSwimState : PlayerState
 {
-    
+
     public PlayerSwimState(Player _player, PlayerStateMachine _stateMachine, string _animBoolName) : base(_player, _stateMachine, _animBoolName)
     {
     }
@@ -12,7 +12,7 @@ public class PlayerSwimState : PlayerState
     public override void Enter()
     {
         base.Enter();
-        
+
     }
 
     public override void Exit()
@@ -24,21 +24,21 @@ public class PlayerSwimState : PlayerState
     {
         base.Update();
 
-        if (!player.isDisableInput && Input.GetKey(KeyCode.I)&&player.transform.position.y<=0.09f)
+        if (!player.isDisableInput && Input.GetKey(KeyCode.I) && player.transform.position.y <= 0.09f)
         {
             player.oxygen -= 100;
         }
-        else if (!player.isDisableInput && Input.GetKey(KeyCode.I)&&player.transform.position.y>0.09f)
+        else if (!player.isDisableInput && Input.GetKey(KeyCode.I) && player.transform.position.y > 0.09f)
         {
             player.DecreaseTime(player.inhaleTime);
-            player.IncreaseOxygenByInhale();
+            player.IncreaseAirByInhale();
             player.IncreaseCarbonDioxideOverTime();
         }
 
         else if (!player.isDisableInput && Input.GetKey(KeyCode.O))
         {
             player.DecreaseExhaleTime();
-            player.DecreaseCarbonDioxideByExhale();
+            player.DecreaseAirByExhale();
             player.DecreaseOxygenOverTime();
         }
         else
@@ -46,15 +46,15 @@ public class PlayerSwimState : PlayerState
             player.DecreaseOxygenOverTime();
             player.IncreaseCarbonDioxideOverTime();
         }
-        
+
         player.SetVelocity(xInput * player.moveSpeed, rb.velocity.y);
-        if (Input.GetKey(KeyCode.Space)&&player.transform.position.y<2.54f)
+        if (Input.GetKey(KeyCode.Space) && player.transform.position.y < 2.54f)
         {
             Swim();
         }
         Sink();
     }
-    
+
     private void Swim()
     {
         // Áp dụng lực đẩy lên nhân vật khi bơi

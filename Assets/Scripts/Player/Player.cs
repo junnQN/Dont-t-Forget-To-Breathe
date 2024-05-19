@@ -183,7 +183,7 @@ public class Player : MonoBehaviour
     {
         if (currentHealth <= 0)
         {
-            
+
             GameManager.instance.HandleGameLose();
         }
     }
@@ -208,19 +208,17 @@ public class Player : MonoBehaviour
         ChangeOxygen(-gameConfig.autoRate * Time.deltaTime);
     }
 
-    public void IncreaseOxygenByInhale()
+    public void IncreaseAirByInhale()
     {
-
         var gameConfig = GameManager.instance.gameConfig;
         ChangeOxygen(gameConfig.inhaleRate * Time.deltaTime);
+        ChangeCarbonDioxide(gameConfig.inhaleRate * Time.deltaTime);
     }
 
     public void IncreaseOxygenByCold()
     {
         var gameConfig = GameManager.instance.gameConfig;
         ChangeOxygen(gameConfig.inhaleRate * 0.5f * Time.deltaTime);
-
-
     }
 
     public void SetVelocity(float _xVelocity, float _yVelocity)
@@ -294,10 +292,11 @@ public class Player : MonoBehaviour
         ChangeCarbonDioxide(gameConfig.amountAirBySmoke * Time.deltaTime);
     }
 
-    public void DecreaseCarbonDioxideByExhale()
+    public void DecreaseAirByExhale()
     {
         var gameConfig = GameManager.instance.gameConfig;
         ChangeCarbonDioxide(-gameConfig.exhaleRate * Time.deltaTime);
+        ChangeOxygen(-gameConfig.exhaleRate * Time.deltaTime);
     }
 
     public void IncreaseCarbonDioxideOverTime()

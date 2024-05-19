@@ -34,7 +34,7 @@ public class PlayerExhaleState : PlayerGroundState
     {
         base.Update();
 
-        player.DecreaseCarbonDioxideByExhale();
+        player.DecreaseAirByExhale();
         player.DecreaseOxygenOverTime();
         if (!player.isDisableInput && Input.GetKeyUp(KeyCode.O))
             player.stateMachine.ChangeState(player.idleState);

@@ -43,7 +43,7 @@ public class PlayerInhaleState : PlayerGroundState
         }
         else
         {
-            player.IncreaseOxygenByInhale();
+            player.IncreaseAirByInhale();
             player.IncreaseCarbonDioxideOverTime();
         }
 
