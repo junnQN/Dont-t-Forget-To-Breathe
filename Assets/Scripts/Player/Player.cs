@@ -177,6 +177,15 @@ public class Player : MonoBehaviour
             AudioManager.instance.PlaySFX(16);
             GameManager.instance.SprintWater();
         }
+
+        if (Input.GetKeyUp(KeyCode.O))
+        {
+            AudioManager.instance.StopSFX(19);
+        }
+        if (Input.GetKeyUp(KeyCode.I))
+        {
+            AudioManager.instance.StopSFX(18);
+        }
     }
 
     public void CheckGameOver()
@@ -211,6 +220,7 @@ public class Player : MonoBehaviour
     public void IncreaseAirByInhale()
     {
         AudioManager.instance.PlaySFX(18);
+        AudioManager.instance.StopSFX(19);
         var gameConfig = GameManager.instance.gameConfig;
         ChangeOxygen(gameConfig.inhaleRate * Time.deltaTime);
     }
@@ -298,6 +308,7 @@ public class Player : MonoBehaviour
     public void DecreaseAirByExhale()
     {
         AudioManager.instance.PlaySFX(19);
+        AudioManager.instance.StopSFX(18);
         var gameConfig = GameManager.instance.gameConfig;
         ChangeCarbonDioxide(-gameConfig.exhaleRate * Time.deltaTime);
     }
