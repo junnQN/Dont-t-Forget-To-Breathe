@@ -59,12 +59,12 @@ public class FallGlass : MonoBehaviour
 
         if (other.gameObject.tag == "Player")
         {
-            AudioManager.instance.PlaySFX(17);
             Debug.Log("FallGlass" + Player.instance.IsGroundDetected());
             if (!Player.instance.IsGroundDetected())
             {
                 isFallGlass = true;
 
+                AudioManager.instance.PlaySFX(17);
 
                 if (other.transform.rotation.y < 0)
                 {
@@ -74,7 +74,7 @@ public class FallGlass : MonoBehaviour
                 {
                     transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, 0, transform.rotation.eulerAngles.z);
                 }
-                info.transform.rotation = Quaternion.Euler(info.transform.rotation.eulerAngles.x, 0, info.transform.rotation.eulerAngles.z);
+
                 IgnoreCollision(true);
                 anim.SetBool("FallGlass", true);
             }
