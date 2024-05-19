@@ -85,6 +85,10 @@ public class GameManager : MonoBehaviour
 
     public void StartGame(bool isRestart = false)
     {
+        if (isRestart)
+        {
+            PrepareLevel();
+        }
         UI_Game.SetActive(true);
         player.gameObject.SetActive(true);
         player.Init(!isRestart);
@@ -122,8 +126,7 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame()
     {
-        time = 0;
-        isPlaying = true;
+        StartGame(true);
     }
 
     public void PrepareLevel()
@@ -138,6 +141,7 @@ public class GameManager : MonoBehaviour
 
         fallGlass.IgnoreCollision(false);
         fallGlass.gameObject.SetActive(true);
+        AudioManager.instance.StopSFX(11);
 
         switch (currentLevel)
         {
