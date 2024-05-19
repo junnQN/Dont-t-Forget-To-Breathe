@@ -250,6 +250,7 @@ public class Player : MonoBehaviour
     {
         if (isAffectedBySmoke) return;
         anim.SetBool("Cough", true);
+        AudioManager.instance.PlaySFX(3);
 
 
         isAffectedBySmoke = true;
@@ -269,6 +270,8 @@ public class Player : MonoBehaviour
         {
             isDisableInput = false;
             anim.SetBool("Cough", false);
+            AudioManager.instance.StopSFX(3);
+
 
             DOVirtual.DelayedCall(gameConfig.smokeImmunityTime, () =>
             {
