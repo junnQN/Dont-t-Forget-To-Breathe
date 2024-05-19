@@ -15,6 +15,7 @@ public class Tutorial : BaseScreen
 
     private void Awake()
     {
+        Debug.Log("Tutorial Awake");
         listTutorials = new Sprite[5][];
         listTutorials[0] = level1;
         listTutorials[1] = level2;

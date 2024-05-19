@@ -35,6 +35,7 @@ public class Smoke : MonoBehaviour
     {
         var emission = smokeParticle.emission;
         emission.rateOverTime = rateOverTime;
+        ShowSmoke();
 
         if (isSwinging)
         {
@@ -124,6 +125,7 @@ public class Smoke : MonoBehaviour
         {
             if (collider != null && collider.CompareTag("WaterGlass") && collider != boxCollider)
             {
+                Debug.Log("<color=red>Smoke is in water</color>");
                 GameManager.instance.HideSmoke();
             }
         }

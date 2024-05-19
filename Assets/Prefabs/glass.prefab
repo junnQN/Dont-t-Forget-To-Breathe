@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 4645328657885096905}
   m_Layer: 6
   m_Name: glass
-  m_TagString: WaterGlass
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -7,6 +7,7 @@ public class BaseScreen : MonoBehaviour
     public string screenName;
     public virtual void Open()
     {
+        Debug.Log("<color=green>Open screen: " + screenName + "</color>");
         gameObject.SetActive(true);
     }
 
