@@ -15,6 +15,8 @@ public class FallGlass : MonoBehaviour
 
     private bool isReady = false;
 
+    [SerializeField] private GameObject info;
+
     private void Start()
     {
         anim = GetComponent<Animator>();
@@ -68,6 +70,7 @@ public class FallGlass : MonoBehaviour
                 {
                     transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, 0, transform.rotation.eulerAngles.z);
                 }
+                info.transform.rotation = Quaternion.Euler(info.transform.rotation.eulerAngles.x, 0, info.transform.rotation.eulerAngles.z);
                 IgnoreCollision(true);
                 anim.SetBool("FallGlass", true);
             }

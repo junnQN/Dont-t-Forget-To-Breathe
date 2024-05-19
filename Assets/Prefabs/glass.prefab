@@ -155,7 +155,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1930022047
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 1416831213, guid: a5e902f971747da4ea6531e5300dc849, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -227,6 +227,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isFallGlass: 0
   water: {fileID: 1069211978250574284}
+  info: {fileID: 7398555038263418114}
 --- !u!95 &284232418976346419
 Animator:
   serializedVersion: 5
@@ -361,7 +362,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1930022047
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 6332605b3c44ebd439f3e2b4cc7f3436, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
