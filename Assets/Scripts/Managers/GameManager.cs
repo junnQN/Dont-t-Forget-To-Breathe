@@ -248,10 +248,8 @@ public class GameManager : MonoBehaviour
     {
         player.stateMachine.ChangeState(player.noneState);
         isPlaying = false;
+        screenDict[ScreenKeys.WIN_SCREEN].Open();
         currentLevel++;
-        var resultScreen = screenDict[ScreenKeys.RESULT_SCREEN] as ResultScreen;
-        resultScreen.UpdateScreen(true);
-        screenDict[ScreenKeys.RESULT_SCREEN].Open();
     }
 
     public void CheckGameLose()
