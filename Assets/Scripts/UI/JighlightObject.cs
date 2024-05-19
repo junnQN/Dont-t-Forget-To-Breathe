@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class JighlightObject : MonoBehaviour
 {
-    [SerializeField]private Sprite newSprite;
+    [SerializeField] private Sprite newSprite;
     [SerializeField] private Sprite original;
     [SerializeField] private GameObject key;
     private SpriteRenderer spriteRenderer;
@@ -17,7 +17,7 @@ public class JighlightObject : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player") && GameManager.instance.currentLevel!=3) // Kiểm tra xem có chạm vào nhân vật không
+        if (other.CompareTag("Player") && (GameManager.instance.currentLevel != 3 || gameObject.tag == "FlushButton")) // Kiểm tra xem có chạm vào nhân vật không
         {
             ChangeSprite(newSprite); // Thay đổi material thành highlight material
             key.SetActive(true);
@@ -32,7 +32,7 @@ public class JighlightObject : MonoBehaviour
             key.SetActive(false);
         }
     }
-    
+
     void ChangeSprite(Sprite _sprite)
     {
         spriteRenderer.sprite = _sprite; // Thay đổi sprite của đối tượng thành sprite mới
