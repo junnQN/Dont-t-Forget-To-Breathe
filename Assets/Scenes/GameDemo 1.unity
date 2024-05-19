@@ -210,11 +210,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac5db086ab1ef1e488c973a02f6068a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!82 &85744181 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 3062357358386648955, guid: d2b3caf691112ff4289b17426bc5a1d7, type: 3}
-  m_PrefabInstance: {fileID: 9152055308643262241}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &108527722 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7414092802871528783, guid: 86d7e94fe159f5c47815b071f40de7ab, type: 3}
@@ -796,6 +791,10 @@ PrefabInstance:
     - target: {fileID: 2478735688155781807, guid: ae60439a39bf12b44a0dbca7acf91d08, type: 3}
       propertyPath: m_Name
       value: Debugger
+      objectReference: {fileID: 0}
+    - target: {fileID: 2478735688155781807, guid: ae60439a39bf12b44a0dbca7acf91d08, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1616,6 +1615,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 519420031}
+    - target: {fileID: 3382652985518026713, guid: 0804720b226bef545bba184d6917ff2a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -527
+      objectReference: {fileID: 0}
     - target: {fileID: 3648351097827750128, guid: 0804720b226bef545bba184d6917ff2a, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1632,6 +1635,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3900760222843282971, guid: 0804720b226bef545bba184d6917ff2a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -422
+      objectReference: {fileID: 0}
     - target: {fileID: 4155887505306747867, guid: 0804720b226bef545bba184d6917ff2a, type: 3}
       propertyPath: m_Name
       value: Canvas
@@ -1639,6 +1646,10 @@ PrefabInstance:
     - target: {fileID: 4155887505306747867, guid: 0804720b226bef545bba184d6917ff2a, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5014413112603003696, guid: 0804720b226bef545bba184d6917ff2a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -461
       objectReference: {fileID: 0}
     - target: {fileID: 5383878588814836273, guid: 0804720b226bef545bba184d6917ff2a, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2335,14 +2346,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1076237852549159850, guid: d2b3caf691112ff4289b17426bc5a1d7, type: 3}
-      propertyPath: sfx.Array.size
-      value: 18
-      objectReference: {fileID: 0}
-    - target: {fileID: 1076237852549159850, guid: d2b3caf691112ff4289b17426bc5a1d7, type: 3}
-      propertyPath: sfx.Array.data[17]
-      value: 
-      objectReference: {fileID: 85744181}
     - target: {fileID: 3000097122985000882, guid: d2b3caf691112ff4289b17426bc5a1d7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.32
