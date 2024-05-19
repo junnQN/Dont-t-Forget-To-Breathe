@@ -90,13 +90,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   screenName: TUTORIAL_SCREEN
   level1:
-  - {fileID: 21300000, guid: 7e8860e4e6aed7e4586f5454555f6ec7, type: 3}
-  - {fileID: 21300000, guid: 62d36abf806e6c14c9ec73e1e6aa9acc, type: 3}
-  - {fileID: 21300000, guid: 5b55edd2529b81342b4905ca8d319a34, type: 3}
-  - {fileID: 21300000, guid: fcf1d0b8052180e4cb6c9b1ab225774d, type: 3}
+  - {fileID: 21300000, guid: 2318ab282473eca4e8596780861914ce, type: 3}
+  - {fileID: 21300000, guid: 65fd85051fcfc64468deb934324a213c, type: 3}
+  - {fileID: 21300000, guid: c9f283a777371b94c82bb68383f7c066, type: 3}
+  - {fileID: 21300000, guid: dac5220bee8dcd648ba8fcbe54e0d884, type: 3}
+  - {fileID: 21300000, guid: 086370e11eaee7c428ba953000b9ef79, type: 3}
   level2:
-  - {fileID: 21300000, guid: 7897930fa51b93c4183924e2137d0364, type: 3}
-  level3: []
-  level4: []
+  - {fileID: 21300000, guid: 6f5d9deb1e3d9c4469c7c40bc5a14ca0, type: 3}
+  level3:
+  - {fileID: 21300000, guid: f0a2511ce312d1f41b8cc41401aa8e7a, type: 3}
+  level4:
+  - {fileID: 21300000, guid: 2625e7c47ab097f4e80363cce58c3fe2, type: 3}
   level5: []
   currentIndex: 0
