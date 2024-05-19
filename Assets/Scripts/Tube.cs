@@ -19,6 +19,7 @@ public class Tube : MonoBehaviour
 
     public void Init(Action onComplete)
     {
+        AudioManager.instance.PlaySFX(11);
         moveTween?.Kill();
         transform.localPosition = new Vector3(startX, transform.localPosition.y, transform.localPosition.z);
         moveTween = transform.DOLocalMoveX(endX, speed).OnComplete(() => onComplete());
@@ -39,6 +40,7 @@ public class Tube : MonoBehaviour
         Debug.Log("OnCollisionEnter2D" + other.gameObject.tag);
         if (other.gameObject.tag == "Box")
         {
+            AudioManager.instance.StopSFX(11);
             onCollisionBox?.Invoke();
         }
     }

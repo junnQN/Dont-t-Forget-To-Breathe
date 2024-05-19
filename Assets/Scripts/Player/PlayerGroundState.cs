@@ -68,8 +68,7 @@ public class PlayerGroundState : PlayerState
 
         if (!player.isDisableInput && Input.GetKeyDown(KeyCode.E) && player.isPlayerTouching&&GameManager.instance.currentLevel!=3)
             stateMachine.ChangeState(player.eatState);
-        if (Input.GetKeyDown(KeyCode.K) )
-            stateMachine.ChangeState(player.swimState);
+        
     }
 
     bool HandleInhaleSmoke()

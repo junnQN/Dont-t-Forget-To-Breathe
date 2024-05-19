@@ -176,6 +176,7 @@ public class GameManager : MonoBehaviour
 
     public void PrepareLevel3()
     {
+        fallGlass.gameObject.SetActive(false);
         player.ReturnSwimPos();
         fallGlass.gameObject.SetActive(false);
         player.gameObject.SetActive(false);
@@ -190,6 +191,8 @@ public class GameManager : MonoBehaviour
 
     public void PrepareLevel4()
     {
+        fallGlass.gameObject.SetActive(true);
+        ResetPos.instance.ResetPosition();
         box.gameObject.SetActive(false);
         player.ReturnStartPos();
         player.gameObject.SetActive(false);
@@ -206,6 +209,8 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+
+
         if (!isPlaying) return;
 
         time += Time.deltaTime;
@@ -225,6 +230,7 @@ public class GameManager : MonoBehaviour
     {
         if (isPlaying && time >= gameConfig.timeOfLevels[currentLevel - 1])
         {
+            AudioManager.instance.PlaySFX(9);
             HandleGameWin();
         }
     }
@@ -250,6 +256,7 @@ public class GameManager : MonoBehaviour
     }
     public void HandleGameLose()
     {
+        AudioManager.instance.PlaySFX(13);
         isPlaying = false;
         var resultScreen = screenDict[ScreenKeys.RESULT_SCREEN] as ResultScreen;
         if (player.currentHealth == 0f)

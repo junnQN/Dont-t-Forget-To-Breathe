@@ -13,12 +13,22 @@ public class PlayerFirstMoveState : PlayerState
     public override void Enter()
     {
         base.Enter();
-
+        if (GameManager.instance.currentLevel != 3)
+        {
+            //AudioManager.instance.PlaySFX(1);
+            AudioManager.instance.PlaySFX(5);
+        }
     }
 
     public override void Exit()
     {
         base.Exit();
+        
+        if(GameManager.instance.currentLevel!=3)
+        {
+            //AudioManager.instance.PlaySFX(1);
+            AudioManager.instance.StopSFX(5);
+        }
     }
 
     public override void Update()

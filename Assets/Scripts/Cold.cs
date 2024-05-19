@@ -15,6 +15,7 @@ public class Cold : MonoBehaviour
     public float timeToChangeTemperature = 2;
     public void Init(Action onComplete)
     {
+        AudioManager.instance.PlaySFX(4);
         isCold = true;
         tween?.Kill();
         spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, 0f);

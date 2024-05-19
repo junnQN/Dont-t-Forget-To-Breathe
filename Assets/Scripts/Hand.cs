@@ -45,6 +45,7 @@ public class Hand : MonoBehaviour
 
             if (GameManager.instance.currentLevel == 3 && transform.position.y <= stopWaterY)
             {
+                AudioManager.instance.PlaySFX(2);
                 moveDown = false;
             }
             else if (GameManager.instance.currentLevel != 3 && transform.position.y <= stopY)

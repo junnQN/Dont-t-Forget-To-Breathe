@@ -13,6 +13,7 @@ public class PlayerCoughState : PlayerState
     {
         base.Enter();
         player.StartCoroutine(ChangeHoldBreatheStateStateAfterDelay());
+        AudioManager.instance.PlaySFX(3);
     }
 
     private IEnumerator ChangeHoldBreatheStateStateAfterDelay()
