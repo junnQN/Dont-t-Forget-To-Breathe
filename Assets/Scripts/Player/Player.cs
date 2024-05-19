@@ -210,6 +210,7 @@ public class Player : MonoBehaviour
 
     public void IncreaseAirByInhale()
     {
+        AudioManager.instance.PlaySFX(18);
         var gameConfig = GameManager.instance.gameConfig;
         ChangeOxygen(gameConfig.inhaleRate * Time.deltaTime);
     }
@@ -296,6 +297,7 @@ public class Player : MonoBehaviour
 
     public void DecreaseAirByExhale()
     {
+        AudioManager.instance.PlaySFX(19);
         var gameConfig = GameManager.instance.gameConfig;
         ChangeCarbonDioxide(-gameConfig.exhaleRate * Time.deltaTime);
     }
