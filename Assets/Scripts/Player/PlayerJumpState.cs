@@ -11,12 +11,14 @@ public class PlayerJumpState : PlayerState
     public override void Enter()
     {
         base.Enter();
+        AudioManager.instance.PlaySFX(12);
         rb.velocity = new Vector2(rb.velocity.x, player.jumpForce);
     }
 
     public override void Exit()
     {
         base.Exit();
+        
     }
     
     public override void Update()

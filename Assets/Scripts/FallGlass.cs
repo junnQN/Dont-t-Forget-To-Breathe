@@ -14,11 +14,12 @@ public class FallGlass : MonoBehaviour
     private Vector2 defaultPos;
 
     private bool isReady = false;
-
+    
     private void Start()
     {
         anim = GetComponent<Animator>();
         defaultPos = transform.position;
+        
     }
 
     public void Init()
@@ -56,10 +57,13 @@ public class FallGlass : MonoBehaviour
 
         if (other.gameObject.tag == "Player")
         {
+            AudioManager.instance.PlaySFX(17);
             Debug.Log("FallGlass" + Player.instance.IsGroundDetected());
             if (!Player.instance.IsGroundDetected())
             {
                 isFallGlass = true;
+                
+                
                 if (other.transform.rotation.y < 0)
                 {
                     transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, -180, transform.rotation.eulerAngles.z);

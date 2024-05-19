@@ -14,6 +14,7 @@ public class WaterBehavior : MonoBehaviour
 
     public void Init()
     {
+        AudioManager.instance.PlaySFX(10);
         GameManager.instance.tube.ShowWaterFall();
         var gameConfig = GameManager.instance.gameConfig;
         SetWaterHeight(start.localPosition.y);

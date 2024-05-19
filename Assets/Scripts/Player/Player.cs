@@ -180,8 +180,8 @@ public class Player : MonoBehaviour
 
         if (isTouchFlushButton && !isDisableInput && Input.GetKeyDown(KeyCode.E))
         {
+            AudioManager.instance.PlaySFX(16);
             GameManager.instance.SprintWater();
-
         }
     }
 
@@ -189,6 +189,7 @@ public class Player : MonoBehaviour
     {
         if (currentHealth <= 0)
         {
+            
             GameManager.instance.HandleGameLose();
         }
     }

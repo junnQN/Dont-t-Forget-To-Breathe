@@ -23,6 +23,8 @@ public class ResultScreen : BaseScreen
 
     public void HandleRestartButton()
     {
+        AudioManager.instance.StopSFX(9);
+        AudioManager.instance.PlaySFX(8);
         if (GameManager.instance.currentLevel == 1)
         {
             Player.instance.ReturnDefaultPos();
@@ -66,6 +68,7 @@ public class ResultScreen : BaseScreen
 
     public void HandleNextButton()
     {
+        AudioManager.instance.PlaySFX(8);
         GameManager.instance.NextLevel();
         Close();
     }
@@ -81,6 +84,7 @@ public class ResultScreen : BaseScreen
 
     public void BackToMainMenu()
     {
+        AudioManager.instance.PlaySFX(8);
         this.title.text = "You Lose!";
         backToMenuBtn.SetActive(true);
         replayButton.SetActive(false);

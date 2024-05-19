@@ -50,6 +50,7 @@ public class GameManager : MonoBehaviour
     #region Prefabs
     [SerializeField] private GameObject smokePrefab;
     [SerializeField] private GameObject waterPrefab;
+    [SerializeField] private GameObject glass;
     #endregion
 
     [SerializeField] private GameObject UI_Game;
@@ -164,6 +165,7 @@ public class GameManager : MonoBehaviour
 
     public void PrepareLevel3()
     {
+        glass.SetActive(false);
         player.ReturnSwimPos();
         player.gameObject.SetActive(false);
         UI_Game.SetActive(false);
@@ -180,6 +182,7 @@ public class GameManager : MonoBehaviour
 
     public void PrepareLevel4()
     {
+        glass.SetActive(true);
         ResetPos.instance.ResetPosition();
         box.gameObject.SetActive(false);
         player.ReturnStartPos();
@@ -220,6 +223,7 @@ public class GameManager : MonoBehaviour
     {
         if (isPlaying && time >= gameConfig.timeOfLevels[currentLevel - 1])
         {
+            AudioManager.instance.PlaySFX(9);
             HandleGameWin();
         }
     }
@@ -245,6 +249,7 @@ public class GameManager : MonoBehaviour
     }
     public void HandleGameLose()
     {
+        AudioManager.instance.PlaySFX(13);
         isPlaying = false;
         var resultScreen = screenDict[ScreenKeys.RESULT_SCREEN] as ResultScreen;
         if (player.currentHealth == 0f)

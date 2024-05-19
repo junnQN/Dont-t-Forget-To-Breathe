@@ -35,8 +35,10 @@ public class TutorialSwitch : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && isTutorial == true)
         {
+            AudioManager.instance.PlaySFX(8);
             if(currentIndex<4 )
             {
+                
                 currentIndex = (currentIndex + 1) % images.Length;
                 UpdateImage();
             }

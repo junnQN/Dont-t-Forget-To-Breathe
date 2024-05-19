@@ -12,6 +12,7 @@ public class MenuScreen : BaseScreen
 
     public void HandleRestartButton()
     {
+        AudioManager.instance.PlaySFX(8);
         UI_Game.SetActive(false);
         Hand.instance.canPlay = true;
         Close();

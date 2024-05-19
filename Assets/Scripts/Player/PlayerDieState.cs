@@ -11,13 +11,15 @@ public class PlayerDieState : PlayerState
     public override void Enter()
     {
         base.Enter();
+        AudioManager.instance.PlaySFX(7);
         player.anim.SetBool("die", true);
-
+        
     }
 
     public override void Exit()
     {
         base.Exit();
+        AudioManager.instance.StopSFX(7);
         player.anim.SetBool("die", false);
     }
 
