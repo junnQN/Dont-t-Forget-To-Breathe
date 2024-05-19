@@ -371,7 +371,7 @@ public class Player : MonoBehaviour
         }
         else if (other.CompareTag("FlushButton"))
         {
-            isTouchFlushButton = true;
+            isTouchFlushButton = false;
         }
     }
 
