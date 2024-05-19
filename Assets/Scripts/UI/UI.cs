@@ -14,6 +14,7 @@ public class UI : MonoBehaviour
     public GameObject restartButton;
     public GameObject winText;
     public GameObject nextLvButton;
+    public GameObject audioSetting;
     
    
     //[SerializeField] private GameObject inGameUI;
@@ -106,5 +107,15 @@ public class UI : MonoBehaviour
         winText.SetActive(true);
         yield return new WaitForSeconds(1.5f);
         nextLvButton.SetActive(true);
+    }
+
+    public void OpenAudioSetting()
+    {
+        audioSetting.gameObject.SetActive(true);
+    }
+
+    public void CloseAudioSetting()
+    {
+        audioSetting.gameObject.SetActive(false);
     }
 }

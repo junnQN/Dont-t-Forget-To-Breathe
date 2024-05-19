@@ -32,6 +32,7 @@ public class PlayerCoughState : PlayerState
     public override void Exit()
     {
         base.Exit();
+        AudioManager.instance.StopSFX(3);
     }
 
     public override void Update()
