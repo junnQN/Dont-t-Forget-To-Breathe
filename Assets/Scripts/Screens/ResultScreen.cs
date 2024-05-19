@@ -26,7 +26,7 @@ public class ResultScreen : BaseScreen
         if (GameManager.instance.currentLevel == 1)
         {
             Player.instance.ReturnDefaultPos();
-            GameManager.instance.StartGame();
+            GameManager.instance.StartGame(true);
             Close();
         }
 
@@ -81,7 +81,8 @@ public class ResultScreen : BaseScreen
 
     public void BackToMainMenu()
     {
-        this.title.text = "You Lose!";
+        this.title.text = "
+         Lose!";
         backToMenuBtn.SetActive(true);
         replayButton.SetActive(false);
         nextLevelButton.SetActive(false);

@@ -83,11 +83,11 @@ public class GameManager : MonoBehaviour
         introManager.Init();
     }
 
-    public void StartGame()
+    public void StartGame(bool isRestart = false)
     {
         UI_Game.SetActive(true);
         player.gameObject.SetActive(true);
-        player.Init(true);
+        player.Init(!isRestart);
         time = 0;
         isPlaying = true;
     }
@@ -131,7 +131,8 @@ public class GameManager : MonoBehaviour
         fallGlass.Init();
         box.Init();
 
-        // fallGlass.IgnoreCollision(true);
+        fallGlass.IgnoreCollision(false);
+        fallGlass.gameObject.SetActive(true);
 
         switch (currentLevel)
         {
@@ -176,6 +177,7 @@ public class GameManager : MonoBehaviour
     public void PrepareLevel3()
     {
         player.ReturnSwimPos();
+        fallGlass.gameObject.SetActive(false);
         player.gameObject.SetActive(false);
         // UI_Game.SetActive(false);
         tube.gameObject.SetActive(true);
