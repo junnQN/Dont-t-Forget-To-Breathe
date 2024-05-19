@@ -8,21 +8,26 @@ public class IntroManager : MonoBehaviour
 {
     public PlayableDirector intro;
 
-    private void Start()
-    {
-        intro = GetComponent<PlayableDirector>();
-        PlayIntro(() =>
-        {
-            Debug.Log("Intro Complete");
-        });
-    }
+    public GameObject cat;
 
-    public void PlayIntro(Action OnIntroComplete)
+    public void Init()
     {
-        intro.Play();
         intro.stopped += (director) =>
         {
-            OnIntroComplete();
+            var player = GameManager.instance.player;
+            player.transform.position = cat.transform.position;
+            if (cat.transform.rotation.y > 0)
+            {
+                player.Flip();
+            }
+            GameManager.instance.StartTutorial();
+            gameObject.SetActive(false);
         };
+    }
+
+    public void PlayIntro()
+    {
+        intro.Stop();
+        intro.Play();
     }
 }

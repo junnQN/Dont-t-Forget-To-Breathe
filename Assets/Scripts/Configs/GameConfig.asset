@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inhaleRate: 5
   exhaleRate: 5
-  autoRate: 7
+  autoRate: 0
   amountCo_2Cough: 10
   timeToBreakCoughState: 1
   amountAirBySmoke: 10
@@ -22,9 +22,9 @@ MonoBehaviour:
   maxTimeInhale: 2
   maxTimeExhale: 2
   timeOfLevels:
-  - 30
-  - 30
-  - 30
+  - 1
+  - 1
+  - 1
   - 30
   - 30
   waterMaxHeight: 2.5

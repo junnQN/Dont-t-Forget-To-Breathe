@@ -45,7 +45,7 @@ public class ResultScreen : BaseScreen
                 Close();
             }
         }
-        
+
         if (GameManager.instance.currentLevel == 3)
         {
             if (Player.instance.currentHealth < 9)
@@ -61,12 +61,12 @@ public class ResultScreen : BaseScreen
                 Close();
             }
         }
-        
+
     }
 
     public void HandleNextButton()
     {
-        GameManager.instance.NextLevel();
+        GameManager.instance.StartDropCat();
         Close();
     }
 

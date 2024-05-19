@@ -497,6 +497,7 @@ MonoBehaviour:
   title: {fileID: 7558349873037116674}
   replayButton: {fileID: 8223916405046960936}
   nextLevelButton: {fileID: 8498117676953029871}
+  backToMenuBtn: {fileID: 0}
 --- !u!1 &8170958579192675658
 GameObject:
   m_ObjectHideFlags: 0
@@ -887,7 +888,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7037213051244121585}
         m_TargetAssemblyTypeName: ResultScreen, Assembly-CSharp
-        m_MethodName: HandleRestartButton
+        m_MethodName: HandleNextButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

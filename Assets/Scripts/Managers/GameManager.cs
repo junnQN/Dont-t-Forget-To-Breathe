@@ -47,12 +47,9 @@ public class GameManager : MonoBehaviour
 
     public BaseItem box;
 
-    #region Prefabs
-    [SerializeField] private GameObject smokePrefab;
-    [SerializeField] private GameObject waterPrefab;
-    #endregion
+    public IntroManager introManager;
 
-    [SerializeField] private GameObject UI_Game;
+    public GameObject UI_Game;
 
     public bool isDisableBreath = false;
 
@@ -82,18 +79,36 @@ public class GameManager : MonoBehaviour
                 // water.ChangeWaterHeight(0.1f);
             }
         };
+
+        introManager.Init();
     }
 
     public void StartGame()
     {
-        player.Init();
+        UI_Game.SetActive(true);
+        player.gameObject.SetActive(true);
+        player.Init(true);
         time = 0;
         isPlaying = true;
+    }
+
+    public void StartDropCat()
+    {
+        UI_Game.SetActive(false);
         PrepareLevel();
+        player.gameObject.SetActive(false);
+        introManager.gameObject.SetActive(true);
+        introManager.PlayIntro();
+    }
+
+    public void StartTutorial()
+    {
+        screenDict[ScreenKeys.TUTORIAL_SCREEN].Open();
     }
 
     public void NextLevel()
     {
+        player.Init(false);
         time = 0;
         isPlaying = false;
 
@@ -112,8 +127,6 @@ public class GameManager : MonoBehaviour
         water.gameObject.SetActive(false);
         flushButton.gameObject.SetActive(false);
         cold.gameObject.SetActive(false);
-
-        // thermometer.gameObject.SetActive(true);
         thermometer.Init();
         fallGlass.Init();
         box.Init();
@@ -141,16 +154,14 @@ public class GameManager : MonoBehaviour
 
     public void PrepareLevel1()
     {
-        // player.ChangeSwimState();
+
     }
 
     public void PrepareLevel2()
     {
         player.ReturnStartPos();
         player.gameObject.SetActive(false);
-        UI_Game.SetActive(false);
-        Hand.instance.canPlay = true;
-        Hand.instance.moveDown = true;
+        // UI_Game.SetActive(false);
         tube.gameObject.SetActive(true);
         tube.Init(() =>
         {
@@ -166,16 +177,13 @@ public class GameManager : MonoBehaviour
     {
         player.ReturnSwimPos();
         player.gameObject.SetActive(false);
-        UI_Game.SetActive(false);
-        Hand.instance.canPlay = true;
-        Hand.instance.moveDown = true;
+        // UI_Game.SetActive(false);
         tube.gameObject.SetActive(true);
         box.gameObject.SetActive(false);
         water.gameObject.SetActive(true);
         water.Init();
         flushButton.gameObject.SetActive(true);
         flushButton.Init();
-        //player.ChangeSwimState();
     }
 
     public void PrepareLevel4()
@@ -183,9 +191,7 @@ public class GameManager : MonoBehaviour
         box.gameObject.SetActive(false);
         player.ReturnStartPos();
         player.gameObject.SetActive(false);
-        UI_Game.SetActive(false);
-        Hand.instance.canPlay = true;
-        Hand.instance.moveDown = true;
+        // UI_Game.SetActive(false);
         smoke.gameObject.SetActive(true);
         smoke.Init();
     }
@@ -259,16 +265,8 @@ public class GameManager : MonoBehaviour
 
     public void SpawnSmoke()
     {
-        if (smoke == null)
-        {
-            var smokeObject = Instantiate(smokePrefab, spawnPoint.position, Quaternion.identity);
-            smoke = smokeObject.GetComponent<Smoke>();
-        }
-        else
-        {
-            smoke.gameObject.transform.position = spawnPoint.position;
-            smoke.gameObject.SetActive(true);
-        }
+        smoke.gameObject.transform.position = spawnPoint.position;
+        smoke.gameObject.SetActive(true);
 
         smoke.Init();
         smoke.ShowSmoke();

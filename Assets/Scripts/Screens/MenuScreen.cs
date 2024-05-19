@@ -10,14 +10,10 @@ public class MenuScreen : BaseScreen
         Application.Quit();
     }
 
-    public void HandleRestartButton()
+    public void HandleStartButton()
     {
-        UI_Game.SetActive(false);
-        Hand.instance.canPlay = true;
+        // UI_Game.SetActive(false);
         Close();
-        //GameManager.instance.StartGame();
-        //UI_Tutorials.SetActive(true);
-        //TutorialSwitch.instance.isTutorial = true;
-        //UI_game.SetActive(false);
+        GameManager.instance.StartDropCat();
     }
 }

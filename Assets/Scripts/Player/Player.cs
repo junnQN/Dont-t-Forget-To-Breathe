@@ -122,18 +122,12 @@ public class Player : MonoBehaviour
         coughState = new PlayerCoughState(this, stateMachine, "Cough");
         noneState = new PlayerNoneState(this, stateMachine, "None");
         dieState = new PlayerDieState(this, stateMachine, "Die");
-    }
 
-
-    private void Start()
-    {
         currentTime = Time.time;
         anim = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        //stateMachine.Initialize(holdBreatheState);
 
-        //=======
-        stateMachine.Initialize(firstState);
+        stateMachine.Initialize(moveState);
         StartCoroutine(DecreaseOverTime(inhaleTime));
     }
 
@@ -145,25 +139,25 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void Init()
+    public void Init(bool isRestHealth = false)
     {
         oxygen = 100f;
         carbonDioxide = 0f;
-        currentHealth = maxHealth;
-        tmpHealth = maxHealth;
-        currentHealth = tmpHealth;
+
+        if (isRestHealth)
+        {
+            currentHealth = maxHealth;
+            tmpHealth = maxHealth;
+            currentHealth = tmpHealth;
+        }
+
         isCold = false;
-        stateMachine.ChangeState(noneState);
+        stateMachine.ChangeState(idleState);
     }
+
 
     private void Update()
     {
-
-        if (shouldMove)
-        {
-            stateMachine.ChangeState(firstState);
-        }
-
         stateMachine.currentState.Update();
 
         if (oxygen <= 0f || carbonDioxide >= 100f)
@@ -218,8 +212,6 @@ public class Player : MonoBehaviour
 
         var gameConfig = GameManager.instance.gameConfig;
         ChangeOxygen(gameConfig.inhaleRate * Time.deltaTime);
-        //carbonDioxide+= carbonDioxideRate * Time.deltaTime;
-
     }
 
     public void IncreaseOxygenByCold()
@@ -238,13 +230,6 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (!isDisableInput && Input.GetKeyDown(KeyCode.E))
-        {
-
-            //bucket.transform.Rotate(0,0,90);
-
-        }
-        //=======
         var gameConfig = GameManager.instance.gameConfig;
         ChangeOxygen(gameConfig.inhaleRate * Time.deltaTime);
     }

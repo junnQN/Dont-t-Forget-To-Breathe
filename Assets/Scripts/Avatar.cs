@@ -2,18 +2,19 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Avatar : MonoBehaviour
 {
     private Animator animator;
-    private SpriteRenderer spriteRenderer;
     public Sprite sprite0;
     public Sprite sprite1;
     public Sprite sprite2;
-    
+
+    public Image frame;
+
     private void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponentInChildren<Animator>();
     }
 
@@ -21,15 +22,15 @@ public class Avatar : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.I))
         {
-            spriteRenderer.sprite = sprite1;
+            frame.sprite = sprite1;
         }
         else if (Input.GetKey(KeyCode.O))
         {
-            spriteRenderer.sprite = sprite2;
+            frame.sprite = sprite2;
         }
         else
         {
-            spriteRenderer.sprite = sprite0;
+            frame.sprite = sprite0;
         }
     }
 }

@@ -22,11 +22,11 @@ public class PlayerNoneState : PlayerState
     public override void Update()
     {
         base.Update();
-        if (stateTimer < 1 &&stateTimer>0 && GameManager.instance.currentLevel==1)
-        {
-            GameManager.instance.isPlaying = true;
-            player.UI_Tutorials.SetActive(true);
-            TutorialSwitch.instance.isTutorial = true;
-        }
+        // if (stateTimer < 1 &&stateTimer>0 && GameManager.instance.currentLevel==1)
+        // {
+        //     GameManager.instance.isPlaying = true;
+        //     player.UI_Tutorials.SetActive(true);
+        //     TutorialSwitch.instance.isTutorial = true;
+        // }
     }
 }
