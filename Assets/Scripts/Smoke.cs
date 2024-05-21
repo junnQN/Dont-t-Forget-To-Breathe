@@ -23,7 +23,7 @@ public class Smoke : MonoBehaviour
     [SerializeField]
     private float targetAngleShape = 70f;
 
-    [HideInInspector]
+    // [HideInInspector]
     public bool isPlaying = false;
     // Start is called before the first frame update
     void Start()
@@ -123,10 +123,10 @@ public class Smoke : MonoBehaviour
         // Kiểm tra từng Collider 2D có overlap với Collider 2D của đối tượng hay không
         foreach (Collider2D collider in colliders)
         {
-            if (isPlaying && collider != null && collider.CompareTag("WaterGlass") && collider != boxCollider)
+            if (isPlaying && collider != null && (collider.CompareTag("WaterGlass") || collider.CompareTag("Water")) && collider != boxCollider)
             {
                 Debug.Log("<color=red>Smoke is in water</color>");
-                GameManager.instance.HideSmoke();
+                ReduceSmoke();
             }
         }
     }
