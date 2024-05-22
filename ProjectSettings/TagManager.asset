@@ -11,6 +11,8 @@ TagManager:
   - WaterGlass
   - Tube
   - Water
+  - Bomb
+  - SupperItem
   layers:
   - Default
   - TransparentFX
@@ -25,8 +27,8 @@ TagManager:
   - Bowl
   - Tube
   - Box
-  - 
-  - 
+  - Bomb
+  - SupperItem
   - 
   - 
   - 

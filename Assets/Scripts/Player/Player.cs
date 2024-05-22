@@ -40,6 +40,7 @@ public class Player : MonoBehaviour
     public int facingDir { get; private set; } = 1;
     [SerializeField] private bool facingRight = false;
     public bool isPlayerTouching = false;
+    public bool isTouchItem = false;
     public bool inAir = false;
 
     public bool shouldMove = false;
@@ -153,6 +154,7 @@ public class Player : MonoBehaviour
 
         isCold = false;
         stateMachine.ChangeState(idleState);
+        isTouchItem = false;
     }
 
 
@@ -371,6 +373,9 @@ public class Player : MonoBehaviour
             case "WaterGlass":
                 isPlayerTouching = true;
                 break;
+            case "SupperItem":
+                isTouchItem = true;
+                break;
             default:
                 Debug.Log(other.tag);
                 break;
@@ -386,6 +391,10 @@ public class Player : MonoBehaviour
         else if (other.CompareTag("FlushButton"))
         {
             isTouchFlushButton = false;
+        }
+        else if (other.CompareTag("SupperItem"))
+        {
+            isTouchItem = false;
         }
     }
 

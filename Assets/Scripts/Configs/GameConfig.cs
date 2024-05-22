@@ -41,4 +41,7 @@ public class GameConfig : ScriptableObject
     [Header("Smoke Configs")]
     public float timeAffectedBySmoke = 1f;
     public float smokeImmunityTime = 0.5f;
+
+    [Header("Bomb Configs")]
+    public float timeToExplode = 20f;
 }

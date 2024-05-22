@@ -47,6 +47,8 @@ public class GameManager : MonoBehaviour
 
     public BaseItem box;
 
+    public BombBehavior bomb;
+
     public IntroManager introManager;
 
     public GameObject UI_Game;
@@ -157,6 +159,9 @@ public class GameManager : MonoBehaviour
             case 4:
                 PrepareLevel4();
                 break;
+            case 5:
+                PrepareLevel5();
+                break;
             default:
                 break;
         }
@@ -210,6 +215,11 @@ public class GameManager : MonoBehaviour
         smoke.Init();
     }
 
+    public void PrepareLevel5()
+    {
+        bomb.Init();
+    }
+
     public void AddScreens()
     {
         foreach (var screen in screens)
@@ -246,6 +256,7 @@ public class GameManager : MonoBehaviour
 
     public void HandleGameWin()
     {
+        AudioManager.instance.PlaySFX(14);
         player.stateMachine.ChangeState(player.noneState);
         isPlaying = false;
         screenDict[ScreenKeys.WIN_SCREEN].Open();
@@ -327,5 +338,17 @@ public class GameManager : MonoBehaviour
     {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentSceneIndex);
+    }
+
+    public void OpenCutScreen(bool isHulk)
+    {
+        var cutScreen = screenDict[ScreenKeys.CUT_SCREEN] as CutScreen;
+        cutScreen.isHulk = isHulk;
+        cutScreen.Open();
+    }
+
+    public void CloseScreen(string screenName)
+    {
+        screenDict[screenName].Close();
     }
 }

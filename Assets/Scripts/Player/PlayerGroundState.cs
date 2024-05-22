@@ -69,6 +69,11 @@ public class PlayerGroundState : PlayerState
         if (!player.isDisableInput && Input.GetKeyDown(KeyCode.E) && player.isPlayerTouching && GameManager.instance.currentLevel != 3)
             stateMachine.ChangeState(player.eatState);
 
+        if (!player.isDisableInput && Input.GetKeyDown(KeyCode.E) && player.isTouchItem)
+        {
+            GameManager.instance.OpenCutScreen(true);
+        }
+
     }
 
     bool HandleInhaleSmoke()
