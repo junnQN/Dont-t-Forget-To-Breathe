@@ -71,6 +71,7 @@ public class PlayerGroundState : PlayerState
 
         if (!player.isDisableInput && Input.GetKeyDown(KeyCode.E) && player.isTouchItem)
         {
+            player.isHulk = true;
             GameManager.instance.OpenCutScreen(true);
         }
 

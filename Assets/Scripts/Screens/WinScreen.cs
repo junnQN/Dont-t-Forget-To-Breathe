@@ -30,6 +30,13 @@ public class WinScreen : BaseScreen
     private void UpdateUI()
     {
         var currentLevel = GameManager.instance.currentLevel;
-        image.sprite = newspapers[currentLevel - 1];
+        if (currentLevel < 5)
+        {
+            image.sprite = newspapers[currentLevel - 1];
+        }
+        else
+        {
+            image.sprite = Player.instance.isHulk ? newspapers[5] : newspapers[4];
+        }
     }
 }

@@ -99,6 +99,8 @@ public class Player : MonoBehaviour
 
     Tween smokeAffectedTween;
 
+    public bool isHulk = false;
+
     private void Awake()
     {
         if (instance != null)
@@ -155,6 +157,7 @@ public class Player : MonoBehaviour
         isCold = false;
         stateMachine.ChangeState(idleState);
         isTouchItem = false;
+        isHulk = false;
     }
 
 
