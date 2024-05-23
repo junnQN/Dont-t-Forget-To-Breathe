@@ -14,7 +14,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource[] bgm;
 
     public bool playBGM;
-    private int bgmIndex;
+    public int bgmIndex;
     
     private void Awake()
     {

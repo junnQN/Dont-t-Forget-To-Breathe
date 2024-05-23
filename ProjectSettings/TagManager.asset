@@ -13,6 +13,8 @@ TagManager:
   - Water
   - Bomb
   - SupperItem
+  - ReleaseWaterButton
+  - Trash
   layers:
   - Default
   - TransparentFX

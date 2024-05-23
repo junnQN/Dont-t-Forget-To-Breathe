@@ -22,13 +22,14 @@ MonoBehaviour:
   maxTimeInhale: 3
   maxTimeExhale: 3
   timeOfLevels:
-  - 100
-  - 100
+  - 5
+  - 5
   - 1
-  - 30
+  - 5
   - 30
   waterMaxHeight: 2.5
   sprintTime: 2
   spawnTime: 1
   timeAffectedBySmoke: 1
   smokeImmunityTime: 0.5
+  timeToExplode: 20

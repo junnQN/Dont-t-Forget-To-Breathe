@@ -21,8 +21,21 @@ public class ResultScreen : BaseScreen
         Application.Quit();
     }
 
+    public override void Open()
+    {
+        base.Open();
+        AudioManager.instance.playBGM = false;
+    }
+
+    public override void Close()
+    {
+        base.Close();
+        AudioManager.instance.playBGM = true;
+    }
+
     public void HandleRestartButton()
     {
+        AudioManager.instance.playBGM = true;
         AudioManager.instance.StopSFX(9);
         AudioManager.instance.PlaySFX(8);
         if (GameManager.instance.currentLevel == 1)

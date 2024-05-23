@@ -65,7 +65,12 @@ public class Player : MonoBehaviour
     [Header("Cold level")]
     public bool isCold = false;
 
+    [Header("Level 5")]
     public bool isTouchFlushButton = false;
+    public bool isTouchReleaseWaterButton = false;
+    public bool isPressedButton = false;
+    public Tube tube;
+    public Cold cold;
 
     #region Components
     public Animator anim { get; private set; }
@@ -167,6 +172,7 @@ public class Player : MonoBehaviour
 
         if (oxygen <= 0f || carbonDioxide >= 100f)
         {
+
             currentHealth = Mathf.Clamp(currentHealth - 1, 0, maxHealth);
             CheckGameOver();
             oxygen = 100f;
@@ -181,6 +187,28 @@ public class Player : MonoBehaviour
         {
             AudioManager.instance.PlaySFX(16);
             GameManager.instance.SprintWater();
+            if (GameManager.instance.currentLevel == 5)
+            {
+                tube.Init(() =>
+                {
+                    cold.gameObject.SetActive(true);
+                    cold.Init(() =>
+                    {
+                        isCold = true;
+                    });
+                });
+            }
+        }
+
+        if (isTouchReleaseWaterButton && !isDisableInput && !isPressedButton)
+        {
+            GameManager.instance.SpawnWater();
+            ChangeSwimState();
+            ReleaseWaterButton.instance.ChangeButtonState(true);
+            isPressedButton = true;
+
+
+            //ReleaseWaterButton.instance.ChangeTag();
         }
 
         if (Input.GetKeyUp(KeyCode.O))
@@ -197,7 +225,6 @@ public class Player : MonoBehaviour
     {
         if (currentHealth <= 0)
         {
-
             GameManager.instance.HandleGameLose();
         }
     }
@@ -379,6 +406,10 @@ public class Player : MonoBehaviour
             case "SupperItem":
                 isTouchItem = true;
                 break;
+            case "ReleaseWaterButton":
+                isTouchReleaseWaterButton = true;
+
+                break;
             default:
                 Debug.Log(other.tag);
                 break;
@@ -398,6 +429,10 @@ public class Player : MonoBehaviour
         else if (other.CompareTag("SupperItem"))
         {
             isTouchItem = false;
+        }
+        else if (other.CompareTag("ReleaseWaterButton"))
+        {
+            isTouchReleaseWaterButton = false;
         }
     }
 

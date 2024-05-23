@@ -24,7 +24,7 @@ public class FloatBowl : MonoBehaviour
     
     private void Update()
     {
-        if(GameManager.instance.currentLevel==3&&GameManager.instance.isPlaying) // Lấy vị trí hiện tại của vật thể
+        if((GameManager.instance.currentLevel==3||GameManager.instance.currentLevel==5)&&GameManager.instance.isPlaying) // Lấy vị trí hiện tại của vật thể
         {
             if(GameManager.instance.isWater==true)
             {
