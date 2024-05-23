@@ -101,6 +101,12 @@ public class GameManager : MonoBehaviour
         {
             player.ChangeSwimState();
         }
+
+        if (currentLevel == 5)
+        {
+            bomb.gameObject.SetActive(true);
+            bomb.Play();
+        }
     }
 
     public void StartDropCat()

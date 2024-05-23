@@ -9,6 +9,10 @@ public class WinScreen : BaseScreen
     public Sprite[] newspapers;
     public Image image;
 
+    [SerializeField]
+    private GameObject nextLevelButton;
+
+    [SerializeField] private GameObject backToMenuBtn;
 
     public void HandleQuitButton()
     {
@@ -40,11 +44,33 @@ public class WinScreen : BaseScreen
         {
             image.sprite = Player.instance.isHulk ? newspapers[5] : newspapers[4];
         }
+        UpdateScreen();
+    }
+
+    private void UpdateScreen()
+    {
+        if (GameManager.instance.currentLevel < 5)
+        {
+            nextLevelButton.SetActive(true);
+            backToMenuBtn.SetActive(false);
+        }
+        else
+        {
+            nextLevelButton.SetActive(false);
+            backToMenuBtn.SetActive(true);
+        }
     }
 
     public void HandleBackToMenu()
     {
         GameManager.instance.CloseScreen(ScreenKeys.WIN_SCREEN);
         GameManager.instance.HandleBackToMenu();
+    }
+
+    public void HandleNextButton()
+    {
+        AudioManager.instance.PlaySFX(8);
+        GameManager.instance.StartDropCat();
+        Close();
     }
 }

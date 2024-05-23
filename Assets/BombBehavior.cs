@@ -22,13 +22,19 @@ public class BombBehavior : MonoBehaviour
     public void Init()
     {
         anim.SetBool("Explode", false);
-        gameObject.SetActive(true);
+        // gameObject.SetActive(true);
         fire.Init();
         time = 0;
-        isPlaying = true;
+        isPlaying = false;
         item.Init();
         text.alpha = 1;
         isShowItem = false;
+    }
+
+    public void Play()
+    {
+        time = 0;
+        isPlaying = true;
     }
 
     void Update()

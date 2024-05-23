@@ -13,6 +13,8 @@ public class IntroManager : MonoBehaviour
     public PlayableAsset introNormal;
     public PlayableAsset introLevel3;
 
+    public PlayableAsset introLevel5;
+
     public void Init()
     {
         intro.stopped += (director) =>
@@ -25,6 +27,11 @@ public class IntroManager : MonoBehaviour
             }
             GameManager.instance.StartTutorial();
             gameObject.SetActive(false);
+
+            if (GameManager.instance.currentLevel == 5)
+            {
+                GameManager.instance.bomb.gameObject.SetActive(true);
+            }
         };
     }
 
@@ -33,6 +40,10 @@ public class IntroManager : MonoBehaviour
         if (GameManager.instance.currentLevel == 3)
         {
             intro.playableAsset = introLevel3;
+        }
+        else if (GameManager.instance.currentLevel == 5)
+        {
+            intro.playableAsset = introLevel5;
         }
         else
         {
