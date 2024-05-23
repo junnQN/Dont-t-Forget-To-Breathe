@@ -145,6 +145,7 @@ public class GameManager : MonoBehaviour
         fallGlass.IgnoreCollision(false);
         fallGlass.gameObject.SetActive(true);
         AudioManager.instance.StopSFX(11);
+        isWater = false;
 
         switch (currentLevel)
         {
@@ -170,11 +171,13 @@ public class GameManager : MonoBehaviour
 
     public void PrepareLevel1()
     {
-
+        AudioManager.instance.bgmIndex = 1;
     }
 
     public void PrepareLevel2()
     {
+        AudioManager.instance.bgmIndex = 1;
+
         player.ReturnStartPos();
         player.gameObject.SetActive(false);
         // UI_Game.SetActive(false);
@@ -192,7 +195,7 @@ public class GameManager : MonoBehaviour
     public void PrepareLevel3()
     {
 
-        AudioManager.instance.bgmIndex += 1;
+        AudioManager.instance.bgmIndex = 2;
         fallGlass.gameObject.SetActive(false);
         player.ReturnSwimPos();
         fallGlass.gameObject.SetActive(false);
@@ -208,6 +211,7 @@ public class GameManager : MonoBehaviour
 
     public void PrepareLevel4()
     {
+        AudioManager.instance.bgmIndex = 2;
         fallGlass.gameObject.SetActive(true);
         ResetPos.instance.ResetPosition();
         box.gameObject.SetActive(false);
@@ -221,7 +225,7 @@ public class GameManager : MonoBehaviour
     public void PrepareLevel5()
     {
         bomb.Init();
-        AudioManager.instance.bgmIndex += 1;
+        AudioManager.instance.bgmIndex = 3;
         releaseButton.gameObject.SetActive(true);
         releaseButton.Init();
         flushButton.gameObject.SetActive(true);
@@ -251,6 +255,8 @@ public class GameManager : MonoBehaviour
 
     public int GetRemainingTime()
     {
+        if (currentLevel > gameConfig.timeOfLevels.Length) return 0;
+
         return (int)gameConfig.timeOfLevels[currentLevel - 1] - (int)time;
     }
 
@@ -265,7 +271,9 @@ public class GameManager : MonoBehaviour
 
     public void HandleGameWin()
     {
-        AudioManager.instance.PlaySFX(14);
+        // stop cold sound
+        AudioManager.instance.StopSFX(11);
+
         player.stateMachine.ChangeState(player.noneState);
         isPlaying = false;
         screenDict[ScreenKeys.WIN_SCREEN].Open();
@@ -283,6 +291,9 @@ public class GameManager : MonoBehaviour
     }
     public void HandleGameLose()
     {
+        // stop cold sound
+        AudioManager.instance.StopSFX(11);
+
         AudioManager.instance.PlaySFX(13);
         isPlaying = false;
         var resultScreen = screenDict[ScreenKeys.RESULT_SCREEN] as ResultScreen;
@@ -352,6 +363,9 @@ public class GameManager : MonoBehaviour
 
     public void OpenCutScreen(bool isHulk)
     {
+        // stop cold sound
+        AudioManager.instance.StopSFX(11);
+
         var cutScreen = screenDict[ScreenKeys.CUT_SCREEN] as CutScreen;
         cutScreen.isHulk = isHulk;
         cutScreen.Open();

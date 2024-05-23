@@ -10,6 +10,7 @@ public class CutScreen : BaseScreen
     public VideoController videoController;
     public override void Open()
     {
+        AudioManager.instance.playBGM = false;
         base.Open();
         if (isHulk)
         {
@@ -23,6 +24,7 @@ public class CutScreen : BaseScreen
 
     public override void Close()
     {
+        AudioManager.instance.playBGM = false;
         base.Close();
     }
 }
