@@ -13,6 +13,7 @@ public class MenuScreen : BaseScreen
     public void HandleStartButton()
     {
         AudioManager.instance.PlaySFX(8);
+        AudioManager.instance.bgmIndex += 1;
         Close();
         GameManager.instance.StartDropCat();
     }

@@ -9,6 +9,7 @@ public class BaseScreen : MonoBehaviour
     {
         Debug.Log("<color=green>Open screen: " + screenName + "</color>");
         gameObject.SetActive(true);
+        
     }
 
     public virtual void Close()

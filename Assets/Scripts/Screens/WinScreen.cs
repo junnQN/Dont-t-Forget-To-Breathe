@@ -9,6 +9,7 @@ public class WinScreen : BaseScreen
     public Sprite[] newspapers;
     public Image image;
 
+    
     public void HandleQuitButton()
     {
         Application.Quit();
@@ -25,6 +26,14 @@ public class WinScreen : BaseScreen
     {
         UpdateUI();
         base.Open();
+        AudioManager.instance.playBGM = false;
+        AudioManager.instance.PlaySFX(21);
+    }
+
+    public override void Close()
+    {
+        base.Close();
+        AudioManager.instance.playBGM = true;
     }
 
     private void UpdateUI()

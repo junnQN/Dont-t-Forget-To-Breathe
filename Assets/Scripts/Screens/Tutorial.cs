@@ -48,6 +48,8 @@ public class Tutorial : BaseScreen
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            AudioManager.instance.StopSFX(8);
+            AudioManager.instance.PlaySFX(8);
             if (!IsCompleteTutorial())
             {
                 ShowImage(GameManager.instance.currentLevel, currentIndex + 1);

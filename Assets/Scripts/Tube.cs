@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class Tube : MonoBehaviour
 {
+    public static Tube instance;
     [SerializeField] private float startX;
     [SerializeField] private float endX;
 
@@ -17,9 +18,19 @@ public class Tube : MonoBehaviour
 
     [SerializeField] private GameObject waterFall;
 
+    private void Awake()
+    {
+        if(instance!=null)
+            Destroy(instance.gameObject);
+        else 
+            instance = this;
+    }
+
+    
     public void Init(Action onComplete)
     {
-        if (GameManager.instance.currentLevel == 2)
+        
+        if (GameManager.instance.currentLevel == 2||GameManager.instance.currentLevel == 5)
         {
             AudioManager.instance.PlaySFX(11);
         }

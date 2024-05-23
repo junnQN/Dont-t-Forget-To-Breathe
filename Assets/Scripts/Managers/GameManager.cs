@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     public float time;
 
     public int currentLevel = 1;
-    public bool isWater = true;
+    public bool isWater = false;
 
     #region Debug
     [SerializeField]
@@ -33,8 +33,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private WaterBehavior water;
 
-    [SerializeField]
-    private FlushButton flushButton;
+    [SerializeField] private FlushButton flushButton;
+    [SerializeField] private ReleaseWaterButton releaseButton;
 
     [SerializeField]
     private Thermometer thermometer;
@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
 
         tube.onCollisionBox += () =>
         {
-            if (currentLevel == 2)
+            if (currentLevel == 2 ||currentLevel==5)
             {
                 Debug.Log("Tube Collision");
                 cold.ExitCold(() =>
@@ -157,6 +157,9 @@ public class GameManager : MonoBehaviour
             case 4:
                 PrepareLevel4();
                 break;
+            case 5:
+                PrepareLevel5();
+                break;
             default:
                 break;
         }
@@ -164,7 +167,7 @@ public class GameManager : MonoBehaviour
 
     public void PrepareLevel1()
     {
-
+        
     }
 
     public void PrepareLevel2()
@@ -185,6 +188,8 @@ public class GameManager : MonoBehaviour
 
     public void PrepareLevel3()
     {
+        
+        AudioManager.instance.bgmIndex += 1;
         fallGlass.gameObject.SetActive(false);
         player.ReturnSwimPos();
         fallGlass.gameObject.SetActive(false);
@@ -210,6 +215,17 @@ public class GameManager : MonoBehaviour
         smoke.Init();
     }
 
+    public void PrepareLevel5()
+    {
+        AudioManager.instance.bgmIndex += 1;
+        releaseButton.gameObject.SetActive(true);
+        releaseButton.Init();
+        flushButton.gameObject.SetActive(true);
+        flushButton.Init();
+        tube.gameObject.SetActive(true);
+        
+    }
+
     public void AddScreens()
     {
         foreach (var screen in screens)
@@ -218,14 +234,13 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-
-
+        
         if (!isPlaying) return;
 
         time += Time.deltaTime;
 
         playerStateText.text = player.stateMachine.currentState.animBoolName ?? "None";
-
+        
         CheckGameWin();
         CheckGameLose();
     }
@@ -296,6 +311,7 @@ public class GameManager : MonoBehaviour
 
     public void SprintWater()
     {
+        AudioManager.instance.PlaySFX(20);
         isWater = false;
         water.SprintWater();
         flushButton.ChangeButtonState(true);

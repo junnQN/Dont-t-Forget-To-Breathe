@@ -11,6 +11,8 @@ TagManager:
   - WaterGlass
   - Tube
   - Water
+  - ReleaseWaterButton
+  - Trash
   layers:
   - Default
   - TransparentFX
