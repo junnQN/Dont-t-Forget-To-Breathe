@@ -375,4 +375,9 @@ public class GameManager : MonoBehaviour
     {
         screenDict[screenName].Close();
     }
+
+    public void HandleBackToMenu()
+    {
+        screenDict[ScreenKeys.MENU_SCREEN].Open();
+    }
 }

@@ -26,6 +26,7 @@ public class VideoController : MonoBehaviour
         videoPlayer.Play();
         onReachEnd = () =>
         {
+            GameManager.instance.player.tmpHealth -= 1;
             GameManager.instance.HandleGameLose();
         };
     }

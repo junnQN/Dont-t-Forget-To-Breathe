@@ -174,7 +174,7 @@ public class Player : MonoBehaviour
         {
 
             currentHealth = Mathf.Clamp(currentHealth - 1, 0, maxHealth);
-            CheckGameOver();
+            // CheckGameOver();
             oxygen = 100f;
             carbonDioxide = 0f;
             return;

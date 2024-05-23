@@ -103,4 +103,10 @@ public class ResultScreen : BaseScreen
         replayButton.SetActive(false);
         nextLevelButton.SetActive(false);
     }
+
+    public void HandleBackToMenu()
+    {
+        GameManager.instance.CloseScreen(ScreenKeys.RESULT_SCREEN);
+        GameManager.instance.HandleBackToMenu();
+    }
 }

@@ -9,17 +9,10 @@ public class WinScreen : BaseScreen
     public Sprite[] newspapers;
     public Image image;
 
-    
+
     public void HandleQuitButton()
     {
         Application.Quit();
-    }
-
-    public void HandleNextButton()
-    {
-        AudioManager.instance.PlaySFX(8);
-        GameManager.instance.StartDropCat();
-        Close();
     }
 
     public override void Open()
@@ -47,5 +40,11 @@ public class WinScreen : BaseScreen
         {
             image.sprite = Player.instance.isHulk ? newspapers[5] : newspapers[4];
         }
+    }
+
+    public void HandleBackToMenu()
+    {
+        GameManager.instance.CloseScreen(ScreenKeys.WIN_SCREEN);
+        GameManager.instance.HandleBackToMenu();
     }
 }
