@@ -203,7 +203,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (isTouchReleaseWaterButton && !isDisableInput && !isPressedButton)
+        if (isTouchReleaseWaterButton && !isDisableInput && !isPressedButton && Input.GetKeyDown(KeyCode.E))
         {
             GameManager.instance.SpawnWater();
             ChangeSwimState();
@@ -293,6 +293,7 @@ public class Player : MonoBehaviour
 
     void AffectedBySmoke()
     {
+        if (!GameManager.instance.isPlaying) return;
         if (isAffectedBySmoke) return;
         anim.SetBool("Cough", true);
         AudioManager.instance.PlaySFX(3);
@@ -425,7 +426,8 @@ public class Player : MonoBehaviour
         {
             isPlayerTouching = false;
         }
-        else if (other.CompareTag("FlushButton"))
+        else
+         if (other.CompareTag("FlushButton"))
         {
             isTouchFlushButton = false;
         }
@@ -542,7 +544,7 @@ public class Player : MonoBehaviour
             Flip();
         }
     }
-    
+
     public void ReturnSmokePos()
     {
         transform.position = new Vector2(-8f, transform.position.y);

@@ -66,11 +66,12 @@ public class PlayerGroundState : PlayerState
         if (!player.isDisableInput && Input.GetKeyDown(KeyCode.Space) && player.IsGroundDetected())
             stateMachine.ChangeState(player.jumpState);
 
-        if (!player.isDisableInput && Input.GetKeyDown(KeyCode.E) && player.isPlayerTouching && !GameManager.instance.isWater)
-            stateMachine.ChangeState(player.eatState);
+        // if (!player.isDisableInput && Input.GetKeyDown(KeyCode.E) && player.isPlayerTouching && !GameManager.instance.isWater)
+        //     stateMachine.ChangeState(player.eatState);
 
         if (!player.isDisableInput && Input.GetKeyDown(KeyCode.E) && player.isTouchItem)
         {
+            stateMachine.ChangeState(player.eatState);
             player.isHulk = true;
             GameManager.instance.OpenCutScreen(true);
         }

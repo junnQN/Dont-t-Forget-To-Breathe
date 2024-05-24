@@ -39,4 +39,12 @@ public class JighlightObject : MonoBehaviour
     {
         spriteRenderer.sprite = _sprite; // Thay đổi sprite của đối tượng thành sprite mới
     }
+
+    private void Update()
+    {
+        if (gameObject.tag == "ReleaseWaterButton" && GameManager.instance.player.isPressedButton)
+        {
+            key.SetActive(false);
+        }
+    }
 }

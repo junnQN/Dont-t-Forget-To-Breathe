@@ -91,7 +91,6 @@ GameObject:
   - component: {fileID: 3456856540272373524}
   - component: {fileID: 284232418976346419}
   - component: {fileID: 4969223137553656978}
-  - component: {fileID: 4645328657885096905}
   m_Layer: 6
   m_Name: glass
   m_TagString: Untagged
@@ -276,21 +275,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &4645328657885096905
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4283173697298438747}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca5938b4521650b44b955cea3805ec83, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  newSprite: {fileID: 21300000, guid: f9b9f0d653ccc724bb5003f67eb48761, type: 3}
-  original: {fileID: 1416831213, guid: a5e902f971747da4ea6531e5300dc849, type: 3}
-  key: {fileID: 7398555038263418114}
 --- !u!1 &7398555038263418114
 GameObject:
   m_ObjectHideFlags: 0
