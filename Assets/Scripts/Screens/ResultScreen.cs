@@ -76,6 +76,7 @@ public class ResultScreen : BaseScreen
                 Close();
             }
         }
+        
 
     }
 

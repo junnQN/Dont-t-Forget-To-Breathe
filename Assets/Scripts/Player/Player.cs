@@ -542,6 +542,15 @@ public class Player : MonoBehaviour
             Flip();
         }
     }
+    
+    public void ReturnSmokePos()
+    {
+        transform.position = new Vector2(-8f, transform.position.y);
+        if (!facingRight)
+        {
+            Flip();
+        }
+    }
 }
 
 

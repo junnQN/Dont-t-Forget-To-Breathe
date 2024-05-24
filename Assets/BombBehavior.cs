@@ -21,6 +21,7 @@ public class BombBehavior : MonoBehaviour
     [Button]
     public void Init()
     {
+        
         anim.SetBool("Explode", false);
         // gameObject.SetActive(true);
         fire.Init();
@@ -33,6 +34,7 @@ public class BombBehavior : MonoBehaviour
 
     public void Play()
     {
+        AudioManager.instance.PlaySFX(22);
         time = 0;
         isPlaying = true;
     }
@@ -50,6 +52,7 @@ public class BombBehavior : MonoBehaviour
         var remainTime = (int)timeToExplode - (int)time;
         if (remainTime <= 0)
         {
+            AudioManager.instance.StopSFX(22);
             text.text = "0";
             isPlaying = false;
             anim.SetBool("Explode", true);
