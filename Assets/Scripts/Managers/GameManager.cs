@@ -221,7 +221,7 @@ public class GameManager : MonoBehaviour
         fallGlass.gameObject.SetActive(true);
         ResetPos.instance.ResetPosition();
         box.gameObject.SetActive(false);
-        if(player.currentHealth==9)
+        if (player.currentHealth == 9)
         {
             player.ReturnStartPos();
         }
@@ -238,6 +238,7 @@ public class GameManager : MonoBehaviour
     public void PrepareLevel5()
     {
         fallGlass.gameObject.SetActive(false);
+        box.gameObject.SetActive(true);
         bomb.Init();
         AudioManager.instance.bgmIndex = 3;
         releaseButton.gameObject.SetActive(true);

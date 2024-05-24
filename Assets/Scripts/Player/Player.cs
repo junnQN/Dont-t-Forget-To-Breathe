@@ -186,7 +186,7 @@ public class Player : MonoBehaviour
         if (stateMachine.currentState != null)
             stateMachine.currentState.Update();
 
-        if (isTouchFlushButton && !isDisableInput && Input.GetKeyDown(KeyCode.E))
+        if (GameManager.instance.isWater && isTouchFlushButton && !isDisableInput && Input.GetKeyDown(KeyCode.E))
         {
             AudioManager.instance.PlaySFX(16);
             GameManager.instance.SprintWater();
