@@ -293,6 +293,7 @@ public class Player : MonoBehaviour
 
     void AffectedBySmoke()
     {
+        if (!GameManager.instance.isPlaying) return;
         if (isAffectedBySmoke) return;
         anim.SetBool("Cough", true);
         AudioManager.instance.PlaySFX(3);
@@ -425,7 +426,8 @@ public class Player : MonoBehaviour
         {
             isPlayerTouching = false;
         }
-        else if (other.CompareTag("FlushButton"))
+        else
+         if (other.CompareTag("FlushButton"))
         {
             isTouchFlushButton = false;
         }
