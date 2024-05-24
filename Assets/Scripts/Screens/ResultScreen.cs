@@ -24,12 +24,14 @@ public class ResultScreen : BaseScreen
     public override void Open()
     {
         base.Open();
+        AudioManager.instance.PlaySFX(9);
         AudioManager.instance.playBGM = false;
     }
 
     public override void Close()
     {
         base.Close();
+        AudioManager.instance.StopSFX(9);
         AudioManager.instance.playBGM = true;
     }
 

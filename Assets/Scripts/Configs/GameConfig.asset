@@ -15,7 +15,7 @@ MonoBehaviour:
   inhaleRate: 5
   exhaleRate: 5
   autoRate: 7
-  amountCo_2Cough: 10
+  amountCo_2Cough: 0.1
   timeToBreakCoughState: 1
   amountAirBySmoke: 0
   coughRate: 0.7
