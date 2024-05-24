@@ -21,7 +21,7 @@ public class IntroManager : MonoBehaviour
         {
             var player = GameManager.instance.player;
             player.transform.position = cat.transform.position;
-            if (cat.transform.rotation.y > 0)
+            if (!player.facingRight)
             {
                 player.Flip();
             }
