@@ -230,6 +230,7 @@ public class GameManager : MonoBehaviour
 
     public void PrepareLevel5()
     {
+        fallGlass.gameObject.SetActive(false);
         bomb.Init();
         AudioManager.instance.bgmIndex = 3;
         releaseButton.gameObject.SetActive(true);
