@@ -17,11 +17,13 @@ public class JighlightObject : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player")&&GameManager.instance.isWater==false && (GameManager.instance.currentLevel != 3 || gameObject.tag == "FlushButton")) // Kiểm tra xem có chạm vào nhân vật không
+        if (!other.CompareTag("Player") || (GameManager.instance.isWater && gameObject.tag != "FlushButton") || (!GameManager.instance.isWater && gameObject.tag == "FlushButton"))
         {
-            ChangeSprite(newSprite); // Thay đổi material thành highlight material
-            key.SetActive(true);
+            return;
         }
+
+        ChangeSprite(newSprite); // Thay đổi material thành highlight material
+        key.SetActive(true);
     }
 
     private void OnTriggerExit2D(Collider2D other)
