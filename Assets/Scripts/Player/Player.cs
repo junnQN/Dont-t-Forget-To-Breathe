@@ -203,7 +203,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (isTouchReleaseWaterButton && !isDisableInput && !isPressedButton)
+        if (isTouchReleaseWaterButton && !isDisableInput && !isPressedButton && Input.GetKeyDown(KeyCode.E))
         {
             GameManager.instance.SpawnWater();
             ChangeSwimState();
@@ -542,7 +542,7 @@ public class Player : MonoBehaviour
             Flip();
         }
     }
-    
+
     public void ReturnSmokePos()
     {
         transform.position = new Vector2(-8f, transform.position.y);
