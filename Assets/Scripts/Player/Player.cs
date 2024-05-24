@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
     public float sinkSpeed = 2f; // Lực cản nước
 
     public int facingDir { get; private set; } = 1;
-    [SerializeField] private bool facingRight = false;
+    [HideInInspector] public bool facingRight = false;
     public bool isPlayerTouching = false;
     public bool isTouchItem = false;
     public bool inAir = false;
@@ -163,6 +163,9 @@ public class Player : MonoBehaviour
         stateMachine.ChangeState(idleState);
         isTouchItem = false;
         isHulk = false;
+        isPressedButton = false;
+        isTouchFlushButton = false;
+        isTouchReleaseWaterButton = false;
     }
 
 
@@ -533,7 +536,7 @@ public class Player : MonoBehaviour
 
     public void ReturnDefaultPos()
     {
-        transform.position = new Vector2(-6.984f, -2.371f);
+        transform.position = new Vector2(-6.64f, -2.371f);
         if (!facingRight)
         {
             Flip();
