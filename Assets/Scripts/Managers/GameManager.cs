@@ -85,7 +85,7 @@ public class GameManager : MonoBehaviour
         introManager.Init();
     }
 
-    public void StartGame(bool isRestart = false)
+    public void StartGame(bool isRestart = false, bool isRestHealth = false)
     {
         if (isRestart)
         {
@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviour
         }
         UI_Game.SetActive(true);
         player.gameObject.SetActive(true);
-        player.Init(!isRestart);
+        player.Init(isRestHealth);
         time = 0;
         isPlaying = true;
 

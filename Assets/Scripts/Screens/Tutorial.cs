@@ -41,7 +41,8 @@ public class Tutorial : BaseScreen
     public override void Close()
     {
         base.Close();
-        GameManager.instance.StartGame();
+        var isRestHealth = GameManager.instance.currentLevel == 1;
+        GameManager.instance.StartGame(false, isRestHealth);
     }
 
     void Update()

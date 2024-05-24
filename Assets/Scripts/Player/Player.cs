@@ -154,9 +154,9 @@ public class Player : MonoBehaviour
 
         if (isRestHealth)
         {
-            //currentHealth = maxHealth;
-            //tmpHealth = maxHealth;
-            //currentHealth = tmpHealth;
+            currentHealth = maxHealth;
+            tmpHealth = maxHealth;
+            currentHealth = tmpHealth;
         }
 
         isCold = false;
