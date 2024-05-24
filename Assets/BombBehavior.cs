@@ -39,7 +39,7 @@ public class BombBehavior : MonoBehaviour
 
     void Update()
     {
-        if (isPlaying == false)
+        if (isPlaying == false || GameManager.instance.isPlaying == false)
         {
             return;
         }
