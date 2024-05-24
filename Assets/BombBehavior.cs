@@ -35,12 +35,17 @@ public class BombBehavior : MonoBehaviour
     public void Play()
     {
         AudioManager.instance.PlaySFX(22);
+        AudioManager.instance.PlaySFX(23);
         time = 0;
         isPlaying = true;
     }
 
     void Update()
     {
+        if (GameManager.instance.isWater)
+        {
+            AudioManager.instance.StopSFX(23);
+        }
         if (isPlaying == false || GameManager.instance.isPlaying == false)
         {
             return;

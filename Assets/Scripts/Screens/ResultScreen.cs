@@ -82,6 +82,7 @@ public class ResultScreen : BaseScreen
 
     public void HandleNextButton()
     {
+        AudioManager.instance.StopSFX(9);
         AudioManager.instance.PlaySFX(8);
         GameManager.instance.StartDropCat();
         Close();
