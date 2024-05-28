@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5731c981cd34bba4688ce15924b04b9f, type: 3}
   m_Name: GameConfig
   m_EditorClassIdentifier: 
-  inhaleRate: 5
-  exhaleRate: 5
-  autoRate: 7
-  amountCo_2Cough: 0.1
+  inhaleRate: 4.5
+  exhaleRate: 4.5
+  autoRate: 4.8
+  amountCo_2Cough: 5
   timeToBreakCoughState: 1
   amountAirBySmoke: 0
   coughRate: 0.7
