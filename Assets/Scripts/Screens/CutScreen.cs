@@ -10,6 +10,7 @@ public class CutScreen : BaseScreen
     public VideoController videoController;
     public override void Open()
     {
+        Player.instance.ChangeNoneState();
         AudioManager.instance.playBGM = false;
         base.Open();
         if (isHulk)

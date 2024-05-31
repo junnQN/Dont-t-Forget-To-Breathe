@@ -553,6 +553,11 @@ public class Player : MonoBehaviour
             Flip();
         }
     }
+    
+    public void ChangeNoneState()
+    {
+        stateMachine.ChangeState(noneState);
+    }
 }
 
 
