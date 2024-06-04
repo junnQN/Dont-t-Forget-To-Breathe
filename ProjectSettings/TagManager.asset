@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Bowl
+  - FlushButton
+  - Smoke
+  - Box
   layers:
   - Default
   - TransparentFX
@@ -11,11 +15,11 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Item
+  - Smoke
+  - Ground
+  - Background
+  - Bowl
   - 
   - 
   - 
@@ -40,4 +44,22 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 1681855853
+    locked: 0
+  - name: Bowl
+    uniqueID: 3611812161
+    locked: 0
+  - name: Item
+    uniqueID: 1930022047
+    locked: 0
+  - name: Player
+    uniqueID: 3111329489
+    locked: 0
+  - name: UI
+    uniqueID: 521387049
+    locked: 0
+  - name: Tutorial
+    uniqueID: 2631085235
     locked: 0
